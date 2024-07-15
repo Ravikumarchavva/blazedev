@@ -1,25 +1,23 @@
 "use client";
-import * as React from "react"
-import Autoplay from "embla-carousel-autoplay"
+import * as React from "react";
+import Autoplay from "embla-carousel-autoplay";
 
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel"
+} from "@/components/ui/carousel";
 
 export function Slides() {
-  const plugin = React.useRef(
-    Autoplay({ delay: 2000})
-  )
+  const plugin = React.useRef(Autoplay({ delay: 2000 }));
 
   return (
     <Carousel
       plugins={[plugin.current]}
-      className="w-full max-w-xs"
+      className="w-full max-w-[80%] md:max-w-[60%] lg:max-w-[40%]"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
@@ -36,8 +34,8 @@ export function Slides() {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="portrait:hidden"/>
+      <CarouselNext className="portrait:hidden"/>
     </Carousel>
-  )
+  );
 }
