@@ -21,7 +21,7 @@ const InfoContainer = () => {
       </h3>
       <TextGenerateEffect words="Welcome to to my data science portfolio!
         Explore my journey into data analysis, machine learning, and data visualizations."
-        className="portrait:hidde vs:hidden sm:hidden landscape:w-[50vw] landscape:pt-[5vh] landscape:text-xl lg:block md:text-[1.7vw] md:w-[min(40vw,70rem)] md:font-normal text-white lg:text-[2vh]"/>
+        className="portrait:hidden vs:hidden sm:hidden landscape:w-[50vw] landscape:pt-[5vh] landscape:text-xl lg:block md:text-[1.7vw] md:w-[min(40vw,70rem)] md:font-normal text-white lg:text-[2vh]"/>
       <div className="h-[20vh] flex justify-center items-center gap-[2vw] portrait:flex-col portrait:gap-10 portrait:mt-8 sm:flex-row landscape:pt-[5vh] font-semibold">
           <Link to={"Contact"} smooth={true} duration={1000}>
           <motion.button whileHover={{ scale: 1.15 }} className="font-semibold bg-secondary hover:bg-secondary-foreground hover:text-black px-2 text-white text-lg rounded-md sm:hidden portrait:hidden lg:inline-block lg:h-8">Portfolio</motion.button>
