@@ -3,7 +3,7 @@ import { Slides } from "./Slides";
 
 const Portfolio = () => {
   return (
-    <div id="Portfolio" className="w-[100vw] flex flex-col items-center justify-center px-[5vw]">
+    <div id="Portfolio" className="w-[100vw] gap-10 flex flex-col items-center justify-center px-[5vw]">
       <div className="mt-20 text-5xl text-primary font-semibold dark:text-secondary">
         Portfolio
       </div>

@@ -48,12 +48,12 @@ const NavBarLinks: React.FC = () => {
         window.removeEventListener('scroll', handleScroll);
       };
     }
-  }, [currentPath]);
+  }, []);
 
   const handleClick = (id: string) => {
     if (menu) {
       toggleMenu();
-    }
+    } 
     const element = document.getElementById(id);
     if (element) {
       scroller.scrollTo(id, {

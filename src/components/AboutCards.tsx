@@ -1,16 +1,45 @@
 "use client";
+import React, { useEffect, useRef, useState } from 'react';
 import { aboutData } from "@/data/Foreground";
-import React, { useEffect, useState } from "react";
 import { useId } from "react";
 
-export default function AboutSection() {
+type Feature = {
+  title: string;
+  description: string;
+};
+
+const AboutSection: React.FC = () => {
+  const ref = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in-up-visible');
+          } else {
+            entry.target.classList.remove('fade-in-up-visible');
+          }
+        });
+      },
+      {
+        threshold: 0.1, // Trigger when 10% of the element is visible
+      }
+    );
+
+    const elements = ref.current?.querySelectorAll('.fade-in-up');
+    elements?.forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="py-20 lg:py-20">
+    <div ref={ref} className="py-20 lg:py-20">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 md:gap-8 mx-auto">
-        {aboutData.map((feature) => (
+        {aboutData.map((feature: Feature) => (
           <div
             key={feature.title}
-            className="relative bg-gradient-to-b dark:from-neutral-900 from-neutral-100 dark:to-neutral-950 to-white p-6 rounded-3xl overflow-hidden"
+            className="relative bg-gradient-to-b dark:from-neutral-900 from-neutral-100 to-background p-6 rounded-3xl overflow-hidden fade-in-up"
           >
             <Grid size={20} />
             <p className="text-base font-bold text-neutral-800 dark:text-white relative z-20">
@@ -24,18 +53,20 @@ export default function AboutSection() {
       </div>
     </div>
   );
-}
+};
 
-export const Grid = ({
-  size,
-}: {
+export default AboutSection;
+
+type GridProps = {
   size?: number;
-}) => {
+};
+
+const Grid: React.FC<GridProps> = ({ size }) => {
   const [squares, setSquares] = useState<number[][]>([]);
 
   useEffect(() => {
     const uniqueSquares = new Set<string>();
-    const newSquares = [];
+    const newSquares: number[][] = [];
 
     while (newSquares.length < 5) {
       const x = Math.floor(Math.random() * 4) + 7;
@@ -65,8 +96,14 @@ export const Grid = ({
   );
 };
 
+type GridPatternProps = {
+  width: number;
+  height: number;
+  squares: number[][];
+  className?: string;
+};
 
-export function GridPattern({ width, height, squares, ...props }: any) {
+export function GridPattern({ width, height, squares, ...props }: GridPatternProps) {
   const patternId = useId();
 
   return (
@@ -84,7 +121,7 @@ export function GridPattern({ width, height, squares, ...props }: any) {
       <rect width="100%" height="100%" fill={`url(#${patternId})`} />
       {squares && (
         <svg className="overflow-visible">
-          {squares.map(([x, y]: any) => (
+          {squares.map(([x, y]) => (
             <rect
               strokeWidth="0"
               key={`${x}-${y}`}
