@@ -48,7 +48,7 @@ const Products: React.FC = () => {
       </div>
       <div className="w-full grid portrait:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 justify-center gap-10">
             {projects.map((project, index) => (
-                <div className="bg-secondary rounded-lg min-h-[390px] max-h-[500px] max-w-[450px] min-w-[270px] aspect-square portrait:aspect-auto mx-auto">
+                <div key={index} className="bg-secondary rounded-lg min-h-[390px] max-h-[500px] max-w-[450px] min-w-[270px] aspect-square portrait:aspect-auto mx-auto">
                     <Card className="overflow-hidden ">
                         <CardContent className="relative flex aspect-square portrait:aspect-auto portrait:h-[60vh] items-center justify-center p-6">
                         <Image 

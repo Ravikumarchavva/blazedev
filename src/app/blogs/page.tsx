@@ -1,4 +1,6 @@
 import { BlogCard } from '@/components/ui/BlogCard'
+import { Button } from '@/components/ui/button'
+import Link from 'next/link'
 import React from 'react'
 
 const Blogs = () => {
@@ -8,13 +10,8 @@ const Blogs = () => {
       <div className="w-full py-10 lg:py-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 md:gap-5">
         <BlogCard />
         <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
-        <BlogCard />
       </div>
+      <div><Link href={'/'}><Button className='bg-secondary'>View All Blogs</Button></Link></div>
     </div>
   )
 }
