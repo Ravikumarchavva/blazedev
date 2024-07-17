@@ -1,40 +1,50 @@
 import { Project } from "@/types/datatypes";
 
-export const Projects : Project[] = [
+export const Projects: Project[] = [
     {
         id: 0,
-        title: 'Ipl Score',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        title: 'IPL Score',
+        description: 'Track live scores and updates final Estimation for IPL matches.',
         date: new Date('2021-01-01'),
-        image: '/projects/ipl.jpg'
-        
+        image: '/projects/ipl.jpg',
+        comingSoon: false,
+        url: 'www.google.com',
     },
     {
         id: 1,
         title: 'Car Price',
-        description: 'Donec id velit vel neque tincidunt congue.',
+        description: 'Predict car prices based on features and market trends.',
         date: new Date('2022-01-01'),
-        image: '/projects/car.jpg'
+        image: '/projects/car.jpg',
+        comingSoon: false,
+        url: 'www.google.com',
     },
     {
         id: 2,
         title: 'Telecom Churn',
-        description: 'Integer non velit sed neque tempus consectetur.',
+        description: 'Analyze customer data to predict telecom churn.',
         date: new Date('2023-01-01'),
-        image: '/projects/churn.jpg'
+        image: '/projects/churn.jpg',
+        comingSoon: false,
+        url: 'www.google.com',
     },
     {
         id: 3,
-        title: 'Music Recommendation',
-        description: 'Maecenas vel diam auctor, consequat felis sed, consectetur justo.',
-        date: new Date('2024-01-01'),
-        image: '/projects/ipl.jpg'
+        title: 'Fraud Detection',
+        description: 'Utilize machine learning to identify fraudulent transactions.',
+        date: new Date('2025-01-01'),
+        image: '/projects/fraud.jpg',
+        comingSoon: true,
+        url: undefined,
     },
     {
         id: 4,
-        title: 'Project 5',
-        description: 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
-        date: new Date('2025-01-01'),
-        image: '/projects/ipl.jpg'
-    }
-]
+        title: 'Music Recommendation',
+        description: 'Suggest personalized music based on user preferences.',
+        date: new Date('2024-01-01'),
+        image: '/projects/music.jpg',
+        comingSoon: true,
+        url: undefined,
+    },
+];
+

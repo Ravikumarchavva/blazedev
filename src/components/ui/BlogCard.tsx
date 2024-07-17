@@ -17,12 +17,12 @@ export function BlogCard() {
             height="100"
             width="100"
             alt="Avatar"
-            src="/manu.png"
+            src="/projects/ipl.jpg"
             className="h-10 w-10 rounded-full border-2 object-cover"
           />
           <div className="flex flex-col">
             <p className="font-normal text-base text-gray-50 relative z-10">
-              Manu Arora
+              ipl Arora
             </p>
             <p className="text-sm text-gray-400">2 min read</p>
           </div>

@@ -40,37 +40,3 @@ export const aboutData = [
         "Committed to staying ahead in the rapidly evolving field of data science through continuous learning and exploration.",
     },
   ];
-
-  interface Project {
-    title: string;
-    imageUrl: string;
-    link: string;
-  }
-  
-  const projects: Project[] = [
-    {
-      title: 'ML Playground',
-      imageUrl: '/mlplayground.jpg',
-      link: '/'
-    },
-    {
-      title: 'Movie Recommendation',
-      imageUrl: '/movie-recommendation.jpg',
-      link: '/'
-    },
-    {
-      title: 'Stock Market',
-      imageUrl: '/stock-market.jpg',
-      link: '/'
-    },
-    {
-      title: 'Optimising Supply Chain',
-      imageUrl: '/Optimising-supply-chain.jpg',
-      link: '/'
-    },
-    {
-      title: 'Self Driving',
-      imageUrl: '/self-driving.jpg',
-      link: '/'
-    },
-  ];

@@ -10,4 +10,6 @@ export interface Project{
   description: string;
   date: Date,
   image: string;
+  comingSoon: boolean,
+  url: string | undefined
 }
