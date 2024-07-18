@@ -1,4 +1,5 @@
 'use client';
+import { Button } from "@/components/ui/button";
 // import { Spotlight } from "@/components/ui/SpotLight";
 import { motion } from "framer-motion";
 import Link from "next/link";
@@ -22,7 +23,7 @@ const Contact = () => {
           <h1 className="text-[5vh] font-semibold portrait:text-[4vh] portrait:underline portrait:underline-offset-[1vh]">
             CONTACT
           </h1>
-          <p className="text-center md:px-[5vw] portrait:px-[5vh] portrait:hidden sm:hidden md:inline-block">
+          <p className="text-center md:px-[5vw] portrait:px-[5vh] portrait:hidden sm:hidden lg:inline-block">
             Whether you&apos;re a fellow enthusiast, a potential collaborator, or
             someone intrigued by the endless possibilities of data science, I&apos;m
             excited to connect with you.<span className="sm:hidden lg:inline"> Let&apos;s embark on this thrilling journey
@@ -43,7 +44,7 @@ const Contact = () => {
                 ravikumar-chavva
               </Link>
             </div>
-            <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center justify-center portrait:hidden sm:hidden">
               <div className="flex items-center justify-center gap-2">
                 <FaPhoneAlt className="size-5 rounded-sm" color="#fff" />
                 <h2 className="text-[3vh] font-medium">Phone</h2>
@@ -102,12 +103,7 @@ const Contact = () => {
             required={true}
             className="w-[80%] text-white border-b-2 outline-none bg-transparent placeholder:text-white"
           ></textarea>
-          <button
-            type="submit"
-            className="w-[40%] portrait:w-[60%] h-[5vh] text-white border-none bg-primary hover:bg-secondary rounded-md shadow-md shadow-background"
-          >
-            Send Message
-          </button>
+          <Button className="bg-secondary mt-2 hover:bg-accent-foreground hover:text-black">Send Message</Button>
         </motion.form>
       </div>
     </div>
