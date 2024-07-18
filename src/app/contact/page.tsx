@@ -1,4 +1,5 @@
 'use client';
+import { Spotlight } from "@/components/ui/SpotLight";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import React from "react";
@@ -7,7 +8,11 @@ import { MdEmail } from "react-icons/md";
 
 const Contact = () => {
   return (
-    <div id="Contact" className="flex flex-col items-center justify-center px-[5vw]">
+    <div id="Contact" className="relative flex flex-col items-center justify-center px-[5vw] pt-10">
+      <Spotlight
+        className="-top-60 left-20 md:left-60 md:-top-20"
+        fill="white"
+      />
       <div
         className="h-[80vh] my-[5vh] w-full bg-primary border-2 shadow-md rounded-md portrait:min-h-[80vh] portrait:flex-col portrait:h-auto flex items-center justify-around text-white"
       >

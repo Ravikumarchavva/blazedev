@@ -29,7 +29,7 @@ const ProjectPage = ({ params }: ProjectPageProps) => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">{project.title}</h1>
-      <div className="relative aspect-w-16 aspect-h-9 mb-4">
+      <div className="w-80 h-80 relative aspect-w-16 aspect-h-9 mb-4">
         <Image 
           src={project.image} 
           alt={project.title} 
