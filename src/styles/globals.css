@@ -89,3 +89,22 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+/* styles/globals.css or your relevant CSS module */
+.carousel-button {
+  background: transparent;
+  transition: background 0.3s ease;
+}
+
+.carousel-button:hover {
+  background: rgba(0, 0, 0, 0.5); /* Adjust the color and opacity as needed */
+}
+
+.carousel-chevron {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-button:hover .carousel-chevron {
+  opacity: 1;
+}

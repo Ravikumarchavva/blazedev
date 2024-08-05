@@ -1,6 +1,5 @@
 'use client';
 import { Button } from "@/components/ui/button";
-// import { Spotlight } from "@/components/ui/SpotLight";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import React from "react";
@@ -10,12 +9,9 @@ import { MdEmail } from "react-icons/md";
 const Contact = () => {
   return (
     <div id="Contact" className="relative flex flex-col items-center justify-center px-[5vw] pt-10">
-      {/* <Spotlight
-        className="-top-60 left-20 md:left-60 md:-top-20"
-        fill="white"
-      /> */}
       <div
-        className="h-[80vh] my-[5vh] w-full bg-primary border-2 shadow-md rounded-md portrait:min-h-[80vh] portrait:flex-col portrait:h-auto flex items-center justify-around text-white"
+        className="h-[80vh] my-[5vh] w-full bg-primary border-2 shadow-md rounded-md 
+        portrait:min-h-[80vh] portrait:flex-col portrait:h-auto flex items-center justify-around text-white"
       >
         <div
           className="w-1/2 h-[90%] mx-[1vw] flex flex-col items-center justify-around portrait:w-full portrait:h-auto"
@@ -81,29 +77,31 @@ const Contact = () => {
           </div>
         </div>
         <motion.form
-          whileHover={{ scale: 1.02 }}
-          className="w-1/2 h-[90%] mx-[1vw] shadow-md shadow-background flex flex-col items-center justify-around py-[2vw] portrait:w-[90%] portrait:h-[40vh]"
+          whileHover={{ scale: 1 }}
+          className="w-1/2 h-[90%] mx-[1vw] shadow-xl flex flex-col items-center pt-[1vw] portrait:w-[95%] portrait:h-[40vh]"
           action={"/"}
         >
           <input
             type="text"
             placeholder="Your Name"
             required={true}
-            className="w-[80%] text-white border-b-2 outline-none bg-transparent placeholder:text-white"
-          ></input>
+            className="w-[80%] p-2 my-2 mt-10 portrait:mt-0 text-black bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent"
+          />
           <input
-            type="text"
-            placeholder="Your Mail"
+            type="email"
+            placeholder="Your Email"
             required={true}
-            className="w-[80%] text-white border-b-2 outline-none bg-transparent placeholder:text-white"
-          ></input>
+            className="w-[80%] p-2 my-2 text-black bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent"
+          />
           <textarea
-            rows={5}
+            rows={7}
             placeholder="Your Message"
             required={true}
-            className="w-[80%] text-white border-b-2 outline-none bg-transparent placeholder:text-white"
-          ></textarea>
-          <Button className="bg-secondary mt-2 hover:bg-accent-foreground hover:text-black">Send Message</Button>
+            className="w-[80%] p-2 my-2 text-black bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent"
+          />
+          <Button className="w-[80%] mt-10 bg-secondary py-2 rounded-md shadow hover:bg-accent-foreground hover:text-black">
+            Send Message
+          </Button>
         </motion.form>
       </div>
     </div>

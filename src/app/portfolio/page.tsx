@@ -6,7 +6,7 @@ import Link from "next/link";
 const Portfolio = () => {
   
   return (
-    <div id="Portfolio" className="w-[100vw] gap-2 flex flex-col items-center justify-center px-[5vw]">
+    <div id="Portfolio" className="w-[100vw] min-h-[90vh] gap-10 flex flex-col items-center justify-center px-[5vw]">
       <div className="w-full flex items-center md:justify-between justify-center mt-10">
         <div className="text-5xl text-primary font-semibold dark:text-secondary inline-block">
           Portfolio

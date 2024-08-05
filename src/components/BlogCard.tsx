@@ -40,7 +40,7 @@ const BlogCard = ({ blog }: { blog: Blog }) => {
     <div 
       ref={ref} 
       className='md:min-w-[200px] md:min-h-[450px] md:max-h-[500px] md:max-w-[300px] my-4 mx-auto flex flex-col bg-primary rounded-lg overflow-hidden
-                 portrait:w-[95vw] sm:w-[90vw] portrait:max-w-[450px] sm:max-w-[450px] xl:min-w-[200px]
+                 portrait:w-[90vw] sm:w-[90vw] portrait:max-w-[450px] sm:max-w-[450px] xl:min-w-[200px]
                  fade-in-up'>
       <div className='relative min-h-[250px] max-w-[96%] flex justify-center items-center mx-2 mt-2'>
         <Image 

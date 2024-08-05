@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import NavBar from "@/components/NavBar/page";
+import { Providers } from './providers';
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -38,7 +39,9 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <NavBar />
-            {children}
+            <Providers>
+              {children}
+            </Providers>
           </ThemeProvider>
       </body>
     </html>

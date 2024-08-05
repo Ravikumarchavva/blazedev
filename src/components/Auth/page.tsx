@@ -1,3 +1,6 @@
+// src/components/Auth/page.tsx
+"use client";
+
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 
 interface AuthProps {
