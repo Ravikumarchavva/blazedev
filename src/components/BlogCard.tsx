@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import React, { useEffect, useRef } from 'react';
 import { Button } from './ui/button';
-import { Blog } from '@/types/datatypes';
+import { Blog } from '@/lib/datatypes';
 import Link from 'next/link';
 
 const BlogCard = ({ blog }: { blog: Blog }) => {

@@ -1,5 +1,4 @@
 // src/app/AddProject/page.tsx
-import ProtectedRoute from '@/components/ProtectedRoute/page';
 import { createClient } from '@/lib/supabase/server';
 import { cookies } from 'next/headers';
 
@@ -15,16 +14,13 @@ export default async function AddProject() {
   }
 
   return (
-    <ProtectedRoute>
-
-    <div className='pt-20'>
+    <div className='pt-20 pl-20'>
       <p>Countries List</p>
-      <ul>
+      <ul className='flex flex-wrap gap-10'>
         {countries?.map((country) => (
           <li key={country.id}>{country.name}</li>
         ))}
       </ul>
     </div>
-        </ProtectedRoute>
   );
 }

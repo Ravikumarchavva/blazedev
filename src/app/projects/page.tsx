@@ -2,7 +2,7 @@
 import * as React from "react";
 import { useEffect, useRef } from "react";
 import Image from 'next/image';
-import { Project } from "@/types/datatypes";
+import { Project } from "@/lib/datatypes";
 import { Projects } from "@/data/Projects";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";

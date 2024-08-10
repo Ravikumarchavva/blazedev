@@ -1,4 +1,4 @@
-import { Blog } from '@/types/datatypes';
+import { Blog } from '@/lib/datatypes';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { BlogsData } from '@/data/Blogs';

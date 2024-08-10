@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "@/styles/globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import NavBar from "@/components/NavBar/page";
-import { Providers } from './providers';
+import { Toaster } from "@/components/ui/sonner";
 
-const fontSans = FontSans({
+const fontPoppins = Poppins({
   subsets: ["latin"],
-  variable: "--font-sans",
+  weight: ["300","400","600","700"]
 })
 
 export const metadata: Metadata = {
@@ -29,7 +29,7 @@ export default function RootLayout({
       <body 
         className={cn(
           "min-h-screen bg-background font-sans antialiased ",
-          fontSans.variable
+          fontPoppins.className
         )}
       >
         <ThemeProvider
@@ -39,9 +39,8 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <NavBar />
-            <Providers>
               {children}
-            </Providers>
+              <Toaster />
           </ThemeProvider>
       </body>
     </html>

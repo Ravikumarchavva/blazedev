@@ -1,8 +1,6 @@
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 import React from 'react';
 import { BlogsData } from '@/data/Blogs';
-import { Blog } from '@/types/datatypes';
+import { Blog } from '@/lib/datatypes';
 import BlogCard from '@/components/BlogCard';
 
 const Blogs = () => {

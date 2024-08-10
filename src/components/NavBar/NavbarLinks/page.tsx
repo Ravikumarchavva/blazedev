@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { Link as ScrollLink, scroller } from 'react-scroll';
 import Link from 'next/link';
 import { useNavBarContext } from '@/context/NavBarContext';
-import { PageLink } from '@/types/datatypes';
+import { PageLink } from '@/lib/datatypes';
 
 const links: PageLink[] = [
   { id: "Home", url: "/", title: "Home" },

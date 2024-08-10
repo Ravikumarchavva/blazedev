@@ -11,7 +11,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Project } from "@/types/datatypes";
+import { Project } from "@/lib/datatypes";
 import { Projects } from "@/data/Projects";
 import Link from "next/link";
 

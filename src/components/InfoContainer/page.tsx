@@ -1,9 +1,9 @@
 "use client";
 import { motion } from 'framer-motion'
 import React from 'react'
-import Resume from '../Resume/page';
-import SocialMedia from '../NavBar/SocialMedia/page';
-import { TextGenerateEffect } from '../TextGenerateEffect/page';
+import Resume from '@/components/Resume/page';
+import SocialMedia from '@/components/NavBar/SocialMedia/page';
+import { TextGenerateEffect } from '@/components/TextGenerateEffect/page';
 import { Link } from 'react-scroll';
 
 const InfoContainer = () => {

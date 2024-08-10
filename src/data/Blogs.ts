@@ -1,4 +1,4 @@
-import { Blog } from '@/types/datatypes';
+import { Blog } from '@/lib/datatypes';
 
 export const BlogsData: Blog[] = [
   {

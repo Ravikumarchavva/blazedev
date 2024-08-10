@@ -2,13 +2,13 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import React from 'react';
 import { BlogsData } from '@/data/Blogs';
-import { Blog } from '@/types/datatypes';
+import { Blog } from '@/lib/datatypes';
 import BlogCard from '@/components/BlogCard';
 
 const Blogs = () => {
   const blogs: Blog[] = BlogsData;
   return (
-    <div id="Blogs" className="w-full gap-2 flex flex-col items-center justify-between px-[5vw]">
+    <div id="Blogs" className="w-full gap-[10vh] flex flex-col items-center justify-center px-[5vw] min-h-screen">
       <div className="w-full flex items-center md:justify-between justify-center mt-10">
         <div className="text-5xl text-primary font-semibold dark:text-secondary">
           Blogs
