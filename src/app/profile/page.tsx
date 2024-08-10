@@ -40,7 +40,7 @@ const Profile = () => {
         <h2 className="text-3xl font-semibold text-primary-foreground">
           Profile
         </h2>
-        <p className="text-gray-300 pt-2">This is how you will see on your site.</p>
+        <p className="text-gray-100 pt-2">This is how you will see on your site.</p>
       </div>
       <div className="border-b border-gray-300 my-4 w-full"></div>
       <div className="h-[15vh] w-full">

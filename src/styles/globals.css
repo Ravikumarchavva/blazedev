@@ -4,11 +4,11 @@
 
   @layer base {
     :root {
-      --background: 0, 16%, 90%; /* white with violet */
+      --background: 0, 0%, 85%; /* white with violet */
       --foreground: 0 0% 4.9%; /* Black */
-      --primary: 246 24% 43%; /* Violet */
+      --primary: 24 10% 53%; /* Violet */
       --primary-foreground: 0 0% 100%; /* White */
-      --secondary: 116 55% 41%; /* Green */
+      --secondary: 116 65% 41%; /* Green */
       --secondary-foreground: 0 0% 100%; /* White */
       
       --accent: 116 55% 41%; /* Green */

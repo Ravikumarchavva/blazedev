@@ -32,11 +32,11 @@ const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
           <h1 className="text-5xl font-semibold text-primary-foreground">
             Settings
           </h1>
-          <p className="text-gray-300 pt-2">
+          <p className="text-gray-100 pt-2">
             Manage your account settings and set e-mail preferences.
           </p>
         </div>
-        <div className="border-b border-gray-300 my-4"></div>
+        <div className="border-b border-gray-200 my-4"></div>
 
         <div className="flex sm:flex-col portrait:flex-col lg:flex-row gap-2">
           <div className="sm:w-full portrait:w-full lg:w-1/6 flex sm:flex-col portrait:flex-col md:flex-row md:gap-2 lg:flex-col">

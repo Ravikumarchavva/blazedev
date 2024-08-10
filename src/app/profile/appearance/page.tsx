@@ -35,15 +35,15 @@ const Appearance = () => {
         <h2 className="text-3xl font-semibold text-primary-foreground">
           Appearance
         </h2>
-        <p className="text-gray-300 pt-2">
+        <p className="text-gray-100 pt-2">
           Customize the appearance of the app. Automatically switch between day
           and night themes.
         </p>
       </div>
-      <div className="border-b border-gray-300 my-4 w-full"></div>
+      <div className="border-b border-gray-200 my-4 w-full"></div>
       <div className="w-full">
         <h2 className="text-xl text-primary-foreground">Theme</h2>
-        <p className="text-gray-300 pt-2">Select the theme for the dashboard.</p>
+        <p className="text-gray-100 pt-2">Select the theme for the dashboard.</p>
 
         <div className="flex space-x-6 mt-6">
           {/* Light Theme Selection Card */}

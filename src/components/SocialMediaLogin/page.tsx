@@ -14,7 +14,7 @@ export const SocialMediaLogin = () => {
       >
         <button
           type="submit"
-          className="flex justify-center items-center w-full dark:bg-background dark:hover:bg-zinc-500 py-2 px-4 rounded"
+          className="flex justify-center bg-primary text-white items-center w-full dark:bg-background dark:hover:bg-zinc-500 py-2 px-4 rounded"
         >
           Github <FaGithub className="ml-2" />
         </button>
@@ -29,7 +29,7 @@ export const SocialMediaLogin = () => {
       >
         <button
           type="submit"
-          className="flex justify-center items-center w-full dark:bg-background dark:hover:bg-zinc-500 py-2 px-4 rounded"
+          className="flex justify-center bg-primary text-white items-center w-full dark:bg-background dark:hover:bg-zinc-500 py-2 px-4 rounded"
         >
           Google <FaGoogle className="ml-2" />
         </button>
