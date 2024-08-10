@@ -22,16 +22,16 @@ export default auth(async function middleware(req) {
     return undefined;
   }
 
-  // if (isAuthRoute) {
-  //   if (isLoggedIn) {
-  //     return Response.redirect(new URL(DEFAULT_REDIRECT_PATH, nextUrl));
-  //   }
-  //   return undefined;
-  // }
+  if (isAuthRoute) {
+    if (isLoggedIn) {
+      return Response.redirect(new URL(DEFAULT_REDIRECT_PATH, nextUrl));
+    }
+    return undefined;
+  }
 
-  // if (!isLoggedIn && !isPublicRoute) {
-  //   return Response.redirect(new URL('/auth/login', nextUrl));
-  // }
+  if (!isLoggedIn && !isPublicRoute) {
+    return Response.redirect(new URL('/auth/login', nextUrl));
+  }
 
   return undefined;
 })
