@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react"
 
 import { Button } from "@/components/ui/button"
@@ -10,15 +8,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { MdAccountCircle } from "react-icons/md";
-import { useRouter } from "next/navigation";
+import { logOut } from "@/actions/logOut";
+import { toast } from "sonner";
+import Link from "next/link";
 
 export function AccountDropdownMenu() {
-  const router = useRouter();
-    const navigateToProfile = ()=>{
-        router.push('/profile');
-    }
-    const logoutUser = ()=>{
-        router.push('/auth/login  ');
+  
+    const logoutUser = async ()=>{
+        await logOut();
+        toast("Logged Out Successfully!")
     }
   return (
     <DropdownMenu>
@@ -29,8 +27,8 @@ export function AccountDropdownMenu() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => navigateToProfile()}>
-            Profile
+        <DropdownMenuItem>
+          <Link href={'./profile'}>Profile</Link>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => logoutUser()}>
             Logout

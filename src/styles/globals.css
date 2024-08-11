@@ -6,7 +6,7 @@
     :root {
       --background: 0, 0%, 85%; /* white with violet */
       --foreground: 0 0% 4.9%; /* Black */
-      --primary: 24 10% 53%; /* Violet */
+      --primary: 3 10% 33%; /* Violet */
       --primary-foreground: 0 0% 100%; /* White */
       --secondary: 116 65% 41%; /* Green */
       --secondary-foreground: 0 0% 100%; /* White */
@@ -18,7 +18,7 @@
       --popover: 244, 16%, 90%; /* white with violet */
       --popover-foreground: 246 24% 43%; /* Violet */
 
-      --destructive: 0 100% 50%; /* Green */
+      --destructive: 0 100% 50%; /* red */
       --destructive-foreground: 0 0% 100%; /* White */
       --border: 0 0% 100%; /* White */
       --input: 0 0% 100%; /* White */
@@ -33,18 +33,16 @@
       --chart-4: 43 74% 66%; /* Example chart color */
       --chart-5: 27 87% 67%; /* Example chart color */
     }
-    
-    
 
     .dark {
       --background:  0 0% 25%; /* Black */
       --foreground: 0 0% 100%; /* White */
       --primary: 0 0% 10%; /* grey */
       --primary-foreground: 0 0% 100%; /* White */
-      --secondary: 48 96% 50%; /* Gold */
+      --secondary: 30 96% 55%; /* orange */
       --secondary-foreground: 0 0% 100%; /* White */
 
-      --accent: 48 96% 50%; /* Gold */
+      --accent: 30 96% 55%; /* orange */
       --accent-foreground: 0 0% 100%; /* White */
       --muted: 0 0% 4.9%; /* Black */
       --muted-foreground: 0 0% 100%; /* White */
@@ -53,17 +51,17 @@
 
       --card: 0 0% 4.9%; /* Black */
       --card-foreground: 0 0% 100%; /* White */
-      --destructive: 0 100% 50%; /* Gold */
+      --destructive: 0 100% 50%; /* red */
       --destructive-foreground: 0 0% 100%; /* White */
       --border: 217.2 32.6% 17.5%; /* Grey */
       --input: 217.2 32.6% 17.5%; /* Grey */
       --ring: 217.2 32.6% 17.5%; /* Grey */
       --radius: 0.5rem;
-      --chart-1: 48 96% 50%; /* Gold */
+      --chart-1: 30 96% 55%; /* orange */
       --chart-2: 217.2 32.6% 17.5%; /* Grey */
-      --chart-3: 48 96% 50%; /* Gold */
+      --chart-3: 30 96% 55%; /* orange */
       --chart-4: 217.2 32.6% 17.5%; /* Grey */
-      --chart-5: 48 96% 50%; /* Gold */
+      --chart-5: 30 96% 55%; /* orange */
     }
   }
 
@@ -81,7 +79,7 @@
 
 .fade-in-up {
   opacity: 0;
-  transform: translateY(50px);
+  transform: translateY(70px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 

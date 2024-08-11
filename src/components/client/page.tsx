@@ -2,7 +2,6 @@
 import { credentialSignUp } from "@/actions/createAccount";
 import { credentialLogin } from "@/actions/login";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
@@ -21,6 +20,7 @@ import { z } from "zod";
 import { FormError } from "../Form-Error";
 import { FormSuccess } from "../Form-Success";
 import { useState, useTransition } from "react";
+import { DEFAULT_REDIRECT_PATH } from "@/routes";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -41,7 +41,8 @@ const LoginForm = () => {
       credentialLogin(values).then((data)=>{
         if(data.success){
           setSuccess(data.message);
-          router.push("/");
+          toast("Login Succesfull!")
+          router.push(DEFAULT_REDIRECT_PATH);
         }
         else{
           setError(data.message);
@@ -64,7 +65,7 @@ const LoginForm = () => {
               <FormLabel htmlFor="email">Email</FormLabel>
               <FormControl>
                 <Input
-                  {...field}
+                  {...field} className="font-semibold"
                   placeholder="example@email.com"
                   type="email"
                   disabled={isPending}
@@ -82,7 +83,7 @@ const LoginForm = () => {
               <FormLabel htmlFor="password">Password</FormLabel>
               <FormControl>
                 <Input
-                  {...field}
+                  {...field} className="font-semibold"
                   placeholder="Password"
                   type="password"
                   disabled={isPending}
@@ -187,7 +188,7 @@ const SignUpForm = () => {
               <FormLabel htmlFor="name">Name</FormLabel>
               <FormControl>
                 <Input
-                  {...field}
+                  {...field} className="font-semibold"
                   placeholder="Your Name"
                   type="name"
                   disabled={isPending}
@@ -205,7 +206,7 @@ const SignUpForm = () => {
               <FormLabel htmlFor="email">Email</FormLabel>
               <FormControl>
                 <Input
-                  {...field}
+                  {...field} className="font-semibold"
                   placeholder="example@email.com"
                   type="email"
                 />
@@ -222,7 +223,7 @@ const SignUpForm = () => {
               <FormLabel htmlFor="password">Password</FormLabel>
               <FormControl>
                 <Input
-                  {...field}
+                  {...field} className="font-semibold"
                   placeholder="*********"
                   type="password"
                   disabled={isPending}
@@ -240,7 +241,7 @@ const SignUpForm = () => {
               <FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel>
               <FormControl>
                 <Input
-                  {...field}
+                  {...field} className="font-semibold"
                   placeholder="*********"
                   type="password"
                   disabled={isPending}

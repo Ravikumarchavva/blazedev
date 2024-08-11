@@ -1,12 +1,11 @@
 /**these routes do not require authenthication**/
 export const publicRoutes = ['/'];
 
+export const apiAuthPrefix = "/api";
+
 /**these routes require authenthication**/
-export const authRoutes = ['/auth/login','/auth/signUp'] ;
+export const authRoutes = ['/login','/signUp'] ;
 
-/**these routes dont require user authenthication**/
-
-export const apiAuthPrefix = "/api/auth";
 
 /**after login redirect */
 export const DEFAULT_REDIRECT_PATH = '/profile';

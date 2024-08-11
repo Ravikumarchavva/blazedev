@@ -10,7 +10,7 @@ const Portfolio = () => {
       className="w-[100vw] min-h-[95vh] gap-10 flex flex-col items-start justify-center px-[5vw] rounded-t-2xl pt-[5vh]"
     >
       <div className="w-full flex items-center md:justify-between justify-center">
-        <div className="text-5xl text-primary font-semibold dark:text-secondary inline-block">
+        <div className="text-5xl text-center font-semibold text-secondary inline-block w-full">
           Portfolio
         </div>
         <div className="sm:hidden portrait:hidden md:inline-block">
@@ -19,7 +19,7 @@ const Portfolio = () => {
           </Link>
         </div>
       </div>
-      <div className="h-1 w-full max-w-3xl bg-primary"></div>
+      <div className="h-1 w-full bg-primary dark:hidden"></div>
       <Slides />
       <div className="md:hidden">
         <Link href={"/projects"}>

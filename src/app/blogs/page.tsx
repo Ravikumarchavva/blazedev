@@ -13,7 +13,7 @@ const Blogs = () => {
       className="w-full gap-5 flex flex-col items-start justify-center px-[5vw] min-h-screen"
     >
       <div className="w-full flex items-center md:justify-between justify-center mt-10">
-        <div className="text-5xl text-primary font-semibold dark:text-secondary">
+        <div className="text-5xl font-semibold text-secondary w-full text-center">
           Blogs
         </div>
         <div className="sm:hidden portrait:hidden md:inline-block">
@@ -22,7 +22,7 @@ const Blogs = () => {
           </Link>
         </div>
       </div>
-      <div className="bg-primary w-full h-1 max-w-4xl"></div>
+      <div className="bg-primary w-full h-1 dark:hidden"></div>
       <div className="grid grid-cols-1 portrait:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full">
         {blogs.map((blog, index) => (
           <BlogCard blog={blog} key={index} />
