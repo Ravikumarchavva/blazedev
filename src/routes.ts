@@ -1,10 +1,10 @@
 /**these routes do not require authenthication**/
-export const publicRoutes = ['/'];
+export const publicRoutes = ['/','/new-verification'];
 
 export const apiAuthPrefix = "/api";
 
 /**these routes require authenthication**/
-export const authRoutes = ['/login','/signUp'] ;
+export const authRoutes = ['/login','/signUp','/error','/reset','/new-password'] ;
 
 
 /**after login redirect */

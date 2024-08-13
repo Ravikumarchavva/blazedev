@@ -2,28 +2,31 @@
 import { credentialSignUp } from "@/actions/createAccount";
 import { credentialLogin } from "@/actions/login";
 import { Input } from "@/components/ui/input";
-import { toast } from "sonner";
-import { Button } from "../ui/button";
-import { useRouter } from "next/navigation";
-import { useForm } from "react-hook-form";
 import { loginSchema, signUpSchema } from "@/models/schemas";
+import { DEFAULT_REDIRECT_PATH } from "@/routes";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  Form,
-  FormControl,
-  FormMessage,
-  FormField,
-  FormLabel,
-  FormItem,
-} from "../ui/form";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useTransition } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 import { FormError } from "../Form-Error";
 import { FormSuccess } from "../Form-Success";
-import { useState, useTransition } from "react";
-import { DEFAULT_REDIRECT_PATH } from "@/routes";
+import { Button } from "../ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
+import Link from "next/link";
 
 const LoginForm = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const urlError = searchParams.get("error") === "OAuthAccountNotLinked" ? "Account already in use by different provider" : '' 
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>(undefined);
   const [success, setSuccess] = useState<string | undefined>(undefined);
@@ -89,11 +92,12 @@ const LoginForm = () => {
                   disabled={isPending}
                 />
               </FormControl>
+              <Button size={"sm"} variant={"link"} asChild className="px-0 text-black dark:text-white"><Link href={'/reset'}>Forgot password?</Link></Button>
               <FormMessage />
             </FormItem>
           )}
         />
-        <FormError message={error} />
+        <FormError message={error || urlError} />
         <FormSuccess message={success} />
         <Button
           type="submit"
@@ -103,51 +107,10 @@ const LoginForm = () => {
         </Button>
       </form>
     </Form>
-    // <form
-    //   action={async (formdata: FormData) => {
-    //     const email = formdata.get("email") as string;
-    //     const password = formdata.get("password") as string;
-    //     if (!email || !password) {
-    //       toast.error("Provide All Details");
-    //       return;
-    //     }
-
-    //     const result = await credentialLogin(email, password);
-    //     if (result.success) {
-    //       toast.success("Login successful");
-    //       router.push("/");
-    //     } else {
-    //       toast.error(result.message || "Invalid Email or Password");
-    //     }
-    //   }}
-    // >
-    //   <div className="space-y-1">
-    //     <Label htmlFor="email">Email</Label>
-    //     <Input
-    //       name="email"
-    //       id="email"
-    //       type="email"
-    //       placeholder="example@example.com"
-    //     />
-    //   </div>
-    //   <div className="space-y-1">
-    //     <Label htmlFor="password">Password</Label>
-    //     <Input name="password" id="password" type="password" />
-    //   </div>
-    //   <div className="mt-5">
-    //     <Button
-    //       type="submit"
-    //       className="w-full space-y-2 bg-secondary dark:hover:bg-secondary-foreground dark:hover:text-black mx-auto"
-    //     >
-    //       Login
-    //     </Button>
-    //   </div>
-    // </form>
   );
 };
 
 const SignUpForm = () => {
-  const router = useRouter();
   const [error, setError] = useState<string | undefined>(undefined);
   const [success, setSuccess] = useState<string | undefined>(undefined);
   const [isPending, startTransition] = useTransition();
@@ -261,63 +224,9 @@ const SignUpForm = () => {
         </Button>
       </form>
     </Form>
-    // <form
-    //   action={async (formdata: FormData) => {
-    //     const name = formdata.get("name") as string;
-    //     const email = formdata.get("email") as string;
-    //     const password = formdata.get("password") as string;
-    //     const retypedpassword = formdata.get("retypedpassword") as string;
-
-    //     if (!name || !email || !password || !retypedpassword) {
-    //       toast.error("Provide All Details");
-    //       return;
-    //     }
-    //     if (password.length < 6) {
-    //       toast.error("Password must be at least 5 characters long");
-    //       return;
-    //     }
-    //     if (password !== retypedpassword) {
-    //       toast.error("Passwords do not match");
-    //       return;
-    //     }
-
-    //     const result = await credentialSignUp(name, email, password);
-    //     if (result.success) {
-    //       toast.success(result.message);
-    //       router.push("/");
-    //     } else {
-    //       toast.error(result.message);
-    //     }
-    //   }}
-    // >
-    //   <div className="space-y-1">
-    //     <Label htmlFor="name">Name</Label>
-    //     <Input name="name" id="name" type="name" placeholder="Your Name" />
-    //   </div>
-    //   <div className="space-y-1">
-    //     <Label htmlFor="email">Email</Label>
-    //     <Input
-    //       name="email"
-    //       id="email"
-    //       type="email"
-    //       placeholder="example@example.com"
-    //     />
-    //   </div>
-    //   <div className="space-y-1">
-    //     <Label htmlFor="password">Password</Label>
-    //     <Input name="password" id="password" type="password" />
-    //   </div>
-    //   <div className="space-y-1">
-    //     <Label htmlFor="current">Re-enter password</Label>
-    //     <Input name="retypedpassword" id="current" type="password" />
-    //   </div>
-    //   <div className="mt-5">
-    //     <Button className="w-full bg-secondary dark:hover:bg-secondary-foreground dark:hover:text-black mx-auto">
-    //       Sign Up
-    //     </Button>
-    //   </div>
-    // </form>
+    
   );
 };
 
 export { LoginForm, SignUpForm };
+

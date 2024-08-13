@@ -16,9 +16,13 @@ export default auth(async function middleware(req) {
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
+  console.log(isLoggedIn);
+  if(isPublicRoute){
+    return;
+  }
   // Allow access to API routes without redirecting to login
   if (isApiAuthRoute) {
-    return undefined;
+    return;
   }
 
   // Handle routes that require authentication
@@ -26,7 +30,7 @@ export default auth(async function middleware(req) {
     if (isLoggedIn) {
       return Response.redirect(new URL(DEFAULT_REDIRECT_PATH, nextUrl));
     }
-    return undefined;
+    return;
   }
 
   // Redirect to login if the user is not logged in and the route is not public
@@ -34,7 +38,7 @@ export default auth(async function middleware(req) {
     return Response.redirect(new URL('/login', nextUrl));
   }
 
-  return undefined;
+  return;
 });
 
 export const config = {

@@ -28,7 +28,7 @@ const Blogs = () => {
           <BlogCard blog={blog} key={index} />
         ))}
       </div>
-      <div className="md:hidden">
+      <div className="md:hidden w-full text-center mb-10">
         <Link href={"/allBlogs"}>
           <Button className="bg-secondary">View All Blogs</Button>
         </Link>

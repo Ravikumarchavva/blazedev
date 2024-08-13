@@ -1,5 +1,5 @@
 "use client";
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import React, { useEffect, useRef } from 'react';
 import { Button } from './ui/button';
 import { Blog } from '@/lib/datatypes';

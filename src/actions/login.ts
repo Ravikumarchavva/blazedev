@@ -1,18 +1,28 @@
 "use server";
 import { signIn } from "@/auth";
 import { getUserByEmail } from "@/data/findUser";
+import { getVerificationTokenByEmail } from "@/data/verification-token";
+import { sendVerificationCode } from "@/lib/mail";
+import { generateVerificationToken } from "@/lib/tokens";
 import { loginSchema } from "@/models/schemas";
 import { AuthError } from "next-auth";
 
 export const credentialLogin = async (values : any) => {
-  const validateFields = await loginSchema.safeParse(values);
-  if (!validateFields.success) {
-    return { success: false, message: validateFields.error.message };
+  const validatedFields = await loginSchema.safeParse(values);
+  if (!validatedFields.success) {
+    return { success: false, message: validatedFields.error.message };
   }
-  const { email, password } = validateFields.data;
-  const user = await getUserByEmail({email});
-  if (!user) {
-    return { success: false, message: "User not found" };
+  const { email, password } = validatedFields.data;
+  const existingUser = await getUserByEmail(email);
+  if (!existingUser || !existingUser.email || !existingUser.password) {
+    return { success: false, message: "Invalid Credentials" };   
+  }
+  if (!existingUser.emailVerified){
+    const verificationToken = await generateVerificationToken(existingUser.email);
+    if(verificationToken){
+      await sendVerificationCode(verificationToken.email,verificationToken.token)
+    }
+    return { success: false, message: "Email not verified.Check your mail again" };
   }
   try{
   const result = await signIn("credentials",{
@@ -20,6 +30,12 @@ export const credentialLogin = async (values : any) => {
     password,
     redirect: false,
   })
+  if(result){
+    const verificationToken = await getVerificationTokenByEmail(email);
+    if(verificationToken){
+      await sendVerificationCode(verificationToken.email,verificationToken.token)
+    }
+  }
   
     if (result?.error) {
       return { success: false, message: result.error };

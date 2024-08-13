@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import { useEffect, useRef } from "react";
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { Project } from "@/lib/datatypes";
 import { Projects } from "@/data/Projects";
 import Link from "next/link";

@@ -1,5 +1,5 @@
 import { Blog } from '@/lib/datatypes';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { notFound } from 'next/navigation';
 import { BlogsData } from '@/data/Blogs';
 interface BlogPageProps {

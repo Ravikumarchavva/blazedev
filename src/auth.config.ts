@@ -1,17 +1,38 @@
 import GitHub from "next-auth/providers/github"
+import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import type { NextAuthConfig } from "next-auth"
 import { loginSchema } from "./models/schemas";
 import { getUserByEmail } from "./data/findUser";
 import { compare } from "bcryptjs";
 export default {
-    providers: [GitHub,
+    providers: [GitHub({
+        clientId: process.env.GITHUB_CLIENT_ID,
+        clientSecret: process.env.GITHUB_CLIENT_SECRET,
+        // profile(profile) {
+        //     return {
+        //         name: profile.name,
+        //         email: profile.email,
+        //         image: profile.avatar_url
+        //     };
+        // }
+    }),Google({
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        // profile(profile) {
+        //     return {
+        //         name: profile.name,
+        //         email: profile.email,
+        //         image: profile.picture
+        //     };
+        // }
+    }),
         Credentials({
             async authorize(credentials) {
                 const validatedFields = await loginSchema.safeParse(credentials);
                 if (validatedFields.success) {
                     const { email, password } = validatedFields.data;
-                    const user = await getUserByEmail({ email });
+                    const user = await getUserByEmail(email);
                     if (!user || !user.password) {
                         return null;
                     }

@@ -1,6 +1,6 @@
 import { Project } from '@/lib/datatypes';
 import { Projects } from '@/data/Projects';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import { notFound } from 'next/navigation';
 
 interface ProjectPageProps {

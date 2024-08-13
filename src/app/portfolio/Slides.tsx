@@ -3,7 +3,7 @@ import * as React from "react";
 import Autoplay from "embla-carousel-autoplay";
 import { Card, CardContent } from "@/components/ui/card";
 import { useEffect, useRef } from "react";
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import {
   Carousel,
   CarouselContent,
