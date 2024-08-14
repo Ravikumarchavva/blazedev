@@ -39,9 +39,9 @@ export function AccountDropdownMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem>
-          <Link href={'/profile'}>Profile</Link>
+          <Link href={'/profile'} className="w-full">Profile</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => logoutUser()} className="gap-1">
+        <DropdownMenuItem onClick={() => logoutUser()} className="gap-1 cursor-pointer">
            <FaSignOutAlt/> <span>Logout</span>
         </DropdownMenuItem>
       </DropdownMenuContent>
