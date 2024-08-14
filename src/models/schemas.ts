@@ -26,3 +26,10 @@ export const settingsSchema = z.object({
     email: z.string().email(),
     bio: z.optional(z.string())
 });
+
+export const contactSchema = z.object({
+    name: z.string().min(1,{message: "Name is Required"}),
+    email: z.string().email(),
+    subject: z.string().min(1,{message: "Subject is Required"}),
+    message: z.string().min(10,{message: "Enter atleast 10 characters"}),
+})

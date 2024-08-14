@@ -1,8 +1,7 @@
-'use client';
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+"use client";
+import ContactForm from "@/components/contactForm/page";
 import Link from "next/link";
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React from "react";
 import { FaLinkedinIn, FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
@@ -13,25 +12,7 @@ interface FormData {
 }
 
 const Contact: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    message: "",
-  });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const mailtoLink = `mailto:ravikumarchavva@outlook.com?subject=Message from ${formData.name}&body=Name: ${formData.name}%0AEmail: ${formData.email}%0AMessage: ${formData.message}`;
-    window.location.href = mailtoLink;
-  };
 
   return (
     <div
@@ -51,13 +32,17 @@ const Contact: React.FC = () => {
             Contact Me
           </h1>
           <p className="text-center md:px-[5vw] portrait:px-[5vh] portrait:hidden sm:hidden lg:inline-block">
-            Whether you&apos;re a fellow enthusiast, a potential collaborator, or someone intrigued by the endless
-            possibilities of data science, I&apos;m excited to connect with you.
+            Whether you&apos;re a fellow enthusiast, a potential collaborator,
+            or someone intrigued by the endless possibilities of data science,
+            I&apos;m excited to connect with you.
             <span className="sm:hidden lg:inline">
-              Let&apos;s embark on this thrilling journey together and unlock the potential of data-driven insights!
+              Let&apos;s embark on this thrilling journey together and unlock
+              the potential of data-driven insights!
             </span>
           </p>
-          <p className="md:hidden portrait:inline-block sm:inline-block">Wanna collaborate or contact me?</p>
+          <p className="md:hidden portrait:inline-block sm:inline-block">
+            Wanna collaborate or contact me?
+          </p>
 
           {/* Contact Methods */}
           <div className="flex flex-col gap-5 mt-5">
@@ -78,7 +63,10 @@ const Contact: React.FC = () => {
               <FaPhoneAlt className="text-2xl" />
               <div>
                 <h2 className="text-lg font-medium">Phone</h2>
-                <a href="tel:+916304424091" className="text-[#dadada] underline underline-offset-4">
+                <a
+                  href="tel:+916304424091"
+                  className="text-[#dadada] underline underline-offset-4"
+                >
                   +91 630 442 4091
                 </a>
               </div>
@@ -87,54 +75,17 @@ const Contact: React.FC = () => {
               <MdEmail className="text-2xl" />
               <div>
                 <h2 className="text-lg font-medium">E-mail</h2>
-                <a href="mailto:ravikumarchavva@outlook.com" className="text-[#dadada] underline underline-offset-4">
+                <a
+                  href="mailto:ravikumarchavva@outlook.com"
+                  className="text-[#dadada] underline underline-offset-4"
+                >
                   ravikumarchavva@outlook.com
                 </a>
               </div>
             </div>
           </div>
         </div>
-
-        <motion.form
-          whileHover={{ scale: 1.02 }}
-          onSubmit={handleSubmit}
-          className="w-full lg:w-1/2 min-h-full mx-[1vw] bg-primary shadow-xl flex flex-col items-center py-10 rounded-md 
-          portrait:w-[95%] portrait:h-auto portrait:mt-5 p-5"
-        >
-          <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            required={true}
-            value={formData.name}
-            onChange={handleChange}
-            className="w-[80%] p-3 my-2 text-black bg-white border border-gray-300 rounded-md shadow-sm 
-            focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent"
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Your Email"
-            required={true}
-            value={formData.email}
-            onChange={handleChange}
-            className="w-[80%] p-3 my-2 text-black bg-white border border-gray-300 rounded-md shadow-sm 
-            focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent"
-          />
-          <textarea
-            rows={7}
-            name="message"
-            placeholder="Your Message"
-            required={true}
-            value={formData.message}
-            onChange={handleChange}
-            className="w-[80%] p-3 my-2 text-black bg-white border border-gray-300 rounded-md shadow-sm 
-            focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent"
-          />
-          <Button className="w-[80%] mt-5 bg-secondary py-3 rounded-md shadow hover:bg-accent-foreground hover:text-black">
-            Send Message
-          </Button>
-        </motion.form>
+        <ContactForm />
       </div>
     </div>
   );
