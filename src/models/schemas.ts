@@ -20,3 +20,9 @@ export const changePasswordSchema = z.object({
     password: z.string().min(6).max(20),
     confirmPassword: z.string(),
 }).refine((data)=>(data.password === data.confirmPassword ? {message: "passwords doesn't match"} : ""));
+
+export const settingsSchema = z.object({
+    name: z.string().min(1,{message: "Name is Required"}),
+    email: z.string().email(),
+    bio: z.optional(z.string())
+});

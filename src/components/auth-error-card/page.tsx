@@ -6,7 +6,7 @@ const AuthErrorCard = () => {
   return (
     <Card className='bg-primary'>
         <CardHeader>Authentication Error</CardHeader>
-        <CardFooter><Link href='/login' className='underline-offset-2 underline'>Please log in to access this page.</Link></CardFooter>
+        <CardFooter><Link href='/login' className='underline-offset-2 underline'>Please log in again.</Link></CardFooter>
     </Card>
   )
 }

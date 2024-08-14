@@ -9,12 +9,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { MdAccountCircle } from "react-icons/md";
-import { logOut } from "@/actions/logOut";
 import { toast } from "sonner";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { FaSignOutAlt, FaUser } from "react-icons/fa";
+import { logOut } from "@/actions/signOut";
 
 export function AccountDropdownMenu() {
     const user = useCurrentUser();

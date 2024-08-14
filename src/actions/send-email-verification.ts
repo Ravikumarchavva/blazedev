@@ -13,9 +13,14 @@ export const Reset = async (values: z.infer<typeof resetSchema>)=>{
     if(existingUser){
 
         if (existingUser.email) {
-            const passwordResetToken = await generatePasswordResetToken(existingUser.email); // Assume generateResetToken is a function that generates a unique token for the user
-            await sendPasswordResetMail(passwordResetToken.email,passwordResetToken.token);
-            return {success:"Reset email sent!"}
+            try{
+
+                const passwordResetToken = await generatePasswordResetToken(existingUser.email); // Assume generateResetToken is a function that generates a unique token for the user
+                await sendPasswordResetMail(passwordResetToken.email,passwordResetToken.token);
+                return {success:"Reset email sent!"}
+            }catch(error){
+                return {error:"Failed to send reset email"};
+            }
         }
     }
     // Send reset email to user

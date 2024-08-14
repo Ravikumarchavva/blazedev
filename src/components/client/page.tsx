@@ -1,6 +1,6 @@
 "use client";
-import { credentialSignUp } from "@/actions/createAccount";
-import { credentialLogin } from "@/actions/login";
+import { credentialSignUp } from "@/actions/signUp";
+import { credentialLogin } from "@/actions/signIn";
 import { Input } from "@/components/ui/input";
 import { loginSchema, signUpSchema } from "@/models/schemas";
 import { DEFAULT_REDIRECT_PATH } from "@/routes";

@@ -22,7 +22,7 @@ export const credentialLogin = async (values : any) => {
     if(verificationToken){
       await sendVerificationCode(verificationToken.email,verificationToken.token)
     }
-    return { success: false, message: "Email not verified.Check your mail again" };
+    return { success: false, message: "Email not verified.Check spam mails too" };
   }
   try{
   const result = await signIn("credentials",{

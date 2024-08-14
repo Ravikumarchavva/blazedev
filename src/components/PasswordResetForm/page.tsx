@@ -1,5 +1,5 @@
 "use client";
-import { Reset } from "@/actions/reset";
+import { Reset } from "@/actions/send-email-verification";
 import { Input } from "@/components/ui/input";
 import { changePasswordSchema } from "@/models/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,7 +17,7 @@ import {
   FormLabel,
   FormMessage,
 } from "../ui/form";
-import { passwordChange } from "@/actions/new-password-reset";
+import { passwordChange } from "@/actions/password-reset";
 import { useSearchParams } from "next/navigation";
 
 export default function PasswordRestForm() {

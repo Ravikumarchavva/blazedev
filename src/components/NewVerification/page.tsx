@@ -4,9 +4,9 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '../ui/card
 import {BeatLoader} from "react-spinners";
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { verification } from '@/actions/new-verification';
 import { FormError } from '../Form-Error';
 import { FormSuccess } from '../Form-Success';
+import { verifyUser } from '@/actions/email-verification';
 const NewVerification = () => {
     const searchParams = useSearchParams();
     const [error,setError] = useState<string | undefined>();
@@ -18,7 +18,7 @@ const NewVerification = () => {
         setError('Token is required');
         return;
       } 
-      verification(token).then((data)=>{
+      verifyUser(token).then((data)=>{
         if(data.success){
           setSuccess(data.message);
         }else{

@@ -1,5 +1,5 @@
 "use client";
-import { Reset } from "@/actions/reset";
+import { Reset } from "@/actions/send-email-verification";
 import { Input } from "@/components/ui/input";
 import { resetSchema } from "@/models/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
