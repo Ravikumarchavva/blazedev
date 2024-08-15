@@ -25,7 +25,7 @@ const Contact: React.FC = () => {
       items-center justify-around text-white overflow-auto"
       >
         <div
-          className="w-full lg:w-1/2 h-full mx-[1vw] flex flex-col items-center justify-around p-5 
+          className="w-full lg:w-1/2 h-full flex flex-col items-center justify-around p-5
         lg:portrait:w-full lg:portrait:h-auto gap-5"
         >
           <h1 className="text-5xl font-semibold portrait:text-3xl portrait:underline portrait:underline-offset-[1vh]">

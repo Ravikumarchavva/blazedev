@@ -42,6 +42,10 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       }
       if (session.user) {
         session.user.role = token.role as Role;
+      };
+      if(session.user){
+        session.user.name = token.name;
+        session.user.bio = token.bio as string;
       }
       return session;
     },
@@ -49,6 +53,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       if (!token.sub) return token;
       const existingUser = await getUserById(token.sub);
       if (!existingUser) return token;
+      token.name = existingUser.name;
+      token.bio = existingUser.bio;
       token.role = existingUser.role;
       return token;
     },

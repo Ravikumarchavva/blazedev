@@ -8,7 +8,7 @@ export const Projects: Project[] = [
         date: new Date('2021-01-01'),
         image: '/projects/ipl.jpg',
         comingSoon: false,
-        url: 'www.google.com',
+        blogUrl: 'www.google.com',
     },
     {
         id: 1,
@@ -17,7 +17,7 @@ export const Projects: Project[] = [
         date: new Date('2022-01-01'),
         image: '/projects/car.jpg',
         comingSoon: false,
-        url: 'www.google.com',
+        blogUrl: 'www.google.com',
     },
     {
         id: 2,
@@ -26,7 +26,7 @@ export const Projects: Project[] = [
         date: new Date('2023-01-01'),
         image: '/projects/churn.jpg',
         comingSoon: false,
-        url: 'www.google.com',
+        blogUrl: 'www.google.com',
     },
     {
         id: 3,
@@ -35,7 +35,7 @@ export const Projects: Project[] = [
         date: new Date('2025-01-01'),
         image: '/projects/fraud.jpg',
         comingSoon: true,
-        url: undefined,
+        blogUrl: undefined,
     },
     {
         id: 4,
@@ -44,7 +44,7 @@ export const Projects: Project[] = [
         date: new Date('2024-01-01'),
         image: '/projects/music.jpg',
         comingSoon: true,
-        url: undefined,
+        blogUrl: undefined,
     },
 ];
 

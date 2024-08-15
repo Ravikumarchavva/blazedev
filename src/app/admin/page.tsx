@@ -1,23 +1,23 @@
-// src/app/admin/page.tsx
-// "use client";
-
 import React from 'react';
 import Link from 'next/link';
+import { db } from '@/lib/db';
+import Image from 'next/image';
 
-const Admin: React.FC = () => {
-
+const Admin: React.FC = async () => {
+  const users = await db.user.findMany();
 
   return (
-      <div className='w-full px-[5vw] pt-20 flex items-center justify-center min-h-screen'>
-        <button className='bg-secondary text-white hover:text-black hover:bg-white py-2 px-4 rounded'>
-          <Link href={'./admin/addproject'}>
-            Add Project
-          </Link>
-        </button>
-        <button className='bg-secondary text-white hover:text-black hover:bg-white py-2 px-4 rounded ml-4'>
-          <Link href={'./admin/addblog'}>Add Blog</Link>
-        </button>
-      </div>
+    <div className='w-full px-[5vw] gap-10 pt-20 flex items-center justify-center min-h-screen'>
+      <p>Number of users: {users.length}</p>
+      {users.map((user) => (
+        <div key={user.id}>
+          {/* Render user details here */}
+          <p>{user.name}</p>
+          <p>{user.email}</p>
+          {/* Add more user details as needed */}
+        </div>
+      ))}
+    </div>
   );
 };
 

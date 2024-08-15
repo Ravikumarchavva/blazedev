@@ -62,7 +62,7 @@ const ContactForm = () => {
     <Form {...contactForm}>
       <form
         onSubmit={contactForm.handleSubmit(handleSubmit)}
-        className="font-semibold w-full min-h-[65vh] mx-[1vw] bg-primary shadow-xl flex flex-col items-center py-8 rounded-lg 
+        className="font-semibold w-full min-h-[65vh] bg-primary shadow-xl flex flex-col items-center py-8 rounded-lg 
         portrait:w-[95%] portrait:h-auto portrait:mt-5 px-[5vw] space-y-4 lg:w-1/2 lg:space-y-6 lg:py-12 lg:px-10"
       >
         <FormField

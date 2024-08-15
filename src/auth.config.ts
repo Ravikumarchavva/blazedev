@@ -9,23 +9,9 @@ export default {
     providers: [GitHub({
         clientId: process.env.GITHUB_CLIENT_ID,
         clientSecret: process.env.GITHUB_CLIENT_SECRET,
-        // profile(profile) {
-        //     return {
-        //         name: profile.name,
-        //         email: profile.email,
-        //         image: profile.avatar_url
-        //     };
-        // }
     }),Google({
         clientId: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        // profile(profile) {
-        //     return {
-        //         name: profile.name,
-        //         email: profile.email,
-        //         image: profile.picture
-        //     };
-        // }
     }),
         Credentials({
             async authorize(credentials) {

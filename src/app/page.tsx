@@ -1,8 +1,8 @@
 // "use client";
-import About from "./about/page";
-import Portfolio from "./portfolio/page";
-import Contact from "./contact/page";
-import Blogs from "./blogs/page";
+import About from "./(mainPage)/about/page";
+import Portfolio from "./(mainPage)/portfolio/page";
+import Contact from "./(mainPage)/contact/page";
+import Blogs from "./(mainPage)/blogs/page";
 import InfoContainer from "@/components/InfoContainer/page";
 
 
