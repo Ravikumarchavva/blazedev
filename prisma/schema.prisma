@@ -58,3 +58,31 @@ enum Role {
   USER
   ADMIN
 }
+model Project {
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  title          String
+  description    String
+  date           DateTime
+  image          String
+  comingSoon     Boolean
+  url            String?   // Optional URL field
+  mlopsBased     Boolean?  // Indicates if the project involves MLOps
+  signInRequired Boolean?  // Indicates if sign-in is required
+  requestLimit   Int?      // Request limit for signed-in users
+  blogPresent    Boolean   // Indicates if a related blog is available
+  blogLink       String?   // URL of the related blog (if blogPresent is true)
+
+  @@map("projects")
+}
+model Blog {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  title             String
+  description       String
+  content           String
+  url               String
+  expectedReadingTime String
+  imageUrl          String
+  projectLink       String? // URL of the related project (if any)
+
+  @@map("blogs")
+}

@@ -22,7 +22,6 @@ const updateProfile = async (id: string,values : z.infer<typeof settingsSchema>)
         });
         return {success:true,message:"Profile updated successfully"};
     } catch (error) {
-        console.error(error);
         return {success:false,message:"Failed to update profile"};
     }
 }

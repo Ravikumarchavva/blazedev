@@ -28,7 +28,6 @@ export const credentialSignUp = async (values: any) => {
   const verificationToken = await generateVerificationToken(email);
   // Send email with verificationToken...
   await sendVerificationCode(verificationToken.email,verificationToken.token);
-  console.log(verificationToken);
   return {
     success: true,
     message: "Confirmation token sent",

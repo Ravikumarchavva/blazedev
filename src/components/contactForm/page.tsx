@@ -49,8 +49,6 @@ const ContactForm = () => {
       const response = await contactMessage(values);
       if (response.success) {
         setSuccess("Message sent successfully!");
-        console.log(response.message);
-        console.log(user)
         // contactForm.reset(); // Reset form after successful submission
       } else {
         setError(response.message);

@@ -9,7 +9,6 @@ export default async function AddProject() {
   const { data: countries, error } = await supabase.from('countries').select('*'); // Change to lower case
 
   if (error) {
-    console.error('Error fetching countries:', error);
     return <div>Error fetching countries</div>;
   }
 

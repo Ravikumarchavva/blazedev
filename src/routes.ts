@@ -13,5 +13,5 @@ export const DEFAULT_REDIRECT_PATH = '/profile';
 
 /**these routes require admin authenthication**/
 
-export const adminRoutes = '/api/admin';
+export const adminRoutes = '/admin';
 
