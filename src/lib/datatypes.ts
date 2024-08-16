@@ -11,7 +11,7 @@ export interface Project {
   date: Date,
   image: string;
   comingSoon: boolean,
-  blogUrl: string | undefined
+  link: string
 }
 
 export interface Blog {

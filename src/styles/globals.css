@@ -76,6 +76,16 @@
 ::-webkit-scrollbar{
   width: 0;
 }
+/* Global CSS (e.g., styles/globals.css) */
+.project::-webkit-scrollbar {
+  width: 12px; /* Adjust width as needed */
+}
+
+.project::-webkit-scrollbar-thumb {
+  background-color: #888; /* Optional: Customize scrollbar thumb */
+  border-radius: 10px;    /* Optional: Round the edges */
+}
+
 
 .fade-in-up {
   opacity: 0;

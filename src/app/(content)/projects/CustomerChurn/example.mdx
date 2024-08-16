@@ -1,0 +1,101 @@
+import Link from 'next//link';
+
+# Customer Churn Prediction with Binary Classification
+
+*Date: July 2024*
+
+GitHub: <Link href='https://github.com/Ravikumarchavva/ML_Playground/tree/main/week2_BinaryClassification' target="_blank"> Ravikumarchavva/ML_Playground/week2_BinaryClassification</Link>
+
+## Objective
+
+Our goal was to predict customer churn using various machine learning techniques with a focus on optimizing recall and precision. This post summarizes our week-long journey through the stages of data exploration, feature engineering, model selection, and refinement.
+
+---
+
+### Start: Data Exploration and Preprocessing
+
+We began by understanding the dataset’s structure and performing necessary preprocessing. This included handling missing values, encoding categorical variables, and performing initial exploratory data analysis (EDA) to identify patterns and relationships in the data.
+
+![Day 1 Report](/projects/churn/Day1-report.png)
+
+**Power BI Report**  
+![Power BI Report](/projects/churn/ChurnReport.jpg)
+
+**Technologies Used:**
+- **Language:** Python
+- **Libraries:** Pandas, NumPy, Scikit-learn
+- **Visualization:** Matplotlib, Seaborn
+
+**Key Insights:**
+- A thorough understanding of the dataset is crucial for effective feature engineering and modeling.
+
+---
+
+### Feature Selection and Naive Modeling
+
+To simplify the model, we dropped features with low Matthews correlation coefficient and used Variance Inflation Factor (VIF) to remove multicollinear features. We then implemented simple models to establish a baseline.
+
+**Technologies Used:**
+- **Libraries:** Scikit-learn
+
+**Key Takeaways:**
+- Feature selection is critical to improve model interpretability and reduce overfitting.
+
+---
+
+### Handling Class Imbalance with SMOTE-N
+
+Given the imbalanced nature of the churn data, we applied Synthetic Minority Over-sampling Technique for Nominal data (SMOTE-N) to balance the classes. This improved the model’s ability to predict churners effectively.
+
+**Technologies Used:**
+- **Libraries:** Imbalanced-learn
+
+**Key Insights:**
+- Addressing class imbalance is vital for improving model recall and precision.
+
+---
+
+### Error Analysis and Model Refinement
+
+To improve our model’s decision boundaries, we analyzed errors and introduced decision trees. This helped overcome the limitations of linear decision boundaries and led to better predictions.
+
+**Technologies Used:**
+- **Libraries:** Scikit-learn
+
+**Key Takeaways:**
+- Error analysis is essential for refining models and improving decision boundaries.
+
+---
+
+### Finish: Ensemble Methods and AutoML
+
+We implemented ensemble methods such as Random Forest and Gradient Boosting to enhance model performance. AutoML tools were also utilized to streamline model selection and hyperparameter tuning. Our final model, CatBoost, achieved excellent recall and precision.
+
+![Day 6 Ensemble Report](/projects/churn/Day6-ensembling-Report.png)
+
+**Models Used:**
+- Random Forest
+- CatBoost
+- AutoML (PyCaret, EvalML)
+
+**Key Insights:**
+- Ensemble methods and AutoML significantly boost model performance and save time.
+
+---
+
+### Conclusion
+
+By systematically progressing through data preprocessing, feature selection, class balancing, error analysis, and advanced techniques, we successfully built a robust model for predicting customer churn. The final model, CatBoost, achieved an impressive recall and precision of 86%, proving highly effective at identifying churners.
+
+**Final Technologies Used:**
+- **Language:** Python
+- **Core Libraries:** Pandas, NumPy, Scikit-learn, Imbalanced-learn, CatBoost
+- **Visualization:** Matplotlib, Seaborn
+- **Development Environment:** Jupyter Notebook, VS Code
+
+---
+
+This structured approach allowed us to effectively solve the customer churn problem, ensuring our model was both accurate and reliable. Stay tuned for more insights as we continue to explore and implement advanced machine learning methodologies!
+
+--- 
+

@@ -14,6 +14,7 @@ import {
 import { Project } from "@/lib/datatypes";
 import { Projects } from "@/data/Projects";
 import Link from "next/link";
+import ProjectCard from "@/components/ProjectCard/page";
 
 export function Slides() {
   const projects: Project[] = Projects;
@@ -57,39 +58,7 @@ export function Slides() {
             className="pl-1 lg:basis-1/2 xl:basis-1/3 fade-in-up"
           >
             <div className="bg-secondary rounded-lg min-h-[390px] max-h-[500px] max-w-[450px] min-w-[270px] aspect-square portrait:aspect-auto mx-auto">
-              <Card className="overflow-hidden rounded-lg">
-                <CardContent className="relative flex aspect-square portrait:aspect-auto portrait:min-h-[425px] items-center justify-center p-6">
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-t-lg"
-                  />
-                  <div className="absolute text-center text-white bg-primary bg-opacity-50 bottom-0 w-full h-[30%] p-2 rounded-b-lg">
-                    <span className="text-2xl font-semibold">
-                      {project.title}
-                    </span>
-                    <div className="flex items-center justify-around px-4">
-                      <p className="mt-2 px-2 portrait:hidden">
-                        {project.description}
-                      </p>
-                      <Link href={`/projects/${project.id}`}>
-                        <button
-                          className={`mt-2 px-4 py-2 rounded ${
-                            project.comingSoon
-                              ? "cursor-not-allowed bg-background hover:bg-background dark:text-white text-black"
-                              : "bg-secondary hover:bg-white text-white hover:text-black"
-                          }`}
-                          disabled={project.comingSoon}
-                        >
-                          {project.comingSoon ? "Coming Soon" : "View"}
-                        </button>
-                      </Link>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+            <ProjectCard title={project.title} description={project.description} image={project.image} comingSoon={project.comingSoon} link={project.link}/>
             </div>
           </CarouselItem>
         ))}
