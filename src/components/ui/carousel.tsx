@@ -34,6 +34,7 @@ type CarouselContextProps = {
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null)
 
+
 function useCarousel() {
   const context = React.useContext(CarouselContext)
 
@@ -82,10 +83,11 @@ const Carousel = React.forwardRef<
     const scrollPrev = React.useCallback(() => {
       api?.scrollPrev()
     }, [api])
-
+    
     const scrollNext = React.useCallback(() => {
       api?.scrollNext()
     }, [api])
+    
 
     const handleKeyDown = React.useCallback(
       (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -236,7 +238,7 @@ const CarouselNext = React.forwardRef<
       ref={ref}
       variant={variant}
       size={size}
-      className={cn(
+      className={cn(  
         "absolute h-8 w-8 rounded-full",
         orientation === "horizontal"
           ? "-right-12 top-1/2 -translate-y-1/2"
