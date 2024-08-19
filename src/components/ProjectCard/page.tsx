@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, CardContent } from "../ui/card";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import Link from "next/link";
 interface projectCardProps {
     title: string;

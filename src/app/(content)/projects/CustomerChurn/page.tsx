@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import Example from "./example.mdx"
+import Example from "./example.mdx";
 import {
   Form,
   FormControl,
@@ -49,10 +49,22 @@ const ChurnPredictionForm = () => {
   });
 
   // Handle form submission and churn prediction
-  const onSubmit = (data: ChurnPredictionFormValues) => {
-    console.log(data);
-    startTransition(() => {
-      setPredictedChurn("Likely to churn");
+  const onSubmit = async (data: ChurnPredictionFormValues) => {
+    startTransition(async () => {
+      try {
+        const response = await fetch(`/api/churn`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        if (!response.ok) throw new Error("Failed to get prediction");
+        const result = await response.json();
+        setPredictedChurn(result.churn);
+      } catch (error) {
+        setPredictedChurn("Error occurred");
+      }
     });
   };
 
@@ -184,7 +196,7 @@ const ChurnPredictionForm = () => {
               )}
             />
 
-            {/* Submit Button */}
+            <div className="flex items-center justify-center">
             <Button
               type="submit"
               disabled={isPending}
@@ -192,21 +204,21 @@ const ChurnPredictionForm = () => {
             >
               Predict Churn
             </Button>
-          </form>
-          {predictedChurn !== null && (
-            <div className="mb-10 w-full">
-              <h2 className="text-2xl text-center text-white font-bold">
-                Prediction: {predictedChurn}
-              </h2>
             </div>
-          )}
-        </Form>
-        </div>
-      <div className="w-full mb-10 bg-primary shadow-2xl prose prose-lg max-w-none p-[5vw] text-white prose-headings:text-white prose-a:text-white prose-strong:text-white prose-code:text-white
-      portrait:px-[5vw] portrait:mb-0">
-    <Example />
-</div>
 
+            {predictedChurn && (
+              <div className="text-center col-span-full">
+                <h2 className="text-2xl text-white">Prediction: {predictedChurn}</h2>
+              </div>
+            )}
+          </form>
+        </Form>
+      </div>
+      
+      {/* Example MDX Component */}
+      <div className="w-full mb-10 bg-primary shadow-2xl prose prose-lg max-w-none p-[5vw] text-white prose-headings:text-white prose-a:text-white prose-strong:text-white prose-code:text-white portrait:px-[5vw] portrait:mb-0">
+        <Example />
+      </div>
     </div>
   );
 };
