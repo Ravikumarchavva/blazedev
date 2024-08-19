@@ -20,7 +20,7 @@ const Products: React.FC = () => {
       <div className="w-full grid portrait:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 justify-center gap-10">
             {projects.map((project, index) => (
                 <div key={index} className="bg-secondary rounded-lg min-h-[390px] max-h-[500px] max-w-[450px] min-w-[270px] aspect-square portrait:aspect-auto mx-auto">
-                  <ProjectCard title={project.title} description={project.description} image={project.image} comingSoon={false} link={project.link}/>
+                  <ProjectCard title={project.title} description={project.description} image={project.image} comingSoon={project.comingSoon} link={project.link}/>
                 </div>
             ))}
       </div>

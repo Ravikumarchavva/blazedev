@@ -21,7 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-
+import WarningNote from "@/components/UxWarning/page";
 // Zod schema for churn prediction
 const churnPredictionSchema = z.object({
   tenure: z.string(),
@@ -207,14 +207,14 @@ const ChurnPredictionForm = () => {
             </div>
 
             {predictedChurn && (
-              <div className="text-center col-span-full">
+              <div className="text-center col-span-full mt-2">
                 <h2 className="text-2xl text-white">Prediction: {predictedChurn}</h2>
               </div>
             )}
           </form>
         </Form>
       </div>
-      
+      <WarningNote />      
       {/* Example MDX Component */}
       <div className="w-full mb-10 bg-primary shadow-2xl prose prose-lg max-w-none p-[5vw] text-white prose-headings:text-white prose-a:text-white prose-strong:text-white prose-code:text-white portrait:px-[5vw] portrait:mb-0">
         <Example />
