@@ -55,9 +55,9 @@ export function Slides() {
         {projects.map((project) => (
           <CarouselItem
             key={project.id}
-            className="pl-1 lg:basis-1/2 xl:basis-1/3 fade-in-up"
+            className="lg:basis-1/2 xl:basis-1/3 fade-in-up"
           >
-            <div className="bg-secondary rounded-lg min-h-[390px] max-h-[500px] max-w-[450px] min-w-[270px] aspect-square portrait:aspect-auto mx-auto">
+            <div className="bg-secondary rounded-lg min-h-[390px] max-h-[500px] max-w-[450px] min-w-[200px] aspect-square portrait:aspect-auto mx-auto">
             <ProjectCard title={project.title} description={project.description} image={project.image} comingSoon={project.comingSoon} link={project.link}/>
             </div>
           </CarouselItem>

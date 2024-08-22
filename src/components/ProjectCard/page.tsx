@@ -26,7 +26,7 @@ const ProjectCard = ({title,description,image,comingSoon,link}:projectCardProps)
             <p className="mt-2 px-2 portrait:hidden">{description}</p>
             <Link href={`${link}`}>
               <button
-                className={`mt-2 px-4 text-white rounded ${
+                className={`mt-2 min-h-10 px-4 text-white rounded ${
                   comingSoon
                     ? "cursor-not-allowed bg-background"
                     : "hover:bg-white bg-secondary hover:text-black py-2"
