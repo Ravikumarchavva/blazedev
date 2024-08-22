@@ -4,14 +4,13 @@ export async function POST(request: NextRequest) {
   try {
     // Validate and parse request body
     const body = await request.json();
-
     // Send data to FastAPI backend
     const response = await fetch(`${process.env.FASTAPI_URL}/predict_churn`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(body), 
     });
 
     if (!response.ok) {

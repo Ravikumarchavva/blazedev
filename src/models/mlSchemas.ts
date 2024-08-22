@@ -1,12 +1,17 @@
 import { z } from 'zod';
 
-const carPricePredictionSchema = z.object({
-  carlength: z.number().positive(),
-  carwidth: z.number().positive(),
-  wheelbase: z.number().positive(),
-  citympg: z.number().positive(),
-  highwaympg: z.number().positive(),
-  enginesize: z.number().positive(),
-  horsepower: z.number().positive(),
-  curbweight: z.number().positive(),
+export const carPricePredictionSchema = z.object({
+  carlength: z.number().max(205).min(140),
+  carwidth: z.number().max(75).min(60),
+  horsepower: z.number().max(200).min(50),
+  brandavg: z.number().max(40000).min(5000),
+  averagempg: z.number().max(60).min(12),
+});
+
+export const churnPredictionSchema = z.object({
+  MonthlyCharges: z.number().max(120).min(18),
+  TotalCharges: z.number().min(18),
+  InternetService: z.enum(["Fiber optic","DSL","No"]),
+  tenure: z.number().positive().max(140),
+  Contract: z.enum(["Month-to-month","One year","Two year"]),
 });

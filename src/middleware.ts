@@ -41,9 +41,5 @@ export default auth(async function middleware(req) {
 });
 
 export const config = {
-  matcher: [
-    '/((?!.+\\.[\\w]+$|_next).*)', // Match all routes except static files and Next.js internal routes
-    '/',
-    '/(api|trpc)(.*)', // Ensure API routes are included in the matcher
-  ],
+  matcher: ['/admin'],
 };
