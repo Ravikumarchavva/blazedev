@@ -8,7 +8,7 @@ export const Projects: Project[] = [
         date: new Date('2022-01-01'),
         image: '/projects/car.jpg',
         comingSoon: false,
-        link: '/carPricePrediction',
+        link: '/projects/carPricePrediction',
     },
     {
         id: 1,
@@ -17,7 +17,7 @@ export const Projects: Project[] = [
         date: new Date('2023-01-01'),
         image: '/projects/churn.jpg',
         comingSoon: false,
-        link: '/customerChurn',
+        link: '/projects/customerChurn',
     },
     {
         id: 3,

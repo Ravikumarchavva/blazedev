@@ -24,7 +24,7 @@ const ProjectCard = ({title,description,image,comingSoon,link}:projectCardProps)
           <span className="text-2xl font-semibold">{title}</span>
           <div className="flex items-center justify-around px-4">
             <p className="mt-2 px-2 portrait:hidden">{description}</p>
-            <Link href={`/projects/${link}`}>
+            <Link href={`${link}`}>
               <button
                 className={`mt-2 px-4 text-white rounded ${
                   comingSoon
