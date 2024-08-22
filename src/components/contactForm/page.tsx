@@ -75,7 +75,7 @@ const ContactForm = () => {
                 <Input
                   {...field}
                   type="text"
-                  className="w-full text-primary"
+                  className="w-full text-primary dark:text-white"
                   placeholder="Enter your name"
                   disabled={isPending}
                 />
@@ -94,7 +94,7 @@ const ContactForm = () => {
                 <Input
                   {...field}
                   type="text"
-                  className="w-full text-primary"
+                  className="w-full text-primary text-white"
                   placeholder="Contacting for "
                   disabled={isPending}
                 />
@@ -112,7 +112,7 @@ const ContactForm = () => {
               <FormControl>
                 <Textarea
                   {...field}
-                  className="text-primary"
+                  className="text-primary text-white"
                   rows={6}
                   placeholder="Write your message here"
                   disabled={isPending}
