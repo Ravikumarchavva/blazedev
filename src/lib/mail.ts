@@ -24,11 +24,11 @@ export const sendPasswordResetMail = async (email: string, token: string) => {
     });
 }
 
-export const contactMail = async (values:z.infer<typeof contactSchema>)=>{
+export const contactMail = async (values:z.infer<typeof contactSchema>,email: string)=>{
     await resend.emails.send({
         from: 'developer@ravikumarchavva.com',
         to: process.env.ADMIN_MAIL || 'hello@ravikumarchavva.com',
         subject: values.subject,
-        text: `Message from: ${values.name} <${values.email}>\n\n${values.message}`,
+        text: `Message from: ${values.name} <${email}>\n\n${values.message}`,
     });
 }

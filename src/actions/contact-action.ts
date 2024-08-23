@@ -11,11 +11,11 @@ export const contactMessage = async (values:z.infer<typeof contactSchema>,email:
         return { success:false, message: "Enter all fields" };
     }
     const existingUser = await getUserByEmail(email);
-    if (!existingUser){
+    if (!existingUser || !existingUser.email){
         return { success: false, message: "Login to send message" };
     };
     try{
-        await contactMail(validatedFields.data);
+        await contactMail(validatedFields.data,existingUser.email);
         return { success: true, message: "Message sent successfully" };
     }
     catch(error){
