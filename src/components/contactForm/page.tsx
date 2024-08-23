@@ -37,25 +37,28 @@ const ContactForm = () => {
   const [success, setSuccess] = useState<string | undefined>(undefined);
 
   const handleSubmit = async (values: FormData) => {
-    startTransition(() => {
+    startTransition(async () => {
       setError(undefined);
       setSuccess(undefined);
+      if(!user){
+        setError("You must be logged in to send a message.");
+        return; // Stop the transition if user is not logged in
+      }
+      try {
+        if (user.email) {
+          values.email = user.email; // Ensure email is set from the user object
+        }
+        const response = await contactMessage(values);
+        if (response.success) {
+          setSuccess("Message sent successfully!");
+          // contactForm.reset(); // Reset form after successful submission
+        } else {
+          setError(response.message);
+        }
+      } catch (error) {
+        setError("Failed to send message.");
+      }
     });
-
-    try {
-      if (user?.email) {
-        values.email = user.email; // Ensure email is set from the user object
-      }
-      const response = await contactMessage(values);
-      if (response.success) {
-        setSuccess("Message sent successfully!");
-        // contactForm.reset(); // Reset form after successful submission
-      } else {
-        setError(response.message);
-      }
-    } catch (error) {
-      setError("Failed to send message.");
-    }
   };
 
   return (

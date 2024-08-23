@@ -41,5 +41,5 @@ export default auth(async function middleware(req) {
 });
 
 export const config = {
-  matcher: ['/admin'],
+  matcher: ['/admin','/contact','/profile'],
 };
