@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { useCurrentUser } from "@/hooks/use-current-user";
 import { contactSchema } from "@/models/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { motion } from "framer-motion";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
@@ -12,13 +11,8 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { FormError } from "../Form-Error";
 import { FormSuccess } from "../Form-Success";
+import { z } from "zod";
 
-interface FormData {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-}
 
 const ContactForm = () => {
   const user = useCurrentUser();
@@ -26,7 +20,6 @@ const ContactForm = () => {
     resolver: zodResolver(contactSchema),
     defaultValues: {
       name: "",
-      email: user?.email || "", // Set the email default value
       subject: "",
       message: "",
     },
@@ -36,26 +29,28 @@ const ContactForm = () => {
   const [error, setError] = useState<string | undefined>(undefined);
   const [success, setSuccess] = useState<string | undefined>(undefined);
 
-  const handleSubmit = async (values: FormData) => {
+  const handleSubmit = (values: z.infer<typeof contactSchema>) => {
     startTransition(async () => {
       setError(undefined);
       setSuccess(undefined);
-      if(!user){
-        setError("You must be logged in to send a message.");
-        return; // Stop the transition if user is not logged in
-      }
+
       try {
-        if (user.email) {
-          values.email = user.email; // Ensure email is set from the user object
+        if(!user || !user.email){
+          setError("Sign in to send message");
+          return; // Skip sending message if user is not signed in
         }
-        const response = await contactMessage(values);
+        const response = await contactMessage(values,user.email);
+
         if (response.success) {
           setSuccess("Message sent successfully!");
-          // contactForm.reset(); // Reset form after successful submission
+          setTimeout(() => {
+            contactForm.reset(); // Reset form after successful submission
+          }, 2000); // Reset form after 2 seconds delay
         } else {
           setError(response.message);
         }
-      } catch (error) {
+      } catch (error: any) {
+        console.error("Error sending message:", error);
         setError("Failed to send message.");
       }
     });
@@ -67,6 +62,7 @@ const ContactForm = () => {
         onSubmit={contactForm.handleSubmit(handleSubmit)}
         className="font-semibold w-full min-h-[65vh] bg-primary shadow-xl flex flex-col items-center py-8 rounded-lg 
         portrait:w-[95%] portrait:h-auto portrait:mt-5 px-[5vw] space-y-4 lg:w-1/2 lg:space-y-6 lg:py-12 lg:px-10"
+        aria-live="polite" // Helps with accessibility for screen readers
       >
         <FormField
           control={contactForm.control}

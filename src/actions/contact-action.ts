@@ -5,12 +5,12 @@ import { contactMail } from "@/lib/mail";
 import { contactSchema } from "@/models/schemas";
 import { z } from "zod";
 
-export const contactMessage = async (values:z.infer<typeof contactSchema>)=>{
+export const contactMessage = async (values:z.infer<typeof contactSchema>,email:string)=>{
     const validatedFields = contactSchema.safeParse(values);
     if (!validatedFields.success) {
         return { success:false, message: "Enter all fields" };
     }
-    const existingUser = await getUserByEmail(values.email);
+    const existingUser = await getUserByEmail(email);
     if (!existingUser){
         return { success: false, message: "Login to send message" };
     };

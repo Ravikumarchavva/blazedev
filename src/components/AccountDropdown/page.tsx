@@ -8,7 +8,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { MdAccountCircle } from "react-icons/md";
 import { toast } from "sonner";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
@@ -27,7 +26,6 @@ export function AccountDropdownMenu() {
       <DropdownMenuTrigger asChild>
         <Avatar>
         <Button size={"icon"} className="bg-transparent hover:bg-transparent/20">
-
         <AvatarImage src={user?.image || ""} className="p-1 rounded-full"/>
         </Button>
         <AvatarFallback className="bg-transparent">

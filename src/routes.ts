@@ -8,7 +8,7 @@ export const authRoutes = ['/login','/signUp','/error','/reset','/new-password']
 
 
 /**after login redirect */
-export const DEFAULT_REDIRECT_PATH = '/profile';
+export const DEFAULT_REDIRECT_PATH = '/';
 
 
 /**these routes require admin authenthication**/

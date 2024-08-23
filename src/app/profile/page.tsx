@@ -11,7 +11,7 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { cn } from "@/lib/utils";
 import { settingsSchema } from "@/models/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -28,6 +28,16 @@ const Profile = () => {
       bio: user?.bio || "",
     },
   });
+
+  useEffect(() => {
+    if (user) {
+      profileForm.reset({
+        name: user.name || "",
+        email: user.email || "",
+        bio: user.bio || "",
+      });
+    }
+  }, [user]);
   const handleSubmit = (values: z.infer<typeof settingsSchema>) => {
     startTransition(async () => {
       console.log("Form submitted with values:", values);
