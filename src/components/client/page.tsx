@@ -24,7 +24,6 @@ import {
 import Link from "next/link";
 
 const LoginForm = () => {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || DEFAULT_REDIRECT_PATH;
   const urlError = searchParams.get("error") === "OAuthAccountNotLinked" ? "Account already in use by different provider" : '' 
@@ -46,7 +45,7 @@ const LoginForm = () => {
         if(data.success){
           setSuccess(data.message);
           toast("Login Succesfull!");
-          router.push(callbackUrl);
+          window.location.assign(callbackUrl); // Redirect to the callbackUrl and reload the page
         }
         else{
           setError(data.message);
