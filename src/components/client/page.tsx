@@ -26,6 +26,7 @@ import Link from "next/link";
 const LoginForm = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || DEFAULT_REDIRECT_PATH;
   const urlError = searchParams.get("error") === "OAuthAccountNotLinked" ? "Account already in use by different provider" : '' 
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>(undefined);
@@ -44,8 +45,8 @@ const LoginForm = () => {
       credentialLogin(values).then((data)=>{
         if(data.success){
           setSuccess(data.message);
-          toast("Login Succesfull!")
-          router.push(DEFAULT_REDIRECT_PATH);
+          toast("Login Succesfull!");
+          router.push(callbackUrl);
         }
         else{
           setError(data.message);

@@ -6,8 +6,9 @@ import { sendVerificationCode } from "@/lib/mail";
 import { generateVerificationToken } from "@/lib/tokens";
 import { loginSchema } from "@/models/schemas";
 import { AuthError } from "next-auth";
+import { z } from "zod";
 
-export const credentialLogin = async (values : any) => {
+export const credentialLogin = async (values : z.infer<typeof loginSchema>) => {
   const validatedFields = await loginSchema.safeParse(values);
   if (!validatedFields.success) {
     return { success: false, message: validatedFields.error.message };

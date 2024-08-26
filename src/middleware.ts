@@ -34,8 +34,13 @@ export default auth(async function middleware(req) {
 
   // Redirect to login if the user is not logged in and the route is not public
   if (!isLoggedIn && !isPublicRoute) {
-    return Response.redirect(new URL('/login', nextUrl));
-  }
+    let callbackUrl = nextUrl.pathname;
+    if (nextUrl.searchParams) {
+      callbackUrl += nextUrl.search;
+    }
+    const encodedCallbackUrl = encodeURIComponent(callbackUrl);
+    return Response.redirect(new URL(`/login?callbackUrl=${encodedCallbackUrl}`, nextUrl));
+  }  
 
   return;
 });
