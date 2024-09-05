@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const fontPoppins = Poppins({
   subsets: ["latin"],
@@ -46,6 +47,7 @@ export default async function RootLayout ({
             <NavBar />
             {children}
             <Analytics/>
+            <SpeedInsights />
           </SessionProvider>
           <Toaster />
         </ThemeProvider>
