@@ -7,6 +7,7 @@ import NavBar from "@/components/NavBar/page";
 import { Toaster } from "@/components/ui/sonner";
 import { auth } from "@/auth";
 import { SessionProvider } from "next-auth/react";
+import { Analytics } from "@vercel/analytics/react";
 
 const fontPoppins = Poppins({
   subsets: ["latin"],
@@ -44,6 +45,7 @@ export default async function RootLayout ({
           <SessionProvider session={session}>
             <NavBar />
             {children}
+            <Analytics/>
           </SessionProvider>
           <Toaster />
         </ThemeProvider>
