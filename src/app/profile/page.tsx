@@ -37,7 +37,7 @@ const Profile = () => {
         bio: user.bio || "",
       });
     }
-  }, [user]);
+  }, []);
   const handleSubmit = (values: z.infer<typeof settingsSchema>) => {
     startTransition(async () => {
       console.log("Form submitted with values:", values);

@@ -32,7 +32,9 @@ Once we provide the training data to the model, we want it to **learn** the unde
 A line in linear regression can be represented as:
 ![Data Exploration Report](/blogs/regression/loss.png)
 
-$$ \hat{y} = \theta_1 \cdot x + \theta_0 $$
+$$ 
+\hat{y} = \theta_1 \cdot x + \theta_0 
+$$
 
 Where:
 -  $$ \hat{y}  = predicted value $$
@@ -56,7 +58,7 @@ The goal is to find the **minimum** of the cost function \( J(w) \). For this, w
 
 ### Learning Rate
 
-- The learning rate \( α \) determines how fast we move towards the minimum.
+- The learning rate ( α ) determines how fast we move towards the minimum.
   
 - If the learning rate is too large, we might overshoot the minimum. If it's too small, the process could converge too slowly.
 
@@ -68,7 +70,10 @@ The goal is to find the **minimum** of the cost function \( J(w) \). For this, w
 
 The cost function \( J(w) \) for **Ordinary Least Squares (OLS)** regression is defined as:
 
-J(w) = $$ \frac{1}{2m}  \sum_{i=1}^{m}  (y_i - \hat{y}_i)^2 = \frac{1}{2m}   \sum_{i=1}^{m} (wx + b - y)^2 $$
+$$
+J(w) = \frac{1}{2m}  \sum_{i=1}^{m}  (y_i - \hat{y}_i)^2 = \frac{1}{2m}   \sum_{i=1}^{m} (wx + b - y)^2
+$$
+
 Where:
 - m  = number of training points
 - $$ y_i $$ = actual value

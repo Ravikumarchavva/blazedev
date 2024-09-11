@@ -7,7 +7,7 @@ export const BlogsData: Blog[] = [
     description: 'Explore the fundamentals of linear regression, a basic yet powerful technique in machine learning.',
     url: 'https://example.com/blog/first-post',
     expectedReadingTime: '5 minutes',
-    imageUrl: '/blogs/linearRegression.jpg',
+    imageUrl: '/blogs/regression/linearRegression.jpg',
     blogUrl: '/allBlogs/LinearRegression'
   },
   {
@@ -16,7 +16,7 @@ export const BlogsData: Blog[] = [
     description: 'A comprehensive guide to classification, a key technique in supervised learning.',
     url: 'https://www.google.com',
     expectedReadingTime: '15 minutes',
-    imageUrl: '/blogs/binaryClassification.jpg',
+    imageUrl: '/blogs/classification/binaryClassification.jpg',
     blogUrl: '/allBlogs/Classification'
   },
   // {
