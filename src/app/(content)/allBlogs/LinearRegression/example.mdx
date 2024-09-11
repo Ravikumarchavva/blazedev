@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 
 # Regression: An Overview
 
@@ -217,21 +216,14 @@ Violations of these assumptions can result in issues like biased coefficients, i
    - **How to interpret**: A p-value below 0.05 indicates the residuals are not normally distributed.
 
 ## How to Solve These Issues
-
-1. **Non-linearity**: Try feature transformation or use a more complex model.
-2. **Heteroscedasticity**: Use Weighted Least Squares (WLS) or transform the dependent variable.
-3. **Autocorrelation**: Apply time-series models like ARIMA or introduce lagged variables.
-4. **Multicollinearity**: Remove or combine variables or use PCA.
-5. **Non-normality of errors**: Apply transformations or use robust models that do not assume normality.
+$$1.$$ Non-linearity: Try feature transformation or use a more complex model. \
+$$2.$$ **Heteroscedasticity**: Use Weighted Least Squares (WLS) or transform the dependent variable. \
+$$3.$$ **Autocorrelation**: Apply time-series models like ARIMA or introduce lagged variables. \
+$$4.$$ **Multicollinearity**: Remove or combine variables or use PCA. \
+$$5.$$ **Non-normality of errors**: Apply transformations or use robust models that do not assume normality. 
 
 ---
 
 ### Conclusion
 
 Identifying and solving issues in linear regression involves understanding the assumptions and running the appropriate tests. By addressing violations of these assumptions, you can ensure that your model produces reliable and valid predictions.
-
-{/* For further reading, check out this [guide on regression diagnostics](https://your-link-here.com).
-
-<Link href="/advanced-linear-regression">
-  Learn more about advanced techniques for linear regression here.
-</Link> */}
