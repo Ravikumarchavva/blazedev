@@ -1,0 +1,153 @@
+import Link from 'next/link';
+import Image from 'next/image';
+
+# Classification Analysis
+
+Binary classification is a type of supervised learning where the goal is to predict the **category** or **class label** of a given input based on its features. The number of class labels is finite, i.e., discrete.
+
+## Types of Classification
+
+1. **Binary Classification**  
+   There are two class labels, e.g., **Spam** or **Not Spam**, **Yes** or **No**.
+
+2. **Multiclass Classification**  
+   More than two class labels, e.g., **Lion**, **Tiger**, or **Leopard**.
+
+3. **Multilabel Classification**  
+   Each instance can have multiple labels, e.g., an image can be tagged as both **sunset** and **beach**.
+
+---
+
+## Binary Classification
+
+In binary classification, all instances are classified into **two categories** or classes, such as Yes/No or 1/0. The process of classification involves creating a **decision boundary**, which separates the two classes. This boundary can be linear or polynomial, depending on the complexity of the problem. 
+
+### Decision Boundary
+
+- A good decision boundary avoids both **overfitting** and **underfitting**.
+- In problems where **least squares** optimization is used, gradient descent can sometimes create **wiggly non-convex curves**, leading to local minima.
+  
+### Training Function
+
+In **regression**, the model uses a combination of input features and adds a bias term, often using a linear combination. However, in **binary classification**, we need a **training function** that produces output in the range [0, 1]. This is where **logistic regression** comes in.
+
+#### Logistic Regression
+
+The **training function** for binary classification is defined as a **probability function** that maps inputs to values between 0 and 1:
+
+$$ 
+P(y = 1 | x; w) = \frac{1}{1 + e^{-w^T x}} = \sigma(w^T x)  
+$$
+
+This function outputs the **probability** of an observation being classified as 1. It is called **logistic regression**.
+
+---
+
+## Likelihood and Binomial Distribution
+
+1. **Bernoulli Trials**  
+   Each observation in binary classification can be treated as a Bernoulli trial, with two possible outcomes: **1 (success)** or **0 (failure)**.
+
+2. **Probability of Observing a Single Data Point**  
+   Given the predicted probability \(P\) from logistic regression, the likelihood of observing the actual outcome \(y\) is modeled using the **Bernoulli distribution**:
+
+$$ 
+P(y | x; w) = P^y (1 - P)^{1 - y} 
+$$
+
+For example, let's say we have a data point where the customer's age is 30, and our logistic regression model outputs a predicted probability \(P = 0.8\).
+
+- If the customer actually buys (i.e., \(y = 1\)):
+
+$$ 
+P(y = 1 | x; w) = P = 0.8 
+$$
+
+- If the customer does not buy (i.e., \(y = 0\)):
+
+$$
+P(y = 0 | x; w) = 1 - P = 0.2
+$$
+Thus, the predicted probability is high when the model's prediction matches the actual outcome.
+
+---
+
+## Likelihood for the Entire Dataset
+
+Since each observation in the dataset is independent, the likelihood of observing the entire dataset is the product of individual observations:
+
+$$
+L(w) = \prod_{i=1}^{n} P(y_i | X; w) = \prod_{i=1}^{n} P_i^{y_i} (1 - P_i)^{1 - y_i}
+$$
+Our goal is to **maximize the likelihood** of the entire dataset for the given set of \(X\) (features) and \(w\) (parameters). 
+
+---
+
+## Log-Likelihood
+
+Maximizing the product of probabilities can be computationally challenging, so we take the **logarithm** and convert the product into a sum. This makes the optimization process easier:
+
+$$
+\log(L(w)) = \sum_{i=1}^{n} \left[ y_i \log(P_i) + (1 - y_i) \log(1 - P_i) \right]
+$$
+---
+
+## Negative Log-Likelihood
+
+In machine learning, we often aim to **minimize** a loss function rather than maximize. Thus, we apply the **negative log-likelihood** to switch to a minimization problem:
+
+$$
+- \log(L(w)) = - \sum_{i=1}^{n} \left[ y_i \log(P_i) + (1 - y_i) \log(1 - P_i) \right]
+$$
+This function measures how well the predicted probabilities align with the actual data. If the model predicts the correct class with high confidence, the loss is low. Conversely, it penalizes being confident and wrong.
+
+---
+
+## Interpretation of the Cost
+
+The cost for misclassifying one observation is:
+
+- If \(y_i = 1\), the cost is \(- \log(P_i)\).
+- If \(y_i = 0\), the cost is \(- \log(1 - P_i)\).
+
+---
+
+## Optimization
+
+Directly using the cost \(J(w)\) can lead to problems such as:
+
+1. Inability to compare models trained on different sample sizes.
+2. The gradients can grow significantly as \(n\) increases.
+
+To address this, we use the **average**:
+
+$$
+J(w, b) = - \frac{1}{n} \sum_{i=1}^{n} \left[ y_i \log(P_i) + (1 - y_i) \log(1 - P_i) \right]
+$$
+This gives us the **average loss per observation**, providing insight into model performance.
+
+---
+
+## Gradient Descent for Logistic Regression
+
+Gradient descent in logistic regression follows a similar procedure as in linear regression, but with the **sigmoid function** involved. We use the **chain rule** to calculate the gradients.
+
+### Gradient Calculation
+
+For the weight \(w\):
+
+$$
+\frac{\partial J}{\partial w} = \frac{1}{n} \sum_{i=1}^{n} (P_i - y_i) x_i
+$$
+For the bias \(b\):
+
+$$
+\frac{\partial J}{\partial b} = \frac{1}{n} \sum_{i=1}^{n} (P_i - y_i)
+$$
+The weights and bias are updated using the calculated gradients in each iteration of gradient descent.
+
+---
+
+## Conclusion
+
+In **binary classification**, the goal is to classify instances into two distinct categories. Logistic regression is a widely used approach that outputs probabilities between 0 and 1, and the model is trained by optimizing the **log-likelihood**. Proper optimization and interpretation of the loss function are crucial for building a successful binary classifier.

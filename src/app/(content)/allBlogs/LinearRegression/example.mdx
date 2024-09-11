@@ -1,0 +1,232 @@
+import Link from 'next/link';
+import Image from 'next/Image';
+
+# Regression: An Overview
+
+In general, **regression** refers to the phenomenon of "falling towards" something. It describes a tendency of data to regress back towards a central value. In machine learning, regression is used to model relationships between variables, predicting the outcome of one variable based on others.
+
+## Linear Regression
+
+**Linear regression** is a type of regression where the data points fall toward a straight line or hyperplane. This line or hyperplane is determined by fitting a regression line through the data points.
+
+- The regression line is built using a set of independent features to generalize the label (dependent variable).
+
+## Terminology
+
+- **Training Set:**  
+  The dataset that consists of both features and labels, which is provided to the model for learning.
+
+- **Test Set:**  
+  The dataset that contains only the features. The labels are used for comparison after the model makes predictions, to evaluate performance.
+
+## Cost Function
+
+Once we provide the training data to the model, we want it to **learn** the underlying patterns. For this, we define a **cost function**, which measures how close the predicted values are to the actual data points.
+
+- The **cost function** is the summation of the **loss function** for each training data point. The cost function could be as simple as the average (mean squared error) or more complex, such as a weighted average.
+
+- Example: The **loss function** could represent the distance between the predicted point on the line and the actual data point.
+
+## How We Train the Model Using the Cost Function
+
+A line in linear regression can be represented as:
+![Data Exploration Report](/blogs/regression/loss.png)
+
+$$ \hat{y} = \theta_1 \cdot x + \theta_0 $$
+
+Where:
+-  $$ \hat{y}  = predicted value $$
+- $$ \theta_1 = slope (or **weights**) $$
+- $$ x  = feature (input variable) $$
+- $$ \theta_0 = bias (intercept) $$
+
+We need to tweak the parameters \( w or θ₁ \) (weights) and \( b or θ₀ \) (bias) to minimize the **cost function**.
+
+### Gradient Descent
+
+To adjust \( w \) and \( b \), we use algorithms such as **gradient descent**, one of the most popular optimization algorithms.
+
+The goal is to find the **minimum** of the cost function \( J(w) \). For this, we calculate the **gradients**, which indicate the direction and magnitude of the adjustment.
+
+### Gradient Descent Process
+
+- We start with arbitrary initial values for \( w \) and \( b \), then iteratively adjust them step-by-step to minimize the cost function.
+
+- The **step size** (learning rate) controls how much we adjust \( w \) and \( b \) in each iteration. 
+
+### Learning Rate
+
+- The learning rate \( α \) determines how fast we move towards the minimum.
+  
+- If the learning rate is too large, we might overshoot the minimum. If it's too small, the process could converge too slowly.
+
+- To tune the learning rate, we start with values such as 0.0001, 0.0003, 0.001, etc., and adjust accordingly.
+
+- The **gradient** provides information about how much to move and in which direction.
+
+### Cost Function: Ordinary Least Squares (OLS)
+
+The cost function \( J(w) \) for **Ordinary Least Squares (OLS)** regression is defined as:
+
+J(w) = $$ \frac{1}{2m}  \sum_{i=1}^{m}  (y_i - \hat{y}_i)^2 = \frac{1}{2m}   \sum_{i=1}^{m} (wx + b - y)^2 $$
+Where:
+- m  = number of training points
+- $$ y_i $$ = actual value
+- $$ \hat{y}_i $$ = predicted value (i.e., \( wx + b \)) 
+
+### Gradient Calculations
+
+To minimize the cost function, we compute the gradient with respect to \( w \) and \( b \) as follows:
+
+- **Gradient with respect to \( w \):**
+
+
+$$ \frac{\partial J}{\partial w} = \frac{1}{m} \sum_{i=1}^{m} \left( (wx + b) - y \right) x $$
+
+- **Gradient with respect to \( b \):**
+
+$$ \frac{\partial J}{\partial b} = \frac{1}{m} \sum_{i=1}^{m} \left( (wx + b) - y \right) $$
+
+### Why Do We Subtract the Gradient?
+
+We subtract the gradient because we want to move in the direction of the **negative slope** (i.e., towards the minimum). If the slope is negative, subtracting the gradient increases \( $$\mathbf{w}$$ \); if the slope is positive, it decreases \( $$\mathbf{w}$$ \).
+
+This ensures that the model parameters are adjusted in the correct direction to minimize the cost function.
+
+## Multivariate Linear Regression
+
+In **simple linear regression**, we only have one feature and one label, which forms a straight line. However, in **multivariate linear regression**, there are multiple features .
+
+### Equation for Multivariate Linear Regression
+
+The regression equation in multivariate linear regression is:
+
+$$
+\hat{y} = \mathbf{w}^T \mathbf{x} + b
+$$
+
+Where:
+- $$\mathbf{w}$$  = vector of weights
+- $$\mathbf{x}$$  = vector of features
+- b  = bias (intercept)
+
+### Gradient Descent for Multiple Features
+
+In multivariate regression, the **gradient descent algorithm** works similarly to the univariate case. However, we adjust the weights and bias for each feature.
+
+For every iteration, we subtract the gradient scaled by the learning rate from the weights and bias:
+
+- **Update for weights \( $$ \mathbf{w} $$ \):**
+
+$$
+\mathbf{w} = \mathbf{w} - \alpha \frac{\partial J}{\partial \mathbf{w}}
+$$
+
+- **Update for bias \( b \):**
+
+$$
+b = b - \alpha \frac{\partial J}{\partial b}
+$$
+
+Where \( $$\alpha $$\) is the learning rate.
+
+## Assumptions of Linear Regression
+
+While linear regression is a powerful tool, it is built on several key assumptions. Violating these assumptions can lead to inaccurate or misleading results. Below are the assumptions of linear regression, common problems that arise when they are violated, and the necessary tests to identify and address these issues.
+
+
+1. **Linearity**  
+   The relationship between the dependent variable and the independent variables must be linear. That is, changes in the independent variables should lead to proportional changes in the dependent variable.
+
+2. **Independence of Errors**  
+   The residuals (errors) must be independent of each other. This is especially important in time series data where observations can be correlated over time.
+
+3. **Homoscedasticity**  
+   The residuals should have constant variance across all levels of the independent variables. When the variance of errors changes (i.e., heteroscedasticity), it can distort the estimation of coefficients and their standard errors.
+
+4. **Normality of Errors**  
+   The residuals should be normally distributed. This is important for making valid statistical inferences and calculating confidence intervals.
+
+5. **No Multicollinearity**  
+   The independent variables should not be too highly correlated with each other. High multicollinearity can make it difficult to determine the independent effect of each predictor on the dependent variable.
+
+6. **No Autocorrelation**  
+   In time series data, the residuals should not be correlated with each other over time. This is particularly important in econometric models.
+
+## When Problems Arise
+
+Violations of these assumptions can result in issues like biased coefficients, inefficient estimates, incorrect standard errors, or even failure of the model to generalize.
+
+### 1. Violation of Linearity
+   - **Problem**: If the relationship between the dependent and independent variables is non-linear, linear regression will not capture the true relationship.
+   - **Solution**:  
+      - Apply **polynomial regression** or transform the variables using logarithms, square roots, etc.
+      - Use non-linear models such as decision trees or neural networks for highly non-linear relationships.
+
+### 2. Violation of Independence of Errors
+   - **Problem**: If errors are correlated (common in time series), it can lead to underestimated standard errors and inflated t-values.
+   - **Solution**:  
+      - Use a **Durbin-Watson** test to check for autocorrelation.  
+      - Consider using **Generalized Least Squares (GLS)** or **Autoregressive Integrated Moving Average (ARIMA)** models for time series data.
+  
+### 3. Violation of Homoscedasticity
+   - **Problem**: When the variance of the residuals is not constant (heteroscedasticity), it leads to inefficient estimates and distorted confidence intervals.
+   - **Solution**:  
+      - Use a **Breusch-Pagan** or **White** test to detect heteroscedasticity.  
+      - Transform the dependent variable or apply **Weighted Least Squares (WLS)** to correct heteroscedasticity.
+
+### 4. Violation of Normality of Errors
+   - **Problem**: If the residuals are not normally distributed, it affects the validity of hypothesis tests and confidence intervals.
+   - **Solution**:  
+      - Perform a **Shapiro-Wilk** or **Kolmogorov-Smirnov** test to check the normality of residuals.  
+      - If the residuals are skewed, transform the dependent variable using a **log** or **box-cox** transformation.
+
+### 5. Multicollinearity
+   - **Problem**: High multicollinearity inflates the standard errors of the coefficients, making it hard to distinguish the effect of each variable.
+   - **Solution**:  
+      - Calculate the **Variance Inflation Factor (VIF)** to check for multicollinearity.  
+      - Remove or combine highly correlated variables, or use **Principal Component Analysis (PCA)** to reduce dimensionality.
+
+### 6. Autocorrelation
+   - **Problem**: If the residuals are autocorrelated, the model’s assumptions about error independence are violated, leading to biased parameter estimates.
+   - **Solution**:  
+      - Use the **Durbin-Watson test** to detect autocorrelation.  
+      - Switch to time-series-specific models such as **ARIMA** or include lagged variables.
+
+## Tests to Identify Problems
+
+### 1. **Durbin-Watson Test for Autocorrelation**
+   - Use to check if there is a pattern in the residuals over time, especially in time series data.
+   - **How to interpret**: A value close to 2 suggests no autocorrelation; a value much lower or higher than 2 indicates positive or negative autocorrelation.
+
+### 2. **Breusch-Pagan Test for Heteroscedasticity**
+   - Use this test to check if the residual variance changes at different levels of the independent variables.
+   - **How to interpret**: A low p-value suggests that heteroscedasticity is present.
+
+### 3. **Variance Inflation Factor (VIF) for Multicollinearity**
+   - A VIF above 10 suggests high multicollinearity.
+   - **How to fix**: Remove or combine correlated variables, or use regularization techniques such as Ridge Regression.
+
+### 4. **Shapiro-Wilk Test for Normality**
+   - Check if the residuals follow a normal distribution.
+   - **How to interpret**: A p-value below 0.05 indicates the residuals are not normally distributed.
+
+## How to Solve These Issues
+
+1. **Non-linearity**: Try feature transformation or use a more complex model.
+2. **Heteroscedasticity**: Use Weighted Least Squares (WLS) or transform the dependent variable.
+3. **Autocorrelation**: Apply time-series models like ARIMA or introduce lagged variables.
+4. **Multicollinearity**: Remove or combine variables or use PCA.
+5. **Non-normality of errors**: Apply transformations or use robust models that do not assume normality.
+
+---
+
+### Conclusion
+
+Identifying and solving issues in linear regression involves understanding the assumptions and running the appropriate tests. By addressing violations of these assumptions, you can ensure that your model produces reliable and valid predictions.
+
+{/* For further reading, check out this [guide on regression diagnostics](https://your-link-here.com).
+
+<Link href="/advanced-linear-regression">
+  Learn more about advanced techniques for linear regression here.
+</Link> */}

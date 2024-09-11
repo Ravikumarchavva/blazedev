@@ -56,7 +56,7 @@ const BlogCard = ({ blog }: { blog: Blog }) => {
         <div className='text-xl font-bold text-white'>{blog.title}</div>
         <div className='flex flex-col justify-around items-center'>
           <p className='text-gray-200'>{blog.description}</p>
-          <Link href={`allBlogs/${blog.id}`}>
+          <Link href={`${blog.blogUrl}`}>
             <Button className='bg-secondary hover:bg-white hover:text-black'>Read</Button>
           </Link>
         </div>

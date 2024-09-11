@@ -18,8 +18,8 @@ export interface Blog {
   id: number;
   title: string;
   description: string;
-  content: string;
   url: string;
   expectedReadingTime: string;
   imageUrl: string;
+  blogUrl: string
 }

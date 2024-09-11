@@ -1,19 +1,18 @@
+import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math'; // Import remark-math
+import rehypeKatex from 'rehype-katex'; // Import rehype-katex
+import createMDX from '@next/mdx';
+
 /** @type {import('next').NextConfig} */
-import createMDX from '@next/mdx'
-
 const nextConfig = {
-    pageExtensions: ['ts','tsx','md','mdx']
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'], // Support MDX pages
 };
+
 const withMDX = createMDX({
-    // Add markdown plugins here, as desired
-    extension:/\.mdx?$/,
-    options:{
+  options: {
+    remarkPlugins: [remarkGfm, remarkMath], // Enable GFM and LaTeX math support
+    rehypePlugins: [rehypeKatex], // Enable Katex for rendering math
+  },
+});
 
-        remarkPlugins: [],
-        rehypePlugins: [],
-    },
-    
-
-
-  })
 export default withMDX(nextConfig);
