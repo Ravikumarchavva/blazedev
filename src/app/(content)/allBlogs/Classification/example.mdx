@@ -77,7 +77,10 @@ Thus, the predicted probability is high when the model's prediction matches the 
 Since each observation in the dataset is independent, the likelihood of observing the entire dataset is the product of individual observations:
 
 $$
-L(w) = \prod_{i=1}^{n} P(y_i | X; w) = \prod_{i=1}^{n} P_i^{y_i} (1 - P_i)^{1 - y_i}
+L(w) = \prod_{i=1}^{n} P(y_i | X; w)
+$$
+$$
+L(w) = \prod_{i=1}^{n} P_i^{y_i} (1 - P_i)^{1 - y_i}
 $$
 Our goal is to **maximize the likelihood** of the entire dataset for the given set of \(X\) (features) and \(w\) (parameters). 
 
@@ -87,8 +90,9 @@ Our goal is to **maximize the likelihood** of the entire dataset for the given s
 
 Maximizing the product of probabilities can be computationally challenging, so we take the **logarithm** and convert the product into a sum. This makes the optimization process easier:
 
+$$\log(L(w))$$ is given by
 $$
-\log(L(w)) = \sum_{i=1}^{n} \left[ y_i \log(P_i) + (1 - y_i) \log(1 - P_i) \right]
+ \sum_{i=1}^{n} \left[ y_i \log(P_i) + (1 - y_i) \log(1 - P_i) \right]
 $$
 ---
 
@@ -96,8 +100,10 @@ $$
 
 In machine learning, we often aim to **minimize** a loss function rather than maximize. Thus, we apply the **negative log-likelihood** to switch to a minimization problem:
 
+$$-\log(L(w))$$ is given by
+
 $$
-- \log(L(w)) = - \sum_{i=1}^{n} \left[ y_i \log(P_i) + (1 - y_i) \log(1 - P_i) \right]
+- \sum_{i=1}^{n} \left[ y_i \log(P_i) + (1 - y_i) \log(1 - P_i) \right]
 $$
 This function measures how well the predicted probabilities align with the actual data. If the model predicts the correct class with high confidence, the loss is low. Conversely, it penalizes being confident and wrong.
 
@@ -107,8 +113,8 @@ This function measures how well the predicted probabilities align with the actua
 
 The cost for misclassifying one observation is:
 
-- If \(y_i = 1\), the cost is \(- \log(P_i)\).
-- If \(y_i = 0\), the cost is \(- \log(1 - P_i)\).
+- If $$ y_i = 1 $$ , the cost is $$- \log(P_i)$$.
+- If $$y_i = 0 $$, the cost is $$- \log(1 - P_i)$$.
 
 ---
 
@@ -121,8 +127,10 @@ Directly using the cost \(J(w)\) can lead to problems such as:
 
 To address this, we use the **average**:
 
+$$J(w,b)$$ is given by
+
 $$
-J(w, b) = - \frac{1}{n} \sum_{i=1}^{n} \left[ y_i \log(P_i) + (1 - y_i) \log(1 - P_i) \right]
+- \frac{1}{n} \sum_{i=1}^{n} \left[ y_i \log(P_i) + (1 - y_i) \log(1 - P_i) \right]
 $$
 This gives us the **average loss per observation**, providing insight into model performance.
 
