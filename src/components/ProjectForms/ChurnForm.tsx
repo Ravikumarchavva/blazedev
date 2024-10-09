@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/select";
 import WarningNote from "@/components/UxWarning/page";
 import { churnPredictionSchema } from "@/models/mlSchemas";
+import React from 'react';
 
 // Typescript type inference
 type ChurnPredictionFormValues = z.infer<typeof churnPredictionSchema>;
@@ -40,25 +41,43 @@ const ChurnForm = () => {
     },
   });
 
+  const fetchWithRetry = async (url: string, options: RequestInit, retries: number = 3, delay: number = 1000) => {
+    for (let i = 0; i < retries; i++) {
+      try {
+        const response = await fetch(url, options);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return await response.json();
+      } catch (error) {
+        if (i < retries - 1) {
+          await new Promise(res => setTimeout(res, delay));
+        } else {
+          throw error;
+        }
+      }
+    }
+  };
+
   // Handle form submission and churn prediction
   const onSubmit = async (data: ChurnPredictionFormValues) => {
     startTransition(async () => {
       try {
-        const response = await fetch(`/api/churn`, {
+        const result = await fetchWithRetry(`/api/churn`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(data),
         });
-        if (!response.ok) throw new Error("Failed to get prediction");
-        const result = await response.json();
+
         setPredictedChurn(result.churn);
       } catch (error) {
         setPredictedChurn("Error occurred");
       }
     });
   };
+
   return (
     <Form {...churnForm}>
       <form
@@ -86,8 +105,6 @@ const ChurnForm = () => {
           )}
         />
 
-
-
         <FormField
           control={churnForm.control}
           name="TotalCharges"
@@ -101,7 +118,6 @@ const ChurnForm = () => {
                   {...field}
                   disabled={isPending}
                   onChange={(e) => field.onChange(parseFloat(e.target.value))}
-
                 />
               </FormControl>
               <FormMessage />
@@ -181,11 +197,6 @@ const ChurnForm = () => {
           )}
         />
 
-
-
-
-
-
         <div className="flex items-center justify-center">
           <Button
             type="submit"
@@ -206,4 +217,4 @@ const ChurnForm = () => {
   )
 }
 
-export default ChurnForm
+export default ChurnForm;

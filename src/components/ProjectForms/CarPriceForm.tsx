@@ -35,10 +35,28 @@ const CarPriceForm = () => {
         },
     });
 
+    const fetchWithRetry = async (url: string, options: RequestInit, retries: number = 3, delay: number = 1000) => {
+        for (let i = 0; i < retries; i++) {
+            try {
+                const response = await fetch(url, options);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return await response.json();
+            } catch (error) {
+                if (i < retries - 1) {
+                    await new Promise(res => setTimeout(res, delay));
+                } else {
+                    throw error;
+                }
+            }
+        }
+    };
+
     const getCarPrice = async (data: CarPricePredictionFormValues) => {
         startTransition(async () => {
             try {
-                const response = await fetch('/api/carprice', {
+                const result = await fetchWithRetry('/api/carprice', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -46,13 +64,14 @@ const CarPriceForm = () => {
                     body: JSON.stringify(data),
                 });
 
-                const result = await response.json();
                 setPredictedPrice(result.price);
+                setError(null); // Clear any previous errors
             } catch (error) {
                 setError("Failed to fetch the price. Please try again.");
             }
         });
     };
+
     return (
         <Form {...carform}>
             <form
@@ -92,7 +111,6 @@ const CarPriceForm = () => {
                                     {...field}
                                     disabled={isPending}
                                     onChange={(e) => field.onChange(parseFloat(e.target.value))}
-
                                 />
                             </FormControl>
                             <FormMessage />
@@ -112,7 +130,6 @@ const CarPriceForm = () => {
                                     {...field}
                                     disabled={isPending}
                                     onChange={(e) => field.onChange(parseFloat(e.target.value))}
-
                                 />
                             </FormControl>
                             <FormMessage />
@@ -132,7 +149,6 @@ const CarPriceForm = () => {
                                     {...field}
                                     disabled={isPending}
                                     onChange={(e) => field.onChange(parseFloat(e.target.value))}
-
                                 />
                             </FormControl>
                             <FormMessage />
@@ -152,7 +168,6 @@ const CarPriceForm = () => {
                                     {...field}
                                     disabled={isPending}
                                     onChange={(e) => field.onChange(parseFloat(e.target.value))}
-
                                 />
                             </FormControl>
                             <FormMessage />
