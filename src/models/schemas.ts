@@ -32,3 +32,10 @@ export const contactSchema = z.object({
     subject: z.string().min(1,{message: "Subject is Required"}),
     message: z.string().min(10,{message: "Enter atleast 10 characters"}),
 })
+
+export const taskSchema = z.object({
+    id: z.number().min(1,{message: "ID is Required"}),
+    title: z.string().min(1,{message: "Title is Required"}),
+    lead: z.string().min(1,{message: "Lead is Required"}),
+    status: z.string().min(1,{message: "Status is Required"}),
+});

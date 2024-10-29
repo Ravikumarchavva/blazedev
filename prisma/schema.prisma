@@ -54,6 +54,14 @@ model PasswordResetToken{
   expires  DateTime
   @@unique([email,token])
 }
+
+model Task {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  status    String
+  lead      String
+}
+
 enum Role {
   USER
   ADMIN
