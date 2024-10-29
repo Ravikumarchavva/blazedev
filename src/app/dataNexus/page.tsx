@@ -9,12 +9,23 @@ const TodoList = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [newTaskLead, setNewTaskLead] = useState('');
+  const [error, setError] = useState<string | null>(null);
 
   // Fetch tasks from the database
   const getTasks = async () => {
-    const response = await fetch('/api/tasks');
-    const tasks = await response.json();
-    setTasks(tasks);
+    try {
+      const response = await fetch('/api/tasks');
+      if (!response.ok) {
+        throw new Error('Failed to fetch tasks');
+      }
+      const tasks = await response.json();
+      if (!Array.isArray(tasks)) {
+        throw new Error('Invalid data format');
+      }
+      setTasks(tasks);
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   useEffect(() => {
@@ -23,47 +34,62 @@ const TodoList = () => {
 
   // Update task status
   const updateStatus = async (id: number, status: string) => {
-    const response = await fetch('/api/tasks', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id, status }),
-    });
-    const updatedTask = await response.json();
-    if (response.ok) {
+    try {
+      const response = await fetch('/api/tasks', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id, status }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update task status');
+      }
+      const updatedTask = await response.json();
       setTasks(tasks.map(task => (task.id === id ? updatedTask : task)));
+    } catch (err) {
+      setError(err.message);
     }
   };
 
   // Add a new task
   const addTask = async () => {
-    const response = await fetch('/api/tasks', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ title: newTaskTitle, lead: newTaskLead }),
-    });
-    const newTask = await response.json();
-    if (response.ok) {
+    try {
+      const response = await fetch('/api/tasks', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title: newTaskTitle, lead: newTaskLead }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to add task');
+      }
+      const newTask = await response.json();
       setTasks([...tasks, newTask]);
       setNewTaskTitle('');
       setNewTaskLead('');
+    } catch (err) {
+      setError(err.message);
     }
   };
 
   // Delete a task
   const deleteTask = async (id: number) => {
-    const response = await fetch('/api/tasks', {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id }),
-    });
-    if (response.ok) {
+    try {
+      const response = await fetch('/api/tasks', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to delete task');
+      }
       setTasks(tasks.filter(task => task.id !== id));
+    } catch (err) {
+      setError(err.message);
     }
   };
 
@@ -76,6 +102,8 @@ const TodoList = () => {
     <div className='w-[90vw] mb-[5vw] py-[5vw] mx-[5vw]'>
       <div className="lg:max-w-full h-full px-2 min-h-[70vh] bg-primary shadow-lg rounded-lg py-[2vh] portrait:max-w-[450px] md:max-w-[600px] mx-auto">
         <h2 className="text-3xl text-white font-semibold text-center mb-6">To-Do List</h2>
+
+        {error && <div className="text-red-500 text-center mb-4">{error}</div>}
 
         {/* Add Task Form */}
         <div className="flex items-center mb-6">
