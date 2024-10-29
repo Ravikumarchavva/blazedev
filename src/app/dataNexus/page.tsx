@@ -14,7 +14,7 @@ const TodoList = () => {
   // Fetch tasks from the database
   const getTasks = async () => {
     try {
-      const response = await fetch('/api/tasks');
+      const response = await fetch('/api/tasks',{method: 'GET'});
       if (!response.ok) {
         throw new Error('Failed to fetch tasks');
       }
@@ -23,7 +23,7 @@ const TodoList = () => {
         throw new Error('Invalid data format');
       }
       setTasks(tasks);
-    } catch (err) {
+    } catch (err: any) {
       setError(err.message);
     }
   };
@@ -47,7 +47,7 @@ const TodoList = () => {
       }
       const updatedTask = await response.json();
       setTasks(tasks.map(task => (task.id === id ? updatedTask : task)));
-    } catch (err) {
+    } catch (err: any) {
       setError(err.message);
     }
   };
@@ -69,7 +69,7 @@ const TodoList = () => {
       setTasks([...tasks, newTask]);
       setNewTaskTitle('');
       setNewTaskLead('');
-    } catch (err) {
+    } catch (err: any) {
       setError(err.message);
     }
   };
@@ -88,7 +88,7 @@ const TodoList = () => {
         throw new Error('Failed to delete task');
       }
       setTasks(tasks.filter(task => task.id !== id));
-    } catch (err) {
+    } catch (err: any) {
       setError(err.message);
     }
   };
