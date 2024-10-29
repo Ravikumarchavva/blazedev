@@ -1,7 +1,7 @@
 // middleware.ts
 import authConfig from "@/auth.config";
 import NextAuth from "next-auth";
-import { DEFAULT_REDIRECT_PATH, publicRoutes, authRoutes, apiAuthPrefix } from "@/routes";
+import { DEFAULT_REDIRECT_PATH, publicRoutes, authRoutes, apiAuthPrefix, adminRoutes } from "@/routes";
 
 // Use only one of the two middleware options below
 // 1. Use middleware directly
@@ -16,6 +16,14 @@ export default auth(async function middleware(req) {
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
+  const isAdminRoute = nextUrl.pathname.startsWith(adminRoutes);
+
+  // Allow access to admin routes only if the user is an admin
+  if(isLoggedIn){
+    if (isAdminRoute && req.auth?.user.role == 'ADMIN') {
+      return;
+    }
+  }
   if(isPublicRoute){
     return;
   }

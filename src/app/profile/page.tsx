@@ -95,7 +95,7 @@ const Profile = () => {
           name="email"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Email</FormLabel>
+              <FormLabel className="text-white">Email</FormLabel>
               <FormControl>
                 <Input
                   {...field}
@@ -115,13 +115,14 @@ const Profile = () => {
           name="bio"
           render={({ field }) => (
             <FormItem className="w-full">
-              <FormLabel>Bio</FormLabel>
+              <FormLabel className="text-white">Bio</FormLabel>
               <FormControl>
                 <Textarea
                   {...field}
                   rows={2}
                   placeholder="I am a recruiter"
                   disabled={isPending}
+                  className="text-black placeholder-black"
                 />
               </FormControl>
               <FormMessage />
