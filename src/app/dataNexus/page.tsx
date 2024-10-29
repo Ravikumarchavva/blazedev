@@ -28,14 +28,11 @@ const TodoList = () => {
     }
   };
 
-  useEffect(() => {
-    getTasks();
-  }, []);
-
+  
   // Update task status
   const updateStatus = async (id: number, status: string) => {
-    try {
-      const response = await fetch('/api/tasks', {
+      try {
+          const response = await fetch('/api/tasks', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -43,55 +40,58 @@ const TodoList = () => {
         body: JSON.stringify({ id, status }),
       });
       if (!response.ok) {
-        throw new Error('Failed to update task status');
+          throw new Error('Failed to update task status');
       }
       const updatedTask = await response.json();
       setTasks(tasks.map(task => (task.id === id ? updatedTask : task)));
     } catch (err: any) {
-      setError(err.message);
+        setError(err.message);
     }
-  };
+};
 
-  // Add a new task
-  const addTask = async () => {
+// Add a new task
+const addTask = async () => {
     try {
-      const response = await fetch('/api/tasks', {
-        method: 'POST',
+        const response = await fetch('/api/tasks', {
+            method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
         },
         body: JSON.stringify({ title: newTaskTitle, lead: newTaskLead }),
       });
       if (!response.ok) {
         throw new Error('Failed to add task');
-      }
-      const newTask = await response.json();
-      setTasks([...tasks, newTask]);
-      setNewTaskTitle('');
-      setNewTaskLead('');
-    } catch (err: any) {
-      setError(err.message);
     }
-  };
+    const newTask = await response.json();
+    setTasks([...tasks, newTask]);
+    setNewTaskTitle('');
+    setNewTaskLead('');
+} catch (err: any) {
+    setError(err.message);
+}
+};
 
-  // Delete a task
-  const deleteTask = async (id: number) => {
+// Delete a task
+const deleteTask = async (id: number) => {
     try {
-      const response = await fetch('/api/tasks', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
+        const response = await fetch('/api/tasks', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
         },
         body: JSON.stringify({ id }),
       });
       if (!response.ok) {
-        throw new Error('Failed to delete task');
-      }
-      setTasks(tasks.filter(task => task.id !== id));
+          throw new Error('Failed to delete task');
+        }
+        setTasks(tasks.filter(task => task.id !== id));
     } catch (err: any) {
-      setError(err.message);
+        setError(err.message);
     }
-  };
+};
+useEffect(() => {
+  getTasks();
+}, [updateStatus, deleteTask, addTask]);
 
   // Separate tasks by status
   const notStartedTasks = tasks.filter(task => task.status === 'Not Started');
