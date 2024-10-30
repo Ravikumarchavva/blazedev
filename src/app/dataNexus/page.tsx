@@ -106,8 +106,13 @@ const PageComponent = () => {
   };
 
   useEffect(() => {
-    getTasks();
-  }, [updateStatus, deleteTask, addTask]);
+    const interval = setInterval(() => {
+      getTasks();
+    }, 5000); // Poll every 5 seconds
+    
+    return () => clearInterval(interval); // Cleanup interval on component unmount
+  }, []); // Empty dependency array to avoid re-running based on props or state changes
+  
 
   // Separate tasks by status
   const notStartedTasks = tasks.filter(task => task.status === 'Not Started');
