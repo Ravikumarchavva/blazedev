@@ -19,9 +19,12 @@ const PageComponent = () => {
     if (role === 'ADMIN') {
       setIsEditing(true);
     } else {
-      toast.error('You need admin privileges to edit this page.');
+      toast('You need admin privileges to edit this page.');
     }
   };
+  useEffect(() => {
+    getTasks();
+  }, []);
 
   // Fetch tasks from the database
   const getTasks = async () => {
