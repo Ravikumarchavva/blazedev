@@ -7,7 +7,7 @@ import { z } from 'zod';
 
 type Task = z.infer<typeof taskSchema>;
 
-const PageComponent = () => {
+const DataNexus = () => {
   const role = useCurrentRole();
   const [isEditing, setIsEditing] = useState(false);
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -17,15 +17,13 @@ const PageComponent = () => {
 
   const handleEditClick = () => {
     if (role === 'ADMIN') {
-      setIsEditing(true);
+      setIsEditing(true);  
     } else {
       toast('You need admin privileges to edit this page.');
+      throw new Error('You need admin privileges to edit this page.');
     }
   };
-  useEffect(() => {
-    getTasks();
-  }, []);
-
+  
   // Fetch tasks from the database
   const getTasks = async () => {
     try {
@@ -42,9 +40,12 @@ const PageComponent = () => {
       setError(err.message);
     }
   };
-
+  useEffect(() => {
+    getTasks();
+  }, []);
+  
   // Update task status
-  const updateStatus = useCallback((id: number, status: string) => {async () => {
+  const updateStatus = async (id: number, status: string) => {
     try {
       const response = await fetch('/api/tasks', {
         method: 'PUT',
@@ -62,24 +63,16 @@ const PageComponent = () => {
       setError(err.message);
     }
   };
-},[])
   // Add a new task
-  const addTask = useCallback(() => {async () => {
-    if (role !== 'ADMIN') {
-      toast.error('You need admin privileges to add a task.');
-      return;
-    }
+  const addTask = async () => {
     try {
+      handleEditClick();
       const response = await fetch('/api/tasks', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title: newTaskTitle, lead: newTaskLead }),
       });
-      if (!response.ok) {
-        throw new Error('Failed to add task');
-      }
+      if (!response.ok) throw new Error('Failed to add task');
       const newTask = await response.json();
       setTasks([...tasks, newTask]);
       setNewTaskTitle('');
@@ -88,9 +81,8 @@ const PageComponent = () => {
       setError(err.message);
     }
   };
-  },[]);
   // Delete a task
-  const deleteTask = useCallback((id: number) => {async () => {
+  const deleteTask = async (id: number) => {
     try {
       const response = await fetch('/api/tasks', {
         method: 'DELETE',
@@ -107,10 +99,6 @@ const PageComponent = () => {
       setError(err.message);
     }
   };
-  },[]);
-  useEffect(() => {
-    getTasks();
-  }, [updateStatus, deleteTask, addTask]);
 
   // Separate tasks by status
   const notStartedTasks = tasks.filter(task => task.status === 'Not Started');
@@ -131,7 +119,6 @@ const PageComponent = () => {
             onChange={(e) => setNewTaskTitle(e.target.value)}
             placeholder="New task title"
             className="flex-1 border border-gray-300 bg-white rounded px-2 py-1 text-sm focus:outline-none w-full sm:w-auto"
-            disabled={role !== 'ADMIN'}
           />
           <input
             type="text"
@@ -139,12 +126,10 @@ const PageComponent = () => {
             onChange={(e) => setNewTaskLead(e.target.value)}
             placeholder="Task lead"
             className="flex-1 border border-gray-300 bg-white rounded px-2 py-1 text-sm focus:outline-none w-full sm:w-auto"
-            disabled={role !== 'ADMIN'}
           />
           <button
             onClick={addTask}
             className="bg-secondary text-white px-3 py-1 rounded hover:bg-secondary/80 transition w-full sm:w-auto"
-            disabled={role !== 'ADMIN'}
           >
             Add Task
           </button>
@@ -308,5 +293,4 @@ const PageComponent = () => {
     </div>
   );
 };
-
-export default PageComponent;
+export default DataNexus;
