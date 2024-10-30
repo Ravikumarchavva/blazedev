@@ -107,7 +107,7 @@ const DataNexus = () => {
 
   return (
     <div className='w-[90vw] mb-[5vw] py-[5vw] mx-[5vw]'>
-      <div className="lg:max-w-full h-full px-2 min-h-[70vh] bg-primary shadow-lg rounded-lg py-[2vh] md:max-w-[70vw] mx-auto">
+      <div className="lg:max-w-full h-full px-2 min-h-[70vh] bg-primary shadow-lg rounded-lg py-[50px] md:max-w-[70vw] mx-auto">
         <h2 className="text-3xl text-white font-semibold text-center mb-6">To-Do List</h2>
 
         {error && <div className="text-red-500 text-center mb-4">{error}</div>}
