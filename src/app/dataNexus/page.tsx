@@ -18,6 +18,16 @@ const taskSchema = z.object({
 type Status = z.infer<typeof statusSchema>;
 type Task = z.infer<typeof taskSchema>;
 
+const retry = async (fn: () => Promise<any>, retries = 3): Promise<any> => {
+  for (let i = 0; i < retries; i++) {
+    try {
+      return await fn();
+    } catch (err) {
+      if (i === retries - 1) throw err;
+    }
+  }
+};
+
 const DataNexus = () => {
   const role = useCurrentRole();
   const [isEditing, setIsEditing] = useState(false);
@@ -35,12 +45,13 @@ const DataNexus = () => {
     } else {
       toast('You need admin privileges to edit this page.');
       setError('You need admin privileges to edit this page.');
+      return;
     }
   };
 
   const getTasks = async () => {
     try {
-      const response = await fetch('/api/tasks', { method: 'GET' });
+      const response = await retry(() => fetch('/api/tasks', { method: 'GET' }));
       if (!response.ok) {
         throw new Error('Failed to fetch tasks');
       }
@@ -62,13 +73,15 @@ const DataNexus = () => {
   const updateStatus = async (id: string, status: string) => {
     try {
       statusSchema.parse(status); // Validate status
-      const response = await fetch('/api/tasks', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id, status }),
-      });
+      const response = await retry(() =>
+        fetch('/api/tasks', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id, status }),
+        })
+      );
       if (!response.ok) {
         throw new Error('Failed to update task status');
       }
@@ -81,15 +94,21 @@ const DataNexus = () => {
   };
 
   const addTask = async () => {
+    if (role !== 'ADMIN') {
+      toast('You need admin privileges to add a task.');
+      setError('You need admin privileges to add a task.');
+      return;
+    }
     try {
-      handleEditClick();
       const newTask = { title: newTaskTitle, lead: newTaskLead, description: newTaskDescription, status: 'NOTSTARTED' };
       taskSchema.omit({ id: true }).parse(newTask); // Validate new task without id
-      const response = await fetch('/api/tasks', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newTask),
-      });
+      const response = await retry(() =>
+        fetch('/api/tasks', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newTask),
+        })
+      );
       if (!response.ok) throw new Error('Failed to add task');
       const addedTask = await response.json();
       taskSchema.parse(addedTask); // Validate added task
@@ -104,13 +123,15 @@ const DataNexus = () => {
 
   const deleteTask = async (id: string) => {
     try {
-      const response = await fetch('/api/tasks', {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id }),
-      });
+      const response = await retry(() =>
+        fetch('/api/tasks', {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id }),
+        })
+      );
       if (!response.ok) {
         throw new Error('Failed to delete task');
       }
@@ -132,13 +153,15 @@ const DataNexus = () => {
   const updateDescription = async () => {
     if (!selectedTask) return;
     try {
-      const response = await fetch('/api/tasks', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id: selectedTask.id, description: editedDescription }),
-      });
+      const response = await retry(() =>
+        fetch('/api/tasks', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ id: selectedTask.id, description: editedDescription }),
+        })
+      );
       if (!response.ok) {
         throw new Error('Failed to update task description');
       }
