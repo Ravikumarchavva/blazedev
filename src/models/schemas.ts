@@ -37,5 +37,6 @@ export const taskSchema = z.object({
     id: z.number().min(1,{message: "ID is Required"}),
     title: z.string().min(1,{message: "Title is Required"}),
     lead: z.string().min(1,{message: "Lead is Required"}),
+    description: z.string(),
     status: z.string().min(1,{message: "Status is Required"}),
 });

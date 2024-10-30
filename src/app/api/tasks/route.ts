@@ -18,7 +18,8 @@ export async function POST(request: NextRequest) {
             data: {
                 title: body.title,
                 lead: body.lead,
-                status: 'Not Started'
+                status: 'NOTSTARTED',
+                description: body.description
             }
         });
         return NextResponse.json(newTask, { status: 200 });
@@ -33,7 +34,7 @@ export async function PUT(request: NextRequest) {
         const body = await request.json();
         const updatedTask = await db.task.update({
             where: { id: body.id },
-            data: { status: body.status }
+            data: { status: body.status, description: body.description }
         });
         return NextResponse.json(updatedTask, { status: 200 });
     } catch (error) {

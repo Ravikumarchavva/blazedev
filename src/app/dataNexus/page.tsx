@@ -1,10 +1,21 @@
 'use client';
 import { useCurrentRole } from '@/hooks/use-current-role';
-import { taskSchema } from '@/models/schemas';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
+import TaskList from '@/components/TaskList';
 import { z } from 'zod';
 
+const statusSchema = z.enum(['NOTSTARTED', 'INPROGRESS', 'COMPLETED']);
+
+const taskSchema = z.object({
+  id: z.string(),
+  title: z.string(),
+  status: statusSchema,
+  lead: z.string(),
+  description: z.string().nullable(),
+});
+
+type Status = z.infer<typeof statusSchema>;
 type Task = z.infer<typeof taskSchema>;
 
 const DataNexus = () => {
@@ -13,18 +24,20 @@ const DataNexus = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState('');
   const [newTaskLead, setNewTaskLead] = useState('');
+  const [newTaskDescription, setNewTaskDescription] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  const [editedDescription, setEditedDescription] = useState<string>('');
 
   const handleEditClick = () => {
     if (role === 'ADMIN') {
       setIsEditing(true);  
     } else {
       toast('You need admin privileges to edit this page.');
-      throw new Error('You need admin privileges to edit this page.');
+      setError('You need admin privileges to edit this page.');
     }
   };
-  
-  // Fetch tasks from the database
+
   const getTasks = async () => {
     try {
       const response = await fetch('/api/tasks', { method: 'GET' });
@@ -35,18 +48,20 @@ const DataNexus = () => {
       if (!Array.isArray(tasks)) {
         throw new Error('Invalid data format');
       }
+      tasks.forEach(task => taskSchema.parse(task)); // Validate each task
       setTasks(tasks);
     } catch (err: any) {
       setError(err.message);
     }
   };
+
   useEffect(() => {
     getTasks();
   }, []);
-  
-  // Update task status
-  const updateStatus = async (id: number, status: string) => {
+
+  const updateStatus = async (id: string, status: string) => {
     try {
+      statusSchema.parse(status); // Validate status
       const response = await fetch('/api/tasks', {
         method: 'PUT',
         headers: {
@@ -58,31 +73,36 @@ const DataNexus = () => {
         throw new Error('Failed to update task status');
       }
       const updatedTask = await response.json();
+      taskSchema.parse(updatedTask); // Validate updated task
       setTasks(tasks.map(task => (task.id === id ? updatedTask : task)));
     } catch (err: any) {
       setError(err.message);
     }
   };
-  // Add a new task
+
   const addTask = async () => {
     try {
       handleEditClick();
+      const newTask = { title: newTaskTitle, lead: newTaskLead, description: newTaskDescription, status: 'NOTSTARTED' };
+      taskSchema.omit({ id: true }).parse(newTask); // Validate new task without id
       const response = await fetch('/api/tasks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ title: newTaskTitle, lead: newTaskLead }),
+        body: JSON.stringify(newTask),
       });
       if (!response.ok) throw new Error('Failed to add task');
-      const newTask = await response.json();
-      setTasks([...tasks, newTask]);
+      const addedTask = await response.json();
+      taskSchema.parse(addedTask); // Validate added task
+      setTasks([...tasks, addedTask]);
       setNewTaskTitle('');
       setNewTaskLead('');
+      setNewTaskDescription('');
     } catch (err: any) {
       setError(err.message);
     }
   };
-  // Delete a task
-  const deleteTask = async (id: number) => {
+
+  const deleteTask = async (id: string) => {
     try {
       const response = await fetch('/api/tasks', {
         method: 'DELETE',
@@ -100,10 +120,40 @@ const DataNexus = () => {
     }
   };
 
-  // Separate tasks by status
-  const notStartedTasks = tasks.filter(task => task.status === 'Not Started');
-  const inProgressTasks = tasks.filter(task => task.status === 'In Progress');
-  const completedTasks = tasks.filter(task => task.status === 'Completed');
+  const handleViewInfoClick = (task: Task) => {
+    setSelectedTask(task);
+    setEditedDescription(task.description || '');
+  };
+
+  const closeDialog = () => {
+    setSelectedTask(null);
+  };
+
+  const updateDescription = async () => {
+    if (!selectedTask) return;
+    try {
+      const response = await fetch('/api/tasks', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: selectedTask.id, description: editedDescription }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update task description');
+      }
+      const updatedTask = await response.json();
+      taskSchema.parse(updatedTask); // Validate updated task
+      setTasks(tasks.map(task => (task.id === selectedTask.id ? updatedTask : task)));
+      closeDialog();
+    } catch (err: any) {
+      setError(err.message);
+    }
+  };
+
+  const notStartedTasks = tasks.filter(task => task.status === 'NOTSTARTED');
+  const inProgressTasks = tasks.filter(task => task.status === 'INPROGRESS');
+  const completedTasks = tasks.filter(task => task.status === 'COMPLETED');
 
   return (
     <div className='w-[90vw] mb-[5vw] py-[5vw] mx-[5vw]'>
@@ -111,7 +161,6 @@ const DataNexus = () => {
         <h2 className="text-3xl text-white font-semibold text-center mb-6">To-Do List</h2>
 
         {error && <div className="text-red-500 text-center mb-4">{error}</div>}
-        {/* Add Task Form */}
         <div className="flex flex-col sm:flex-row items-center mb-6 space-y-2 sm:space-y-0 sm:space-x-2 text-black">
           <input
             type="text"
@@ -127,6 +176,13 @@ const DataNexus = () => {
             placeholder="Task lead"
             className="flex-1 border border-gray-300 bg-white rounded px-2 py-1 text-sm focus:outline-none w-full sm:w-auto"
           />
+          <input
+            type='text'
+            value={newTaskDescription}
+            onChange={(e) => setNewTaskDescription(e.target.value)}
+            placeholder='Task description'
+            className='flex-1 border border-gray-300 bg-white rounded px-2 py-1 text-sm focus:outline-none w-full sm:w-auto'
+          />
           <button
             onClick={addTask}
             className="bg-secondary text-white px-3 py-1 rounded hover:bg-secondary/80 transition w-full sm:w-auto"
@@ -134,163 +190,103 @@ const DataNexus = () => {
             Add Task
           </button>
         </div>
-        {/* Task Statistics */}
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4 mb-4 text-black">
           <div className="bg-gray-200 p-3 rounded text-center">
             <h3 className="font-medium">Total Tasks</h3>
             <p className="text-xl font-bold">{tasks.length}</p>
           </div>
           <div className="bg-gray-200 p-3 rounded text-center">
-            <h3 className="font-medium">Not Started</h3>
+            <h3 className="font-medium">NOTSTARTED</h3>
             <p className="text-xl font-bold">{notStartedTasks.length}</p>
           </div>
           <div className="bg-gray-200 p-3 rounded text-center">
-            <h3 className="font-medium">In Progress</h3>
+            <h3 className="font-medium">INPROGRESS</h3>
             <p className="text-xl font-bold">{inProgressTasks.length}</p>
           </div>
           <div className="bg-gray-200 p-3 rounded text-center">
-            <h3 className="font-medium">Completed</h3>
+            <h3 className="font-medium">COMPLETED</h3>
             <p className="text-xl font-bold">{completedTasks.length}</p>
           </div>
         </div>
-        {/* Task Lists */}
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4 text-black">
-          <div className="bg-gray-200 p-3 rounded text-center min-h-[30vh]">
-            <h3 className="font-medium">Total Tasks</h3>
-            <ul className="space-y-2">
-              {tasks.map(task => (
-                <li key={task.id} className="flex justify-between items-center bg-gray-100 p-2 rounded-md">
-                  <div className='flex flex-col'>
-                    <span>{task.title}</span>
-                    <span className='bg-white/60 text-black rounded font-medium'>Lead: {task.lead}</span>
+          <TaskList
+            tasks={tasks}
+            updateStatus={updateStatus}
+            deleteTask={deleteTask}
+            handleViewInfoClick={handleViewInfoClick}
+            title="Total Tasks"
+            bgColor="bg-gray-200"
+          />
+          <TaskList
+            tasks={notStartedTasks}
+            updateStatus={updateStatus}
+            deleteTask={deleteTask}
+            handleViewInfoClick={handleViewInfoClick}
+            title="NOTSTARTED"
+            bgColor="bg-red-500"
+          />
+          <TaskList
+            tasks={inProgressTasks}
+            updateStatus={updateStatus}
+            deleteTask={deleteTask}
+            handleViewInfoClick={handleViewInfoClick}
+            title="INPROGRESS"
+            bgColor="bg-orange-500"
+          />
+          <TaskList
+            tasks={completedTasks}
+            updateStatus={updateStatus}
+            deleteTask={deleteTask}
+            handleViewInfoClick={handleViewInfoClick}
+            title="COMPLETED"
+            bgColor="bg-green-500"
+          />
+        </div>
+        {selectedTask && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg shadow-lg w-[90vw] md:w-[50vw] p-6 relative">
+              <h3 className="text-2xl font-semibold mb-4">{selectedTask.title}</h3>
+              <div className="mb-4">
+                <p className="text-lg"><strong>Lead:</strong> {selectedTask.lead}</p>
+                {role === 'ADMIN' ? (
+                  <>
+                    <label htmlFor="description" className="block text-lg font-medium mb-2"><strong>Description:</strong></label>
+                    <textarea
+                      id="description"
+                      value={editedDescription}
+                      onChange={(e) => setEditedDescription(e.target.value)}
+                      className="w-full border border-gray-300 rounded px-3 py-2 text-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+                    />
+                  </>
+                ) : (
+                  <div className="text-lg text-black">
+                    <h2 className="font-semibold"><strong>Title:</strong> {selectedTask.title}</h2>
+                    <h2 className="font-semibold"><strong>Description:</strong> {selectedTask.description}</h2>         
                   </div>
-                  <div className='flex items-center'>
-                    <select
-                      value={task.status}
-                      onChange={(e) => updateStatus(task.id, e.target.value)}
-                      className="border border-gray-300 dark:text-white rounded px-2 py-1 text-sm focus:outline-none mr-2"
-                      disabled={role !== 'ADMIN'}
-                    >
-                      <option value="Not Started">Not Started</option>
-                      <option value="In Progress">In Progress</option>
-                      <option value="Completed">Completed</option>
-                    </select>
-                    <button
-                      onClick={() => deleteTask(task.id)}
-                      className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 transition"
-                      disabled={role !== 'ADMIN'}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-          {/* Not Started Tasks */}
-          <div className='bg-destructive/60 p-3 text-center rounded min-h-[30vh]'>
-            <h3 className="text-lg font-semibold mb-2 text-white">Not Started</h3>
-            <div>
-              <ul className="space-y-2">
-                {notStartedTasks.map(task => (
-                  <li key={task.id} className="flex justify-between items-center bg-gray-100 p-2 rounded-md">
-                    <div className='flex flex-col'>
-                      <span>{task.title}</span>
-                      <span className='bg-white/60 text-black rounded font-medium'>Lead: {task.lead}</span>
-                    </div>
-                    <div className='flex items-center'>
-                      <select
-                        value={task.status}
-                        onChange={(e) => updateStatus(task.id, e.target.value)}
-                        className="border border-gray-300 dark:text-white rounded px-2 py-1 text-sm focus:outline-none mr-2"
-                        disabled={role !== 'ADMIN'}
-                      >
-                        <option value="Not Started">Not Started</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="Completed">Completed</option>
-                      </select>
-                      <button
-                        onClick={() => deleteTask(task.id)}
-                        className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 transition"
-                        disabled={role !== 'ADMIN'}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+                )}
+              </div>
+              <div className="flex justify-end space-x-2">
+                {role === 'ADMIN' && (
+                  <button
+                    onClick={updateDescription}
+                    className="bg-secondary text-white px-4 py-2 rounded hover:bg-secondary/80 transition"
+                  >
+                    Save
+                  </button>
+                )}
+                <button
+                  onClick={closeDialog}
+                  className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition"
+                >
+                  Close
+                </button>
+              </div>
             </div>
           </div>
-          {/* In Progress Tasks */}
-          <div className='bg-amber-600 p-3 text-center rounded min-h-[30vh]'>
-            <h3 className="text-lg font-semibold mb-2 text-white">In Progress</h3>
-            <ul className="space-y-2">
-              {inProgressTasks.map(task => (
-                <li key={task.id} className="flex justify-between items-center bg-gray-100 p-2 rounded-md">
-                  <div className='flex flex-col'>
-                    <span>{task.title}</span>
-                    <span className='bg-white/60 text-black rounded font-medium'>Lead: {task.lead}</span>
-                  </div>
-                  <div className='flex items-center'>
-                    <select
-                      value={task.status}
-                      onChange={(e) => updateStatus(task.id, e.target.value)}
-                      className="border border-gray-300 rounded dark:text-white px-2 py-1 text-sm focus:outline-none mr-2"
-                      disabled={role !== 'ADMIN'}
-                    >
-                      <option value="Not Started">Not Started</option>
-                      <option value="In Progress">In Progress</option>
-                      <option value="Completed">Completed</option>
-                    </select>
-                    <button
-                      onClick={() => deleteTask(task.id)}
-                      className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 transition"
-                      disabled={role !== 'ADMIN'}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-          {/* Completed Tasks */}
-          <div className='bg-green-400 p-3 text-center rounded min-h-[30vh]'>
-            <h3 className="text-lg font-semibold mb-2 text-white">Completed</h3>
-            <ul className="space-y-2">
-              {completedTasks.map(task => (
-                <li key={task.id} className="flex justify-between items-center bg-gray-100 p-2 rounded-md">
-                  <div className='flex flex-col'>
-                    <span>{task.title}</span>
-                    <span className='bg-white/60 text-black rounded font-medium'>Lead: {task.lead}</span>
-                  </div>
-                  <div className='flex items-center'>
-                    <select
-                      value={task.status}
-                      onChange={(e) => updateStatus(task.id, e.target.value)}
-                      className="border border-gray-300 rounded dark:text-white px-2 py-1 text-sm focus:outline-none mr-2"
-                      disabled={role !== 'ADMIN'}
-                    >
-                      <option value="Not Started">Not Started</option>
-                      <option value="In Progress">In Progress</option>
-                      <option value="Completed">Completed</option>
-                    </select>
-                    <button
-                      onClick={() => deleteTask(task.id)}
-                      className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 transition"
-                      disabled={role !== 'ADMIN'}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );
 };
+
 export default DataNexus;

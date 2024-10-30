@@ -58,10 +58,16 @@ model PasswordResetToken{
 model Task {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   title     String
-  status    String
+  status    Status @default(NOTSTARTED)
   lead      String
+  description String?
 }
+enum Status{
+  NOTSTARTED
+  INPROGRESS
+  COMPLETED
 
+}
 enum Role {
   USER
   ADMIN
