@@ -239,6 +239,7 @@ const DataNexus = () => {
             handleViewInfoClick={handleViewInfoClick}
             title="Total Tasks"
             bgColor="bg-gray-200"
+            textColor='text-black'
           />
           <TaskList
             tasks={notStartedTasks}
@@ -247,6 +248,7 @@ const DataNexus = () => {
             handleViewInfoClick={handleViewInfoClick}
             title="NOTSTARTED"
             bgColor="bg-red-500"
+            textColor='text-white'
           />
           <TaskList
             tasks={inProgressTasks}
@@ -255,6 +257,7 @@ const DataNexus = () => {
             handleViewInfoClick={handleViewInfoClick}
             title="INPROGRESS"
             bgColor="bg-orange-500"
+            textColor='text-white'
           />
           <TaskList
             tasks={completedTasks}
@@ -263,6 +266,7 @@ const DataNexus = () => {
             handleViewInfoClick={handleViewInfoClick}
             title="COMPLETED"
             bgColor="bg-green-500"
+            textColor='text-white'
           />
         </div>
         {selectedTask && (
