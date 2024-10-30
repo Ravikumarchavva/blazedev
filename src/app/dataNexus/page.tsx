@@ -182,7 +182,7 @@ const DataNexus = () => {
     <div className='w-[90vw] mb-[5vw] py-[5vw] mx-[5vw]'>
       <div className="lg:max-w-full h-full px-2 min-h-[70vh] bg-primary shadow-lg rounded-lg py-[50px] md:max-w-[70vw] mx-auto">
         <h2 className="text-3xl text-white font-semibold text-center mb-6">To-Do List</h2>
-
+        <h3 className="text-xl text-white font-semibold text-center mb-4">{role==='ADMIN'? "ADMIN" : "You are not admin"}</h3>
         {error && <div className="text-red-500 text-center mb-4">{error}</div>}
         <div className="flex flex-col sm:flex-row items-center mb-6 space-y-2 sm:space-y-0 sm:space-x-2 text-black">
           <input
