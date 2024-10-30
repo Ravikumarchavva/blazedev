@@ -19,9 +19,12 @@ const PageComponent = () => {
     if (role === 'ADMIN') {
       setIsEditing(true);
     } else {
-      toast.error('You need admin privileges to edit this page.');
+      toast('You need admin privileges to edit this page.');
     }
   };
+  useEffect(() => {
+    getTasks();
+  }, []);
 
   // Fetch tasks from the database
   const getTasks = async () => {
@@ -104,10 +107,6 @@ const PageComponent = () => {
       setError(err.message);
     }
   };
-
-  useEffect(() => {
-    getTasks();
-  }, [updateStatus, deleteTask, addTask]);
 
   // Separate tasks by status
   const notStartedTasks = tasks.filter(task => task.status === 'Not Started');
