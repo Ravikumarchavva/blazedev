@@ -1,0 +1,10 @@
+{
+    "redirects": [
+      {
+        "source": "/datanexus",
+        "destination": "/dataNexus",
+        "permanent": true
+      }
+    ]
+  }
+  

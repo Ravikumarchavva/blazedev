@@ -1,7 +1,7 @@
 'use client';
 import { useCurrentRole } from '@/hooks/use-current-role';
 import { taskSchema } from '@/models/schemas';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
@@ -19,9 +19,12 @@ const PageComponent = () => {
     if (role === 'ADMIN') {
       setIsEditing(true);
     } else {
-      toast.error('You need admin privileges to edit this page.');
+      toast('You need admin privileges to edit this page.');
     }
   };
+  useEffect(() => {
+    getTasks();
+  }, []);
 
   // Fetch tasks from the database
   const getTasks = async () => {
@@ -41,7 +44,7 @@ const PageComponent = () => {
   };
 
   // Update task status
-  const updateStatus = async (id: number, status: string) => {
+  const updateStatus = useCallback((id: number, status: string) => {async () => {
     try {
       const response = await fetch('/api/tasks', {
         method: 'PUT',
@@ -59,9 +62,9 @@ const PageComponent = () => {
       setError(err.message);
     }
   };
-
+},[])
   // Add a new task
-  const addTask = async () => {
+  const addTask = useCallback(() => {async () => {
     if (role !== 'ADMIN') {
       toast.error('You need admin privileges to add a task.');
       return;
@@ -85,9 +88,9 @@ const PageComponent = () => {
       setError(err.message);
     }
   };
-
+  },[]);
   // Delete a task
-  const deleteTask = async (id: number) => {
+  const deleteTask = useCallback((id: number) => {async () => {
     try {
       const response = await fetch('/api/tasks', {
         method: 'DELETE',
@@ -104,7 +107,7 @@ const PageComponent = () => {
       setError(err.message);
     }
   };
-
+  },[]);
   useEffect(() => {
     getTasks();
   }, [updateStatus, deleteTask, addTask]);
