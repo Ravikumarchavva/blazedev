@@ -4,20 +4,14 @@ import { useState, useEffect } from 'react';
 import { toast } from 'sonner';
 import TaskList from '@/components/TaskList';
 import { z } from 'zod';
+import { statusSchema, taskSchema } from '@/models/schemas';
+import { useCurrentUser } from '@/hooks/use-current-user';
 
-const statusSchema = z.enum(['NOTSTARTED', 'INPROGRESS', 'COMPLETED']);
-
-const taskSchema = z.object({
-  id: z.string(),
-  title: z.string(),
-  status: statusSchema,
-  lead: z.string(),
-  description: z.string().nullable(),
-});
 
 type Status = z.infer<typeof statusSchema>;
 type Task = z.infer<typeof taskSchema>;
 
+//code for retry
 const retry = async (fn: () => Promise<any>, retries = 3): Promise<any> => {
   for (let i = 0; i < retries; i++) {
     try {
@@ -30,6 +24,7 @@ const retry = async (fn: () => Promise<any>, retries = 3): Promise<any> => {
 
 const DataNexus = () => {
   const role = useCurrentRole();
+  const user = useCurrentUser();
   const [isEditing, setIsEditing] = useState(false);
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState('');
@@ -38,16 +33,6 @@ const DataNexus = () => {
   const [error, setError] = useState<string | null>(null);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [editedDescription, setEditedDescription] = useState<string>('');
-
-  const handleEditClick = () => {
-    if (role === 'ADMIN') {
-      setIsEditing(true);  
-    } else {
-      toast('You need admin privileges to edit this page.');
-      setError('You need admin privileges to edit this page.');
-      return;
-    }
-  };
 
   const getTasks = async () => {
     try {
@@ -96,7 +81,6 @@ const DataNexus = () => {
   const addTask = async () => {
     if (role !== 'ADMIN') {
       toast('You need admin privileges to add a task.');
-      setError('You need admin privileges to add a task.');
       return;
     }
     try {
@@ -182,7 +166,7 @@ const DataNexus = () => {
     <div className='w-[90vw] mb-[5vw] py-[5vw] mx-[5vw]'>
       <div className="lg:max-w-full h-full px-2 min-h-[70vh] bg-primary shadow-lg rounded-lg py-[50px] md:max-w-[70vw] mx-auto">
         <h2 className="text-3xl text-white font-semibold text-center mb-6">To-Do List</h2>
-        <h3 className="text-xl text-white font-semibold text-center mb-4">{role==='ADMIN'? "ADMIN" : "You are not admin"}</h3>
+        <h3 className="text-xl text-white font-semibold text-center mb-4">{role==='ADMIN'? "(ADMIN)" : "You are not admin"} {user?.name}</h3>
         {error && <div className="text-red-500 text-center mb-4">{error}</div>}
         <div className="flex flex-col sm:flex-row items-center mb-6 space-y-2 sm:space-y-0 sm:space-x-2 text-black">
           <input

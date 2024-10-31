@@ -31,12 +31,14 @@ export const contactSchema = z.object({
     name: z.string().min(1,{message: "Name is Required"}),
     subject: z.string().min(1,{message: "Subject is Required"}),
     message: z.string().min(10,{message: "Enter atleast 10 characters"}),
-})
+});
+
+export const statusSchema = z.enum(["NOTSTARTED", "INPROGRESS", "COMPLETED"]);
 
 export const taskSchema = z.object({
-    id: z.number().min(1,{message: "ID is Required"}),
-    title: z.string().min(1,{message: "Title is Required"}),
-    lead: z.string().min(1,{message: "Lead is Required"}),
-    description: z.string(),
-    status: z.string().min(1,{message: "Status is Required"}),
+    id: z.string(),
+    title: z.string(),
+    status: statusSchema,
+    lead: z.string(),
+    description: z.string().nullable(),
 });
