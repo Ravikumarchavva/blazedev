@@ -24,7 +24,7 @@ export const Projects: Project[] = [
         title: 'Cricket Win Prediction',
         description: 'Estimates the probability of a cricket team winning a match.',
         date: new Date('2024-12-04'),
-        image: '/projects/CricketWinPrediction/t20.jpg',
+        image: '/projects/cricketWinPrediction/t20.jpg',
         comingSoon: false,
         link: '/projects/CricketWinPrediction',
     },
