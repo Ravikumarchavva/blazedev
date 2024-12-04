@@ -13,84 +13,59 @@ Our goal was to predict the outcome of T20 cricket matches using various deep le
 
 ---
 
-## Overview
-![Data Processing Pipeline](/projects/cricketWinPrediction/airflow_etl_pipeline.jpg)
+## Overview Architecture
+
+![Architecture Overview](/projects/cricketWinPrediction/architectureOverview.jpg)
 
 ---
 
-### Start: Data Collection and Preprocessing
+## Data Collection and Building Pipeline
+
+### Data Collection
 
 We began by gathering data from sources like Cricsheet and ESPN cricket stats. Necessary preprocessing steps included handling missing values, encoding categorical variables, and performing exploratory data analysis (EDA) to identify key patterns and relationships in the match data.
 
-![Day 1 Report](/projects/cricketWinPrediction/Day1-report.jpg)
+**Technologies Used:**
+- **Data Processing:** Apache Airflow, Apache Spark
+- **Storage:** Hadoop HDFS
+
+### Building the Pipeline
+
+Utilizing **Apache Airflow**, we orchestrated the data pipeline to ensure efficient data flow and management. The pipeline includes data extraction, transformation, and loading (ETL) processes, enabling seamless integration of diverse data sources.
+
+**Key Components:**
+- **ETL Orchestration:** Apache Airflow
+- **Data Transformation:** Apache Spark
+- **Storage Management:** Hadoop HDFS
+
+---
+
+## Modeling with Weights & Biases (WandB)
+
+To enhance model tracking and experiment management, we integrated **Weights & Biases (WandB)** into our workflow. This facilitated real-time monitoring of training processes and streamlined collaboration.
 
 **Technologies Used:**
-- **Language:** Python
-- **Libraries:** Pandas, NumPy, Scikit-learn
-- **Visualization:** Matplotlib, Seaborn
-
-**Key Insights:**
-- Understanding the temporal dynamics of matches is crucial for accurate predictions.
+- **Experiment Tracking:** WandB
+- **Machine Learning Framework:** PyTorch
 
 ---
 
-### Feature Engineering and Model Selection
+## Hyperparameter Tuning
 
-To enhance model performance, we engineered features such as run rates, player form, and pitch conditions. We then implemented various models to establish baselines and selected the best-performing ones for further tuning.
+We conducted hyperparameter tuning to optimize model performance. This involved adjusting parameters such as learning rate, batch size, and network architecture to achieve the best possible results.
 
 **Technologies Used:**
-- **Libraries:** Scikit-learn, PyTorch
-
-**Key Takeaways:**
-- Feature engineering significantly impacts model accuracy and reliability.
+- **Hyperparameter Optimization:** WandB Sweeps
+- **Model Training:** PyTorch
 
 ---
 
-### Handling Data Imbalance with SMOTE
+## Results
 
-Given the imbalance in match outcomes, we applied Synthetic Minority Over-sampling Technique (SMOTE) to balance the classes. This improved the model’s ability to predict wins and losses more effectively.
+The final model achieved an accuracy of 85% on the test set, which was evaluated across different overs.
 
-**Technologies Used:**
-- **Libraries:** Imbalanced-learn
-
-**Key Insights:**
-- Addressing class imbalance is vital for enhancing model precision and recall.
-
----
-
-### Error Analysis and Model Refinement
-
-We conducted thorough error analysis to understand mispredictions and refined our models by incorporating ensemble techniques and hyperparameter tuning, leading to improved decision boundaries and prediction accuracy.
-
-**Technologies Used:**
-- **Libraries:** Scikit-learn, PyTorch
-
-**Key Takeaways:**
-- Continuous error analysis is essential for model refinement and performance enhancement.
-
----
-
-### Finish: Deployment and Real-Time Predictions
-
-We deployed the final model using Docker containers and integrated it into a cricket application for real-time win probability predictions. The deployment ensures scalability and consistent performance across environments.
-
-![Deployment Setup](/projects/cricketWinPrediction/deploymentSetup.jpg)
-
-**Models Used:**
-- Random Forest
-- Neural Networks (RNN, CNN)
-- Ensemble Models
-
-**Key Insights:**
-- Scalable deployment ensures the model can handle real-time data streams efficiently.
-
----
-
-## Deployment
-
-Deployment is currently managed to minimize costs. Instead of a live API, the model results are showcased through static visualizations and snapshots. This approach ensures that infrastructure expenses remain low while still providing valuable insights.
-
-![Docker Setup](/projects/cricketWinPrediction/docker.jpg)
+![Results](/projects/cricketWinPrediction/results.jpg)
+![Hyperparameter Tuning](/projects/cricketWinPrediction/wandb_hp_tuning.jpg)
 
 ---
 
@@ -102,7 +77,7 @@ By systematically progressing through data preprocessing, feature engineering, c
 - **Language:** Python
 - **Core Libraries:** Pandas, NumPy, Scikit-learn, PyTorch, Imbalanced-learn
 - **Visualization:** Matplotlib, Seaborn
-- **Deployment:** Docker, Kubernetes
+- **Deployment:** Dockerized
 
 ---
 
