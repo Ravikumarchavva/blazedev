@@ -1,0 +1,112 @@
+import Link from 'next/link';
+
+--- 
+# T20 Cricket Win Prediction with Deep Learning
+
+*Date: April 2024*
+
+GitHub: <Link href='https://github.com/Ravikumarchavva/Cricket-Prediction' target="_blank">T20CricketPrediction</Link>
+
+## Objective
+
+Our goal was to predict the outcome of T20 cricket matches using various deep learning techniques with a focus on optimizing accuracy and real-time prediction capabilities. This post summarizes our project journey through data collection, feature engineering, model selection, and deployment.
+
+---
+
+## Overview
+![Data Processing Pipeline](/projects/cricketWinPrediction/airflow_etl_pipeline.jpg)
+
+---
+
+### Start: Data Collection and Preprocessing
+
+We began by gathering data from sources like Cricsheet and ESPN cricket stats. Necessary preprocessing steps included handling missing values, encoding categorical variables, and performing exploratory data analysis (EDA) to identify key patterns and relationships in the match data.
+
+![Day 1 Report](/projects/cricketWinPrediction/Day1-report.jpg)
+
+**Technologies Used:**
+- **Language:** Python
+- **Libraries:** Pandas, NumPy, Scikit-learn
+- **Visualization:** Matplotlib, Seaborn
+
+**Key Insights:**
+- Understanding the temporal dynamics of matches is crucial for accurate predictions.
+
+---
+
+### Feature Engineering and Model Selection
+
+To enhance model performance, we engineered features such as run rates, player form, and pitch conditions. We then implemented various models to establish baselines and selected the best-performing ones for further tuning.
+
+**Technologies Used:**
+- **Libraries:** Scikit-learn, PyTorch
+
+**Key Takeaways:**
+- Feature engineering significantly impacts model accuracy and reliability.
+
+---
+
+### Handling Data Imbalance with SMOTE
+
+Given the imbalance in match outcomes, we applied Synthetic Minority Over-sampling Technique (SMOTE) to balance the classes. This improved the model’s ability to predict wins and losses more effectively.
+
+**Technologies Used:**
+- **Libraries:** Imbalanced-learn
+
+**Key Insights:**
+- Addressing class imbalance is vital for enhancing model precision and recall.
+
+---
+
+### Error Analysis and Model Refinement
+
+We conducted thorough error analysis to understand mispredictions and refined our models by incorporating ensemble techniques and hyperparameter tuning, leading to improved decision boundaries and prediction accuracy.
+
+**Technologies Used:**
+- **Libraries:** Scikit-learn, PyTorch
+
+**Key Takeaways:**
+- Continuous error analysis is essential for model refinement and performance enhancement.
+
+---
+
+### Finish: Deployment and Real-Time Predictions
+
+We deployed the final model using Docker containers and integrated it into a cricket application for real-time win probability predictions. The deployment ensures scalability and consistent performance across environments.
+
+![Deployment Setup](/projects/cricketWinPrediction/deploymentSetup.jpg)
+
+**Models Used:**
+- Random Forest
+- Neural Networks (RNN, CNN)
+- Ensemble Models
+
+**Key Insights:**
+- Scalable deployment ensures the model can handle real-time data streams efficiently.
+
+---
+
+## Deployment
+
+Deployment is currently managed to minimize costs. Instead of a live API, the model results are showcased through static visualizations and snapshots. This approach ensures that infrastructure expenses remain low while still providing valuable insights.
+
+![Docker Setup](/projects/cricketWinPrediction/docker.jpg)
+
+---
+
+### Conclusion
+
+By systematically progressing through data preprocessing, feature engineering, class balancing, error analysis, and advanced modeling techniques, we successfully built a robust model for predicting T20 cricket match outcomes. The final model achieved an accuracy of 85%, demonstrating its effectiveness in real-time prediction scenarios. Integrating this model into a cricket application enhances user engagement by providing insightful analytics and live win probabilities.
+
+**Final Technologies Used:**
+- **Language:** Python
+- **Core Libraries:** Pandas, NumPy, Scikit-learn, PyTorch, Imbalanced-learn
+- **Visualization:** Matplotlib, Seaborn
+- **Deployment:** Docker, Kubernetes
+
+---
+
+This structured approach allowed us to effectively predict the outcomes of T20 cricket matches, ensuring our model was both accurate and reliable. Stay tuned for more insights as we continue to explore and implement advanced machine learning methodologies in sports analytics!
+
+---
+

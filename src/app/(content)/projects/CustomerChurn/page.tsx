@@ -1,28 +1,11 @@
 "use client";
-import { Input } from "@/components/ui/input";
+import ChurnForm from "@/components/ProjectForms/ChurnForm";
+import WarningNote from "@/components/UxWarning/page";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import Example from "./example.mdx";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
 import { z } from "zod";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import WarningNote from "@/components/UxWarning/page";
-import ChurnForm from "@/components/ProjectForms/ChurnForm";
+import Example from "./example.mdx";
 // Zod schema for churn prediction
 const churnPredictionSchema = z.object({
   tenure: z.string(),
