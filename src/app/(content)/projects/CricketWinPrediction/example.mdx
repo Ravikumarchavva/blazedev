@@ -42,24 +42,9 @@ Utilizing **Apache Airflow**, we orchestrated the data pipeline to ensure effici
 
 ## Data Augmentation
 
-To enhance the diversity of our training dataset and improve the model's generalization capabilities, we implemented several data augmentation strategies:
+To enhance the diversity of our training dataset and improve the model's generalization capabilities, we incorporated augmentation, like limmiting the data to certain overs. This approach allows us to obtain match win predictions at any given stage in the match, not only during the final overs.
 
-### Techniques Used
-
-- **Random Oversampling:** Increased the number of minority class samples to balance the dataset using the `imbalanced-learn` library.
-- **Noise Injection:** Added Gaussian noise to the input features to make the model robust to variations.
-- **Feature Scaling:** Applied normalization techniques to ensure all features contribute equally to the training process.
-
-### Implementation
-
-Data augmentation was performed using the `augument_data` function in our `data_utils.py` module. This function systematically applies the above techniques during the data preprocessing phase.
-
-**Technologies Used:**
-- **Library:** Imbalanced-learn
-- **Framework:** PyTorch
-
-By incorporating these augmentation methods, like limmiting the data to certain overs. This approach allows us to obtain match win predictions at any given stage in the match, not only during the final overs.
-
+- Futher implementation of data augmentation like using random noise or GANs will be encouraged to improve the model performance.
 ---
 
 ## Modeling with Weights & Biases (WandB)
