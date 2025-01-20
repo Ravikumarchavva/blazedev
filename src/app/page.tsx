@@ -14,8 +14,8 @@ export default function Home() {
             landscape:bg-[url('/tileps5.jpg')] landscape:bg-right-bottom relative">
         <InfoContainer /> 
       </div>
-        <About />
         <Portfolio />
+        <About />
         <Blogs />
         <Contact />
     </div>
