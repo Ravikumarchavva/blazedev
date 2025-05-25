@@ -27,7 +27,10 @@ export function AccountDropdownMenu() {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar>
-          <Button size={"icon"} className="bg-transparent hover:bg-transparent/20">
+          <Button
+            size={"icon"}
+            className="bg-transparent hover:bg-transparent/20"
+          >
             <AvatarImage src={user?.image || ""} className="p-1 rounded-full" />
           </Button>
           <AvatarFallback className="bg-transparent">
@@ -45,7 +48,10 @@ export function AccountDropdownMenu() {
                 Profile
               </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={logoutUser} className="gap-1 cursor-pointer">
+            <DropdownMenuItem
+              onClick={logoutUser}
+              className="gap-1 cursor-pointer"
+            >
               <FaSignOutAlt /> <span>Logout</span>
             </DropdownMenuItem>
           </>

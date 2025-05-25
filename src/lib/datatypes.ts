@@ -8,10 +8,10 @@ export interface Project {
   id: number;
   title: string;
   description: string;
-  date: Date,
+  date: Date;
   image: string;
-  comingSoon: boolean,
-  link: string
+  comingSoon: boolean;
+  link: string;
 }
 
 export interface Blog {
@@ -21,5 +21,5 @@ export interface Blog {
   url: string;
   expectedReadingTime: string;
   imageUrl: string;
-  blogUrl: string
+  blogUrl: string;
 }

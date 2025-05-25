@@ -1,9 +1,10 @@
-import Link from 'next/link';
+import Link from "next/link";
 
---- 
+---
+
 # T20 Cricket Win Prediction with Deep Learning
 
-*Date: April 2024*
+_Date: April 2024_
 
 GitHub: <Link href='https://github.com/Ravikumarchavva/Cricket-Prediction' target="_blank">T20CricketPrediction</Link>
 
@@ -26,6 +27,7 @@ Our goal was to predict the outcome of T20 cricket matches using various deep le
 We began by gathering data from sources like Cricsheet and ESPN cricket stats. Necessary preprocessing steps included handling missing values, encoding categorical variables, and performing exploratory data analysis (EDA) to identify key patterns and relationships in the match data.
 
 **Technologies Used:**
+
 - **Data Processing:** Apache Airflow, Apache Spark
 - **Storage:** Hadoop HDFS
 
@@ -34,6 +36,7 @@ We began by gathering data from sources like Cricsheet and ESPN cricket stats. N
 Utilizing **Apache Airflow**, we orchestrated the data pipeline to ensure efficient data flow and management. The pipeline includes data extraction, transformation, and loading (ETL) processes, enabling seamless integration of diverse data sources.
 
 **Key Components:**
+
 - **ETL Orchestration:** Apache Airflow
 - **Data Transformation:** Apache Spark
 - **Storage Management:** Hadoop HDFS
@@ -45,6 +48,7 @@ Utilizing **Apache Airflow**, we orchestrated the data pipeline to ensure effici
 To enhance the diversity of our training dataset and improve the model's generalization capabilities, we incorporated augmentation, like limmiting the data to certain overs. This approach allows us to obtain match win predictions at any given stage in the match, not only during the final overs.
 
 - Futher implementation of data augmentation like using random noise or GANs will be encouraged to improve the model performance.
+
 ---
 
 ## Modeling with Weights & Biases (WandB)
@@ -52,6 +56,7 @@ To enhance the diversity of our training dataset and improve the model's general
 To enhance model tracking and experiment management, we integrated **Weights & Biases (WandB)** into our workflow. This facilitated real-time monitoring of training processes and streamlined collaboration.
 
 **Technologies Used:**
+
 - **Experiment Tracking:** WandB
 - **Machine Learning Framework:** PyTorch
 
@@ -62,6 +67,7 @@ To enhance model tracking and experiment management, we integrated **Weights & B
 We conducted hyperparameter tuning to optimize model performance. This involved adjusting parameters such as learning rate, batch size, and network architecture to achieve the best possible results.
 
 **Technologies Used:**
+
 - **Hyperparameter Optimization:** WandB Sweeps
 - **Model Training:** PyTorch
 
@@ -72,14 +78,17 @@ To achieve optimal model performance, we utilized WandB Sweeps to systematically
 ![Hyperparameter Tuning](/projects/cricketWinPrediction/wandb_hp_tuning.jpg)
 
 1. **Learning Rate:**
+
    - Experimented with a range of learning rates from 0.0001 to 0.1.
    - Identified 0.001 as the optimal learning rate that balances convergence speed and stability.
 
 2. **Batch Size:**
+
    - Tested batch sizes of 32, 64, and 128.
    - Found that a batch size of 32 provided the best trade-off between training time and model accuracy.
 
 3. **Network Architecture:**
+
    - Modified the number of layers and units per layer.
    - Enhanced the model's capacity without overfitting by adding an additional hidden layer with 128 neurons.
    - **Hidden Size:** Increased to 256 neurons to further improve model capacity.
@@ -114,6 +123,7 @@ Loss Example
 By systematically progressing through data preprocessing, feature engineering, class balancing, error analysis, and advanced modeling techniques, we successfully built a robust model for predicting T20 cricket match outcomes. The final model achieved an accuracy of 85%, demonstrating its effectiveness in real-time prediction scenarios. Integrating this model into a cricket application enhances user engagement by providing insightful analytics and live win probabilities.
 
 **Overall Technologies Used:**
+
 - **Language:** Python
 - **Core Libraries:** Pandas, Polars, Apache Spark, NumPy, Scikit-learn, PyTorch
 - **Visualization:** Matplotlib, Seaborn
@@ -126,4 +136,3 @@ By systematically progressing through data preprocessing, feature engineering, c
 This structured approach allowed us to effectively predict the outcomes of T20 cricket matches, ensuring our model was both accurate and reliable.
 
 ---
-

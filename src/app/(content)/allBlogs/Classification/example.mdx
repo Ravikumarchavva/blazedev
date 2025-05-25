@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import Image from 'next/image';
+import Link from "next/link";
+import Image from "next/image";
 
 # Classification Analysis
 
@@ -20,13 +20,13 @@ Binary classification is a type of supervised learning where the goal is to pred
 
 ## Binary Classification
 
-In binary classification, all instances are classified into **two categories** or classes, such as Yes/No or 1/0. The process of classification involves creating a **decision boundary**, which separates the two classes. This boundary can be linear or polynomial, depending on the complexity of the problem. 
+In binary classification, all instances are classified into **two categories** or classes, such as Yes/No or 1/0. The process of classification involves creating a **decision boundary**, which separates the two classes. This boundary can be linear or polynomial, depending on the complexity of the problem.
 
 ### Decision Boundary
 
 - A good decision boundary avoids both **overfitting** and **underfitting**.
 - In problems where **least squares** optimization is used, gradient descent can sometimes create **wiggly non-convex curves**, leading to local minima.
-  
+
 ### Training Function
 
 In **regression**, the model uses a combination of input features and adds a bias term, often using a linear combination. However, in **binary classification**, we need a **training function** that produces output in the range [0, 1]. This is where **logistic regression** comes in.
@@ -35,8 +35,8 @@ In **regression**, the model uses a combination of input features and adds a bia
 
 The **training function** for binary classification is defined as a **probability function** that maps inputs to values between 0 and 1:
 
-$$ 
-P(y = 1 | x; w) = \frac{1}{1 + e^{-w^T x}} = \sigma(w^T x)  
+$$
+P(y = 1 | x; w) = \frac{1}{1 + e^{-w^T x}} = \sigma(w^T x)
 $$
 
 This function outputs the **probability** of an observation being classified as 1. It is called **logistic regression**.
@@ -51,16 +51,16 @@ This function outputs the **probability** of an observation being classified as 
 2. **Probability of Observing a Single Data Point**  
    Given the predicted probability \(P\) from logistic regression, the likelihood of observing the actual outcome \(y\) is modeled using the **Bernoulli distribution**:
 
-$$ 
-P(y | x; w) = P^y (1 - P)^{1 - y} 
+$$
+P(y | x; w) = P^y (1 - P)^{1 - y}
 $$
 
 For example, let's say we have a data point where the customer's age is 30, and our logistic regression model outputs a predicted probability \(P = 0.8\).
 
 - If the customer actually buys (i.e., \(y = 1\)):
 
-$$ 
-P(y = 1 | x; w) = P = 0.8 
+$$
+P(y = 1 | x; w) = P = 0.8
 $$
 
 - If the customer does not buy (i.e., \(y = 0\)):
@@ -68,6 +68,7 @@ $$
 $$
 P(y = 0 | x; w) = 1 - P = 0.2
 $$
+
 Thus, the predicted probability is high when the model's prediction matches the actual outcome.
 
 ---
@@ -79,10 +80,12 @@ Since each observation in the dataset is independent, the likelihood of observin
 $$
 L(w) = \prod_{i=1}^{n} P(y_i | X; w)
 $$
+
 $$
 L(w) = \prod_{i=1}^{n} P_i^{y_i} (1 - P_i)^{1 - y_i}
 $$
-Our goal is to **maximize the likelihood** of the entire dataset for the given set of \(X\) (features) and \(w\) (parameters). 
+
+Our goal is to **maximize the likelihood** of the entire dataset for the given set of \(X\) (features) and \(w\) (parameters).
 
 ---
 
@@ -91,9 +94,11 @@ Our goal is to **maximize the likelihood** of the entire dataset for the given s
 Maximizing the product of probabilities can be computationally challenging, so we take the **logarithm** and convert the product into a sum. This makes the optimization process easier:
 
 $$\log(L(w))$$ is given by
+
 $$
  \sum_{i=1}^{n} \left[ y_i \log(P_i) + (1 - y_i) \log(1 - P_i) \right]
 $$
+
 ---
 
 ## Negative Log-Likelihood
@@ -105,6 +110,7 @@ $$-\log(L(w))$$ is given by
 $$
 - \sum_{i=1}^{n} \left[ y_i \log(P_i) + (1 - y_i) \log(1 - P_i) \right]
 $$
+
 This function measures how well the predicted probabilities align with the actual data. If the model predicts the correct class with high confidence, the loss is low. Conversely, it penalizes being confident and wrong.
 
 ---
@@ -132,6 +138,7 @@ $$J(w,b)$$ is given by
 $$
 - \frac{1}{n} \sum_{i=1}^{n} \left[ y_i \log(P_i) + (1 - y_i) \log(1 - P_i) \right]
 $$
+
 This gives us the **average loss per observation**, providing insight into model performance.
 
 ---
@@ -147,11 +154,13 @@ For the weight \(w\):
 $$
 \frac{\partial J}{\partial w} = \frac{1}{n} \sum_{i=1}^{n} (P_i - y_i) x_i
 $$
+
 For the bias \(b\):
 
 $$
 \frac{\partial J}{\partial b} = \frac{1}{n} \sum_{i=1}^{n} (P_i - y_i)
 $$
+
 The weights and bias are updated using the calculated gradients in each iteration of gradient descent.
 
 ---

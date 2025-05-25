@@ -33,7 +33,7 @@ export function Slides() {
       },
       {
         threshold: 0.1, // Trigger when 10% of the element is visible
-      }
+      },
     );
 
     const elements = ref.current?.querySelectorAll(".fade-in-up");
@@ -58,7 +58,13 @@ export function Slides() {
             className="lg:basis-1/2 xl:basis-1/3 fade-in-up"
           >
             <div className="bg-secondary rounded-lg min-h-[390px] max-h-[500px] max-w-[450px] min-w-[200px] aspect-square portrait:aspect-auto mx-auto">
-            <ProjectCard title={project.title} description={project.description} image={project.image} comingSoon={project.comingSoon} link={project.link}/>
+              <ProjectCard
+                title={project.title}
+                description={project.description}
+                image={project.image}
+                comingSoon={project.comingSoon}
+                link={project.link}
+              />
             </div>
           </CarouselItem>
         ))}

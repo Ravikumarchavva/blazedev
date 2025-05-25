@@ -57,7 +57,7 @@ const ChurnPredictionForm = () => {
       <div className="w-full bg-primary px-[3vw]">
         <ChurnForm />
       </div>
-      <WarningNote />      
+      <WarningNote />
       {/* Example MDX Component */}
       <div className="w-full mb-10 bg-primary shadow-2xl prose prose-lg max-w-none p-[5vw] text-white prose-headings:text-white prose-a:text-white prose-strong:text-white prose-code:text-white portrait:px-[5vw] portrait:mb-0">
         <Example />

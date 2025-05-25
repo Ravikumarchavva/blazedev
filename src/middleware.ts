@@ -1,7 +1,13 @@
 // middleware.ts
 import authConfig from "@/auth.config";
 import NextAuth from "next-auth";
-import { DEFAULT_REDIRECT_PATH, publicRoutes, authRoutes, apiAuthPrefix, adminRoutes } from "@/routes";
+import {
+  DEFAULT_REDIRECT_PATH,
+  publicRoutes,
+  authRoutes,
+  apiAuthPrefix,
+  adminRoutes,
+} from "@/routes";
 
 // Use only one of the two middleware options below
 // 1. Use middleware directly
@@ -19,12 +25,12 @@ export default auth(async function middleware(req) {
   const isAdminRoute = nextUrl.pathname.startsWith(adminRoutes);
 
   // Allow access to admin routes only if the user is an admin
-  if(isLoggedIn){
-    if (isAdminRoute && req.auth?.user.role == 'ADMIN') {
+  if (isLoggedIn) {
+    if (isAdminRoute && req.auth?.user.role == "ADMIN") {
       return;
     }
   }
-  if(isPublicRoute){
+  if (isPublicRoute) {
     return;
   }
   // Allow access to API routes without redirecting to login
@@ -47,12 +53,14 @@ export default auth(async function middleware(req) {
       callbackUrl += nextUrl.search;
     }
     const encodedCallbackUrl = encodeURIComponent(callbackUrl);
-    return Response.redirect(new URL(`/login?callbackUrl=${encodedCallbackUrl}`, nextUrl));
-  }  
+    return Response.redirect(
+      new URL(`/login?callbackUrl=${encodedCallbackUrl}`, nextUrl),
+    );
+  }
 
   return;
 });
 
 export const config = {
-  matcher: ['/admin','/contact','/profile'],
+  matcher: ["/admin", "/contact", "/profile"],
 };

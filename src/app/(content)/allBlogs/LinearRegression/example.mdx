@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 # Regression: An Overview
 
@@ -31,14 +31,15 @@ Once we provide the training data to the model, we want it to **learn** the unde
 A line in linear regression can be represented as:
 ![Data Exploration Report](/blogs/regression/loss.jpg)
 
-$$ 
-\hat{y} = \theta_1 \cdot x + \theta_0 
+$$
+\hat{y} = \theta_1 \cdot x + \theta_0
 $$
 
 Where:
--  $$ \hat{y}  = predicted value $$
+
+- $$ \hat{y} = predicted value $$
 - $$ \theta_1 = slope (or **weights**) $$
-- $$ x  = feature (input variable) $$
+- $$ x = feature (input variable) $$
 - $$ \theta_0 = bias (intercept) $$
 
 We need to tweak the parameters \( w or θ₁ \) (weights) and \( b or θ₀ \) (bias) to minimize the **cost function**.
@@ -53,12 +54,11 @@ The goal is to find the **minimum** of the cost function \( J(w) \). For this, w
 
 - We start with arbitrary initial values for \( w \) and \( b \), then iteratively adjust them step-by-step to minimize the cost function.
 
-- The **step size** (learning rate) controls how much we adjust \( w \) and \( b \) in each iteration. 
+- The **step size** (learning rate) controls how much we adjust \( w \) and \( b \) in each iteration.
 
 ### Learning Rate
 
 - The learning rate ( α ) determines how fast we move towards the minimum.
-  
 - If the learning rate is too large, we might overshoot the minimum. If it's too small, the process could converge too slowly.
 
 - To tune the learning rate, we start with values such as 0.0001, 0.0003, 0.001, etc., and adjust accordingly.
@@ -70,16 +70,18 @@ The goal is to find the **minimum** of the cost function \( J(w) \). For this, w
 The cost function \( J(w) \) for **Ordinary Least Squares (OLS)** regression is defined as:
 
 $$
-J(w) = \frac{1}{2m}  \sum_{i=1}^{m}  (y_i - \hat{y}_i)^2 
+J(w) = \frac{1}{2m}  \sum_{i=1}^{m}  (y_i - \hat{y}_i)^2
 $$
-$$  
+
+$$
 J(w)  = \frac{1}{2m}   \sum_{i=1}^{m} (wx + b - y)^2
 $$
 
 Where:
-- m  = number of training points
+
+- m = number of training points
 - $$ y_i $$ = actual value
-- $$ \hat{y}_i $$ = predicted value (i.e., \( wx + b \)) 
+- $$ \hat{y}\_i $$ = predicted value (i.e., \( wx + b \))
 
 ### Gradient Calculations
 
@@ -87,12 +89,11 @@ To minimize the cost function, we compute the gradient with respect to \( w \) a
 
 - **Gradient with respect to \( w \):**
 
-
-$$ \frac{\partial J}{\partial w} = \frac{1}{m} \sum_{i=1}^{m} \left( (wx + b) - y \right) x $$
+$$ \frac{\partial J}{\partial w} = \frac{1}{m} \sum\_{i=1}^{m} \left( (wx + b) - y \right) x $$
 
 - **Gradient with respect to \( b \):**
 
-$$ \frac{\partial J}{\partial b} = \frac{1}{m} \sum_{i=1}^{m} \left( (wx + b) - y \right) $$
+$$ \frac{\partial J}{\partial b} = \frac{1}{m} \sum\_{i=1}^{m} \left( (wx + b) - y \right) $$
 
 ### Why Do We Subtract the Gradient?
 
@@ -113,9 +114,10 @@ $$
 $$
 
 Where:
-- $$\mathbf{w}$$  = vector of weights
-- $$\mathbf{x}$$  = vector of features
-- b  = bias (intercept)
+
+- $$\mathbf{w}$$ = vector of weights
+- $$\mathbf{x}$$ = vector of features
+- b = bias (intercept)
 
 ### Gradient Descent for Multiple Features
 
@@ -141,89 +143,105 @@ Where \( $$\alpha $$\) is the learning rate.
 
 While linear regression is a powerful tool, it is built on several key assumptions. Violating these assumptions can lead to inaccurate or misleading results. Below are the assumptions of linear regression, common problems that arise when they are violated, and the necessary tests to identify and address these issues.
 
+#### 1. **Linearity**
 
-#### 1. **Linearity**  
-  - The relationship between the dependent variable and the independent variables must be linear. That is, changes in the independent variables should lead to proportional changes in the dependent variable.
+- The relationship between the dependent variable and the independent variables must be linear. That is, changes in the independent variables should lead to proportional changes in the dependent variable.
 
-#### 2. **Independence of Errors**  
-  - The residuals (errors) must be independent of each other. This is especially important in time series data where observations can be correlated over time.
+#### 2. **Independence of Errors**
 
-#### 3. **Homoscedasticity**  
-  - The residuals should have constant variance across all levels of the independent variables. When the variance of errors changes (i.e., heteroscedasticity), it can distort the estimation of coefficients and their standard errors.
+- The residuals (errors) must be independent of each other. This is especially important in time series data where observations can be correlated over time.
 
-#### 4. **Normality of Errors**  
-  - The residuals should be normally distributed. This is important for making valid statistical inferences and calculating confidence intervals.
+#### 3. **Homoscedasticity**
 
-#### 5. **No Multicollinearity**  
-  - The independent variables should not be too highly correlated with each other. High multicollinearity can make it difficult to determine the independent effect of each predictor on the dependent variable.
+- The residuals should have constant variance across all levels of the independent variables. When the variance of errors changes (i.e., heteroscedasticity), it can distort the estimation of coefficients and their standard errors.
 
-#### 6. **No Autocorrelation**  
-  - In time series data, the residuals should not be correlated with each other over time. This is particularly important in econometric models.
+#### 4. **Normality of Errors**
+
+- The residuals should be normally distributed. This is important for making valid statistical inferences and calculating confidence intervals.
+
+#### 5. **No Multicollinearity**
+
+- The independent variables should not be too highly correlated with each other. High multicollinearity can make it difficult to determine the independent effect of each predictor on the dependent variable.
+
+#### 6. **No Autocorrelation**
+
+- In time series data, the residuals should not be correlated with each other over time. This is particularly important in econometric models.
 
 ## When Problems Arise
 
 Violations of these assumptions can result in issues like biased coefficients, inefficient estimates, incorrect standard errors, or even failure of the model to generalize.
 
 ### 1. Violation of Linearity
-   - **Problem**: If the relationship between the dependent and independent variables is non-linear, linear regression will not capture the true relationship.
-   - **Solution**:  
-      - Apply **polynomial regression** or transform the variables using logarithms, square roots, etc.
-      - Use non-linear models such as decision trees or neural networks for highly non-linear relationships.
+
+- **Problem**: If the relationship between the dependent and independent variables is non-linear, linear regression will not capture the true relationship.
+- **Solution**:
+  - Apply **polynomial regression** or transform the variables using logarithms, square roots, etc.
+  - Use non-linear models such as decision trees or neural networks for highly non-linear relationships.
 
 ### 2. Violation of Independence of Errors
-   - **Problem**: If errors are correlated (common in time series), it can lead to underestimated standard errors and inflated t-values.
-   - **Solution**:  
-      - Use a **Durbin-Watson** test to check for autocorrelation.  
-      - Consider using **Generalized Least Squares (GLS)** or **Autoregressive Integrated Moving Average (ARIMA)** models for time series data.
-  
+
+- **Problem**: If errors are correlated (common in time series), it can lead to underestimated standard errors and inflated t-values.
+- **Solution**:
+  - Use a **Durbin-Watson** test to check for autocorrelation.
+  - Consider using **Generalized Least Squares (GLS)** or **Autoregressive Integrated Moving Average (ARIMA)** models for time series data.
+
 ### 3. Violation of Homoscedasticity
-   - **Problem**: When the variance of the residuals is not constant (heteroscedasticity), it leads to inefficient estimates and distorted confidence intervals.
-   - **Solution**:  
-      - Use a **Breusch-Pagan** or **White** test to detect heteroscedasticity.  
-      - Transform the dependent variable or apply **Weighted Least Squares (WLS)** to correct heteroscedasticity.
+
+- **Problem**: When the variance of the residuals is not constant (heteroscedasticity), it leads to inefficient estimates and distorted confidence intervals.
+- **Solution**:
+  - Use a **Breusch-Pagan** or **White** test to detect heteroscedasticity.
+  - Transform the dependent variable or apply **Weighted Least Squares (WLS)** to correct heteroscedasticity.
 
 ### 4. Violation of Normality of Errors
-   - **Problem**: If the residuals are not normally distributed, it affects the validity of hypothesis tests and confidence intervals.
-   - **Solution**:  
-      - Perform a **Shapiro-Wilk** or **Kolmogorov-Smirnov** test to check the normality of residuals.  
-      - If the residuals are skewed, transform the dependent variable using a **log** or **box-cox** transformation.
+
+- **Problem**: If the residuals are not normally distributed, it affects the validity of hypothesis tests and confidence intervals.
+- **Solution**:
+  - Perform a **Shapiro-Wilk** or **Kolmogorov-Smirnov** test to check the normality of residuals.
+  - If the residuals are skewed, transform the dependent variable using a **log** or **box-cox** transformation.
 
 ### 5. Multicollinearity
-   - **Problem**: High multicollinearity inflates the standard errors of the coefficients, making it hard to distinguish the effect of each variable.
-   - **Solution**:  
-      - Calculate the **Variance Inflation Factor (VIF)** to check for multicollinearity.  
-      - Remove or combine highly correlated variables, or use **Principal Component Analysis (PCA)** to reduce dimensionality.
+
+- **Problem**: High multicollinearity inflates the standard errors of the coefficients, making it hard to distinguish the effect of each variable.
+- **Solution**:
+  - Calculate the **Variance Inflation Factor (VIF)** to check for multicollinearity.
+  - Remove or combine highly correlated variables, or use **Principal Component Analysis (PCA)** to reduce dimensionality.
 
 ### 6. Autocorrelation
-   - **Problem**: If the residuals are autocorrelated, the model’s assumptions about error independence are violated, leading to biased parameter estimates.
-   - **Solution**:  
-      - Use the **Durbin-Watson test** to detect autocorrelation.  
-      - Switch to time-series-specific models such as **ARIMA** or include lagged variables.
+
+- **Problem**: If the residuals are autocorrelated, the model’s assumptions about error independence are violated, leading to biased parameter estimates.
+- **Solution**:
+  - Use the **Durbin-Watson test** to detect autocorrelation.
+  - Switch to time-series-specific models such as **ARIMA** or include lagged variables.
 
 ## Tests to Identify Problems
 
 ### 1. **Durbin-Watson Test for Autocorrelation**
-   - Use to check if there is a pattern in the residuals over time, especially in time series data.
-   - **How to interpret**: A value close to 2 suggests no autocorrelation; a value much lower or higher than 2 indicates positive or negative autocorrelation.
+
+- Use to check if there is a pattern in the residuals over time, especially in time series data.
+- **How to interpret**: A value close to 2 suggests no autocorrelation; a value much lower or higher than 2 indicates positive or negative autocorrelation.
 
 ### 2. **Breusch-Pagan Test for Heteroscedasticity**
-   - Use this test to check if the residual variance changes at different levels of the independent variables.
-   - **How to interpret**: A low p-value suggests that heteroscedasticity is present.
+
+- Use this test to check if the residual variance changes at different levels of the independent variables.
+- **How to interpret**: A low p-value suggests that heteroscedasticity is present.
 
 ### 3. **Variance Inflation Factor (VIF) for Multicollinearity**
-   - A VIF above 10 suggests high multicollinearity.
-   - **How to fix**: Remove or combine correlated variables, or use regularization techniques such as Ridge Regression.
+
+- A VIF above 10 suggests high multicollinearity.
+- **How to fix**: Remove or combine correlated variables, or use regularization techniques such as Ridge Regression.
 
 ### 4. **Shapiro-Wilk Test for Normality**
-   - Check if the residuals follow a normal distribution.
-   - **How to interpret**: A p-value below 0.05 indicates the residuals are not normally distributed.
+
+- Check if the residuals follow a normal distribution.
+- **How to interpret**: A p-value below 0.05 indicates the residuals are not normally distributed.
 
 ## How to Solve These Issues
+
 $$1.$$ Non-linearity: Try feature transformation or use a more complex model. \
 $$2.$$ **Heteroscedasticity**: Use Weighted Least Squares (WLS) or transform the dependent variable. \
 $$3.$$ **Autocorrelation**: Apply time-series models like ARIMA or introduce lagged variables. \
 $$4.$$ **Multicollinearity**: Remove or combine variables or use PCA. \
-$$5.$$ **Non-normality of errors**: Apply transformations or use robust models that do not assume normality. 
+$$5.$$ **Non-normality of errors**: Apply transformations or use robust models that do not assume normality.
 
 ---
 

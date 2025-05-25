@@ -26,7 +26,10 @@ import Link from "next/link";
 const LoginForm = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || DEFAULT_REDIRECT_PATH;
-  const urlError = searchParams.get("error") === "OAuthAccountNotLinked" ? "Account already in use by different provider" : '' 
+  const urlError =
+    searchParams.get("error") === "OAuthAccountNotLinked"
+      ? "Account already in use by different provider"
+      : "";
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>(undefined);
   const [success, setSuccess] = useState<string | undefined>(undefined);
@@ -41,16 +44,15 @@ const LoginForm = () => {
     setError("");
     setSuccess("");
     startTransition(() => {
-      credentialLogin(values).then((data)=>{
-        if(data.success){
+      credentialLogin(values).then((data) => {
+        if (data.success) {
           setSuccess(data.message);
           toast("Login Succesfull!");
           window.location.assign(callbackUrl); // Redirect to the callbackUrl and reload the page
-        }
-        else{
+        } else {
           setError(data.message);
         }
-      })
+      });
     });
   };
 
@@ -68,7 +70,8 @@ const LoginForm = () => {
               <FormLabel htmlFor="email">Email</FormLabel>
               <FormControl>
                 <Input
-                  {...field} className="font-semibold"
+                  {...field}
+                  className="font-semibold"
                   placeholder="example@email.com"
                   type="email"
                   disabled={isPending}
@@ -86,13 +89,21 @@ const LoginForm = () => {
               <FormLabel htmlFor="password">Password</FormLabel>
               <FormControl>
                 <Input
-                  {...field} className="font-semibold"
+                  {...field}
+                  className="font-semibold"
                   placeholder="Password"
                   type="password"
                   disabled={isPending}
                 />
               </FormControl>
-              <Button size={"sm"} variant={"link"} asChild className="px-0 text-black dark:text-white"><Link href={'/reset'}>Forgot password?</Link></Button>
+              <Button
+                size={"sm"}
+                variant={"link"}
+                asChild
+                className="px-0 text-black dark:text-white"
+              >
+                <Link href={"/reset"}>Forgot password?</Link>
+              </Button>
               <FormMessage />
             </FormItem>
           )}
@@ -151,7 +162,8 @@ const SignUpForm = () => {
               <FormLabel htmlFor="name">Name</FormLabel>
               <FormControl>
                 <Input
-                  {...field} className="font-semibold"
+                  {...field}
+                  className="font-semibold"
                   placeholder="Your Name"
                   type="name"
                   disabled={isPending}
@@ -169,7 +181,8 @@ const SignUpForm = () => {
               <FormLabel htmlFor="email">Email</FormLabel>
               <FormControl>
                 <Input
-                  {...field} className="font-semibold"
+                  {...field}
+                  className="font-semibold"
                   placeholder="example@email.com"
                   type="email"
                 />
@@ -186,7 +199,8 @@ const SignUpForm = () => {
               <FormLabel htmlFor="password">Password</FormLabel>
               <FormControl>
                 <Input
-                  {...field} className="font-semibold"
+                  {...field}
+                  className="font-semibold"
                   placeholder="*********"
                   type="password"
                   disabled={isPending}
@@ -204,7 +218,8 @@ const SignUpForm = () => {
               <FormLabel htmlFor="confirmPassword">Confirm Password</FormLabel>
               <FormControl>
                 <Input
-                  {...field} className="font-semibold"
+                  {...field}
+                  className="font-semibold"
                   placeholder="*********"
                   type="password"
                   disabled={isPending}
@@ -224,9 +239,7 @@ const SignUpForm = () => {
         </Button>
       </form>
     </Form>
-    
   );
 };
 
 export { LoginForm, SignUpForm };
-

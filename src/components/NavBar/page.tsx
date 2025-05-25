@@ -16,7 +16,6 @@ const NavBarContent: React.FC = () => {
   const { fix, menu, clicked, toggleMenu } = useNavBarContext();
   const currentPath = usePathname();
 
-
   const navBarClass = `w-full h-[6vh] min-h-14 flex items-center justify-between fixed px-[5vw] transition duration-500 ${
     fix ? "bg-primary z-[30] rounded-b-md" : "z-[20]"
   } ${currentPath === "/" ? "" : "bg-primary"}`;
@@ -35,7 +34,7 @@ const NavBarContent: React.FC = () => {
       </div>
       <div className="flex items-center gap-4 md:hidden">
         <ModeToggle />
-          <AccountDropdownMenu />
+        <AccountDropdownMenu />
         <motion.div whileTap={{ scale: 1.5 }} className="z-[50]">
           <button onClick={toggleMenu}>
             {menu ? (
@@ -46,11 +45,10 @@ const NavBarContent: React.FC = () => {
           </button>
         </motion.div>
       </div>
-      <div
-      className="relative hidden md:flex md:items-center md:justify-between md:gap-2">
-      <ModeToggle />
-      <AccountDropdownMenu />
-    </div>
+      <div className="relative hidden md:flex md:items-center md:justify-between md:gap-2">
+        <ModeToggle />
+        <AccountDropdownMenu />
+      </div>
       {clicked &&
         (menu ? (
           <motion.div

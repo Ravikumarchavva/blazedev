@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 interface NavBarContextProps {
   fix: boolean;
@@ -18,7 +18,9 @@ export const useNavBarContext = () => {
   return context;
 };
 
-export const NavBarProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const NavBarProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [fix, setFix] = useState(false);
   const [menu, setMenu] = useState(false);
   const [clicked, setClicked] = useState(false);

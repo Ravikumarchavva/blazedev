@@ -1,14 +1,21 @@
-import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+// Local Imports
 import "@/styles/globals.css";
-import { cn } from "@/lib/utils";
-import { ThemeProvider } from "@/components/ThemeProvider";
 import NavBar from "@/components/NavBar/page";
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { cn } from "@/lib/utils";
 import { auth } from "@/auth";
+
+// Authentication Imports
 import { SessionProvider } from "next-auth/react";
+
+// For vercel analytics and speed insights
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+
+// External Imports
+import type { Metadata } from "next";
+import { Poppins } from "next/font/google";
 
 const fontPoppins = Poppins({
   subsets: ["latin"],
@@ -17,9 +24,11 @@ const fontPoppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Ravi Kumar Chavva | Data Analyst & Web Developer",
-  description: "Explore Ravi Kumar Chavva's portfolio — data analytics projects, web development work, technical blog posts, and more.",
+  description:
+    "Explore Ravi Kumar Chavva's portfolio — data analytics projects, web development work, technical blog posts, and more.",
   keywords: [
     "Ravi Kumar Chavva",
+    "ravikumarchavva",
     "Data Analyst",
     "Machine Learning",
     "Web Developer",
@@ -27,39 +36,23 @@ export const metadata: Metadata = {
     "Projects",
     "Blog",
     "Next.js Developer",
-    "India"
+    "India",
   ],
-  authors: [{ name: "Ravi Kumar Chavva", url: "https://www.ravikumarchavva.com" }],
+  authors: [
+    { name: "Ravi Kumar Chavva", url: "https://www.ravikumarchavva.com" },
+  ],
   creator: "Ravi Kumar Chavva",
   publisher: "Ravi Kumar Chavva",
-  metadataBase: new URL("https://www.ravikumarchavva.com"), 
-  // openGraph: {
-  //   title: "Ravi Kumar Chavva | Data Analyst & Web Developer",
-  //   description: "Data-driven insights and modern web solutions. View projects, read blogs, and explore my tech stack.",
-  //   url: "https://www.ravikumarchavva.com",
-  //   siteName: "Ravi Kumar Chavva",
-  //   images: [
-  //     {
-  //       url: "/og-image.jpg", // Replace with an actual Open Graph image path
-  //       width: 1200,
-  //       height: 630,
-  //       alt: "Ravi Kumar Chavva",
-  //     },
-  //   ],
-  //   locale: "en_US",
-  //   type: "website",
-  // },
+  metadataBase: new URL("https://www.ravikumarchavva.com"),
   twitter: {
-    card: "summary_large_image",
     title: "Ravi Kumar Chavva",
     description: "Data Analyst & Full-Stack Developer",
-    creator: "@Ravikumarchavva", 
-    images: ["/og-image.jpg"],
+    creator: "@Ravikumarchavva",
+    images: ["/icon.jpg"],
   },
 };
 
-
-export default async function RootLayout ({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -68,12 +61,56 @@ export default async function RootLayout ({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <meta charSet="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="index, follow" />
         <link rel="icon" href="/icon.jpg" />
+        <link rel="canonical" href="https://www.ravikumarchavva.com" />
+        {/* Open Graph Meta Tags */}
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="Ravi Kumar Chavva | Data Analyst & Web Developer"
+        />
+        <meta
+          property="og:description"
+          content="Explore Ravi Kumar Chavva's portfolio — data analytics projects, web development work, technical blog posts, and more."
+        />
+        <meta property="og:url" content="https://www.ravikumarchavva.com" />
+        <meta property="og:image" content="/icon.jpg" />
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:title" content="Ravi Kumar Chavva" />
+        <meta
+          name="twitter:description"
+          content="Data Analyst & Full-Stack Developer"
+        />
+        <meta name="twitter:creator" content="@Ravikumarchavva" />
+        <meta name="twitter:image" content="/icon.jpg" />
+        {/* Structured Data (JSON-LD) */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Ravi Kumar Chavva",
+              url: "https://www.ravikumarchavva.com",
+              sameAs: [
+                "https://twitter.com/Ravikumarchavva",
+                // Add other social profiles if available
+              ],
+              jobTitle: "Data Analyst & Web Developer",
+              image: "/icon.jpg",
+              description:
+                "Explore Ravi Kumar Chavva's portfolio — data analytics projects, web development work, technical blog posts, and more.",
+            }),
+          }}
+        />
       </head>
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased ",
-          fontPoppins.className
+          "min-h-screen bg-background antialiased",
+          fontPoppins.className,
         )}
       >
         <ThemeProvider
@@ -85,7 +122,7 @@ export default async function RootLayout ({
           <SessionProvider session={session}>
             <NavBar />
             {children}
-            <Analytics/>
+            <Analytics />
             <SpeedInsights />
           </SessionProvider>
           <Toaster />

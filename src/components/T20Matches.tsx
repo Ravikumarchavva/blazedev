@@ -1,7 +1,7 @@
 // components/T20Matches.tsx
 "use client";
 // src/app/components/T20Matches.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 type Match = {
   matchType: string;
@@ -16,14 +16,14 @@ const T20Matches: React.FC = () => {
   useEffect(() => {
     const getMatches = async () => {
       try {
-        const response = await fetch('/api/t20Matches');
+        const response = await fetch("/api/t20Matches");
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const data = await response.json();
         setMatches(data);
       } catch (error) {
-        console.error('Error fetching T20 matches:', error);
+        console.error("Error fetching T20 matches:", error);
       }
     };
 
@@ -36,10 +36,18 @@ const T20Matches: React.FC = () => {
       <ul>
         {matches.map((match, index) => (
           <li key={index}>
-            <p><strong>Type:</strong> {match.matchType}</p>
-            <p><strong>Teams:</strong> {match.teams}</p>
-            <p><strong>Date:</strong> {match.date}</p>
-            <p><strong>Venue:</strong> {match.venue}</p>
+            <p>
+              <strong>Type:</strong> {match.matchType}
+            </p>
+            <p>
+              <strong>Teams:</strong> {match.teams}
+            </p>
+            <p>
+              <strong>Date:</strong> {match.date}
+            </p>
+            <p>
+              <strong>Venue:</strong> {match.venue}
+            </p>
           </li>
         ))}
       </ul>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 import { aboutData } from "@/data/Foreground";
 import { useId } from "react";
 
@@ -16,18 +16,18 @@ const AboutSection: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in-up-visible');
+            entry.target.classList.add("fade-in-up-visible");
           } else {
-            entry.target.classList.remove('fade-in-up-visible');
+            entry.target.classList.remove("fade-in-up-visible");
           }
         });
       },
       {
         threshold: 0.1, // Trigger when 10% of the element is visible
-      }
+      },
     );
 
-    const elements = ref.current?.querySelectorAll('.fade-in-up');
+    const elements = ref.current?.querySelectorAll(".fade-in-up");
     elements?.forEach((element) => observer.observe(element));
 
     return () => observer.disconnect();
@@ -103,7 +103,12 @@ type GridPatternProps = {
   className?: string;
 };
 
-export function GridPattern({ width, height, squares, ...props }: GridPatternProps) {
+export function GridPattern({
+  width,
+  height,
+  squares,
+  ...props
+}: GridPatternProps) {
   const patternId = useId();
 
   return (

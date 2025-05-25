@@ -1,12 +1,13 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 ---
 
 # Predicting Car Prices with Linear Models
 
-*Date: June 2024*
+_Date: June 2024_
 
 Github : <Link href='https://github.com/Ravikumarchavva/ML_Playground/tree/main/week1_regressionAnalysis' target="_blank"> RegressionAnalysis</Link>
+
 ## Objective
 
 Our goal was to predict car prices using various linear models and machine learning techniques. This post summarizes our journey from start to finish, highlighting the key steps, technologies, and models used to build a robust car price prediction model.
@@ -14,6 +15,7 @@ Our goal was to predict car prices using various linear models and machine learn
 ---
 
 ## Overview
+
 ![Data Exploration Report](/projects/carPrice/carOverview.JPG)
 
 ---
@@ -28,12 +30,14 @@ We began by exploring the dataset to understand its structure. Preprocessing inv
 ![Power BI Report](/projects/carPrice/carpriceReport_page-0001.jpg)
 
 **Key Insights:**
+
 - Wagon, hatchback cars are tend to have lower price.
 - Having more cylinders tend to have higher price.
 - Jaguar, Porcshe, Buick cars are tend to have higher price.
 - Cars with higher horsepower tend to have higher price.
 
 **Technologies Used:**
+
 - **Language:** Python
 - **Libraries:** Polars, NumPy, Scikit-learn
 - **Visualization:** Matplotlib, Seaborn
@@ -46,8 +50,8 @@ We began by exploring the dataset to understand its structure. Preprocessing inv
 
 We then focused on feature engineering, creating new features like `carspace`, `averagempg`, and `performancebalance` to capture more information. Simple model like Linear Regression is implemented to establish a baseline performance.
 
-
 **Key Takeaways:**
+
 - Thoughtful feature engineering can significantly enhance model accuracy.
 - Baseline models provide a useful point of comparison for future enhancements.
 
@@ -58,11 +62,13 @@ We then focused on feature engineering, creating new features like `carspace`, `
 To prevent overfitting, we introduced regularization techniques such as Lasso and Ridge Regression. These methods reduced model complexity while maintaining performance, ensuring that the models could generalize well to unseen data.
 
 **Models Used:**
+
 - Lasso Regression
 - Ridge Regression
 - ElasticNet
 
 **Key Insights:**
+
 - Regularization is essential to avoid overfitting, especially with complex models.
 - Almost all type of regularization techniques showed similar improvement in model performance.
 
@@ -73,6 +79,7 @@ To prevent overfitting, we introduced regularization techniques such as Lasso an
 An in-depth error analysis was conducted to diagnose model performance and identify areas for improvement. Based on the analysis, adjustments were made to further refine the models and improve accuracy.
 
 **Key Takeaways:**
+
 - Error analysis is vital for identifying and correcting model weaknesses.
 
 ---
@@ -84,10 +91,12 @@ Finally, we applied ensemble methods like Bagging and Boosting to combine multip
 ![Ensemble Methods Report](/projects/carPrice/Day6-ensembling-Report.jpg)
 
 **Models Used:**
+
 - Bagging with Ridge regression
 - AdaBoost with Ridge regression
 
 **Key Insights:**
+
 - Ensemble methods leverage the strengths of different models, leading to better predictions.
 
 ---
@@ -95,6 +104,5 @@ Finally, we applied ensemble methods like Bagging and Boosting to combine multip
 ### Conclusion
 
 Our systematic approach—progressing from data exploration and preprocessing to feature engineering, regularization, error analysis, and ensembling—resulted in a robust predictive model for car price estimation.
-
 
 ---

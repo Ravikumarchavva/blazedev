@@ -1,23 +1,25 @@
-import { Blog } from '@/lib/datatypes';
+import { Blog } from "@/lib/datatypes";
 
 export const BlogsData: Blog[] = [
   {
     id: 0,
-    title: 'Linear Regression',
-    description: 'Explore the fundamentals of linear regression, a basic yet powerful technique in machine learning.',
-    url: 'https://example.com/blog/first-post',
-    expectedReadingTime: '5 minutes',
-    imageUrl: '/blogs/regression/linearRegression.jpg',
-    blogUrl: '/allBlogs/LinearRegression'
+    title: "Linear Regression",
+    description:
+      "Explore the fundamentals of linear regression, a basic yet powerful technique in machine learning.",
+    url: "https://example.com/blog/first-post",
+    expectedReadingTime: "5 minutes",
+    imageUrl: "/blogs/regression/linearRegression.jpg",
+    blogUrl: "/allBlogs/LinearRegression",
   },
   {
     id: 1,
-    title: 'Classification',
-    description: 'A comprehensive guide to classification, a key technique in supervised learning.',
-    url: 'https://www.google.com',
-    expectedReadingTime: '15 minutes',
-    imageUrl: '/blogs/classification/binaryClassification.jpg',
-    blogUrl: '/allBlogs/Classification'
+    title: "Classification",
+    description:
+      "A comprehensive guide to classification, a key technique in supervised learning.",
+    url: "https://www.google.com",
+    expectedReadingTime: "15 minutes",
+    imageUrl: "/blogs/classification/binaryClassification.jpg",
+    blogUrl: "/allBlogs/Classification",
   },
   // {
   //   id: 2,

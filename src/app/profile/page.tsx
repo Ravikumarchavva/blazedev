@@ -4,7 +4,14 @@ import { profileUpdate } from "@/actions/profile-update";
 import { FormError } from "@/components/Form-Error";
 import { FormSuccess } from "@/components/Form-Success";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useCurrentUser } from "@/hooks/use-current-user";
@@ -51,13 +58,12 @@ const Profile = () => {
       }
     });
   };
-  
 
   return (
     <Form {...profileForm}>
       <form
         className={cn(
-          "w-full max-w-3xl flex flex-col items-start justify-start pb-10"
+          "w-full max-w-3xl flex flex-col items-start justify-start pb-10",
         )}
         onSubmit={profileForm.handleSubmit(handleSubmit)}
       >
@@ -71,67 +77,64 @@ const Profile = () => {
         </div>
         <div className="border-b border-gray-300 my-4 w-full"></div>
         <div className="h-[15vh] w-full">
-        <FormField
-        control={profileForm.control}
-        name="name"
-        render={({ field }) => (
-          <FormItem className="w-full">
-            <FormLabel className="text-xl text-primary-foreground">Username</FormLabel>
-            <FormControl>
-              <Input
-                {...field}
-                placeholder="Username"
-                disabled={isPending}
-              />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+          <FormField
+            control={profileForm.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel className="text-xl text-primary-foreground">
+                  Username
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    {...field}
+                    placeholder="Username"
+                    disabled={isPending}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
         <div className="h-[15vh] w-full">
-        <FormField
-          control={profileForm.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel className="text-white">Email</FormLabel>
-              <FormControl>
-                <Input
-                  {...field}
-                  type="email"
-                  placeholder="Email"
-                  disabled
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={profileForm.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel className="text-white">Email</FormLabel>
+                <FormControl>
+                  <Input {...field} type="email" placeholder="Email" disabled />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
         <div className="h-[20vh] w-full">
-        <FormField
-          control={profileForm.control}
-          name="bio"
-          render={({ field }) => (
-            <FormItem className="w-full">
-              <FormLabel className="text-white">Bio</FormLabel>
-              <FormControl>
-                <Textarea
-                  {...field}
-                  rows={2}
-                  placeholder="I am a recruiter"
-                  disabled={isPending}
-                  className="text-black placeholder-black"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+          <FormField
+            control={profileForm.control}
+            name="bio"
+            render={({ field }) => (
+              <FormItem className="w-full">
+                <FormLabel className="text-white">Bio</FormLabel>
+                <FormControl>
+                  <Textarea
+                    {...field}
+                    rows={2}
+                    placeholder="I am a recruiter"
+                    disabled={isPending}
+                    className="text-black placeholder-black"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         </div>
-        <FormSuccess message={success}/>
-        <FormError message={error}/>
+        <FormSuccess message={success} />
+        <FormError message={error} />
         <Button type="submit" className="bg-secondary hover:bg-secondary/80">
           Update Profile
         </Button>

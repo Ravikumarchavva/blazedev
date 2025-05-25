@@ -25,27 +25,23 @@ export default function RestForm() {
   const resetForm = useForm<z.infer<typeof resetSchema>>({
     resolver: zodResolver(resetSchema),
     defaultValues: {
-      email:""
+      email: "",
     },
   });
-  const onSubmit = async (values:z.infer<typeof resetSchema>)=>{
+  const onSubmit = async (values: z.infer<typeof resetSchema>) => {
     setError(undefined);
     setSuccess(undefined);
     startTransition(() => {
-      Reset(values).then((data)=>{
-      setSuccess(data?.success);
-      setError(data?.error);
+      Reset(values).then((data) => {
+        setSuccess(data?.success);
+        setError(data?.error);
+      });
     });
-    })
-  }
-
+  };
 
   return (
     <Form {...resetForm}>
-      <form
-        onSubmit={resetForm.handleSubmit(onSubmit)}
-        className="space-y-6"
-      >
+      <form onSubmit={resetForm.handleSubmit(onSubmit)} className="space-y-6">
         <FormField
           control={resetForm.control}
           name="email"
@@ -54,7 +50,8 @@ export default function RestForm() {
               <FormLabel htmlFor="email">Email</FormLabel>
               <FormControl>
                 <Input
-                  {...field} className="font-semibold"
+                  {...field}
+                  className="font-semibold"
                   placeholder="example@email.com"
                   type="email"
                   disabled={isPending}
@@ -75,4 +72,4 @@ export default function RestForm() {
       </form>
     </Form>
   );
-};
+}

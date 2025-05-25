@@ -1,14 +1,14 @@
-import React from 'react';
-import { FaGithub, FaGoogle } from 'react-icons/fa';
-import { signIn } from '@/auth';
+import React from "react";
+import { FaGithub, FaGoogle } from "react-icons/fa";
+import { signIn } from "@/auth";
 
 export const SocialMediaLogin = () => {
   return (
     <div className="flex justify-between items-center w-full">
       <form
         action={async () => {
-          "use server"
-          await signIn('github', { redirectTo: '/' });
+          "use server";
+          await signIn("github", { redirectTo: "/" });
         }}
         className="w-[45%] mx-auto"
       >
@@ -22,8 +22,8 @@ export const SocialMediaLogin = () => {
 
       <form
         action={async () => {
-          "use server"
-          await signIn('google', { redirectTo: '/' });
+          "use server";
+          await signIn("google", { redirectTo: "/" });
         }}
         className="w-[45%] mx-auto"
       >

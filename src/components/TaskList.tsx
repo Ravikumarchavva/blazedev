@@ -1,7 +1,7 @@
-import React from 'react';
-import { Task } from '@prisma/client';
-import TaskCard from './TaskCard';
-import { useCurrentRole } from '@/hooks/use-current-role';
+import React from "react";
+import { Task } from "@prisma/client";
+import TaskCard from "./TaskCard";
+import { useCurrentRole } from "@/hooks/use-current-role";
 
 interface TaskListProps {
   tasks: Task[];
@@ -13,13 +13,21 @@ interface TaskListProps {
   textColor: string;
 }
 
-const TaskList: React.FC<TaskListProps> = ({ tasks, updateStatus, deleteTask, handleViewInfoClick, title, bgColor, textColor }) => {
+const TaskList: React.FC<TaskListProps> = ({
+  tasks,
+  updateStatus,
+  deleteTask,
+  handleViewInfoClick,
+  title,
+  bgColor,
+  textColor,
+}) => {
   const role = useCurrentRole();
   return (
     <div className={`${bgColor} p-3 text-center rounded min-h-[30vh]`}>
       <h3 className={`text-lg font-semibold mb-2 ${textColor}`}>{title}</h3>
       <ul className="space-y-2">
-        {tasks.map(task => (
+        {tasks.map((task) => (
           <li key={task.id}>
             <TaskCard
               task={task}

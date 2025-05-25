@@ -38,7 +38,9 @@ const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
               <Button
                 className={cn(
                   "my-2 w-full text-left justify-start",
-                  item.href === path ? "bg-secondary hover:bg-secondary/80" : "hover:underline"
+                  item.href === path
+                    ? "bg-secondary hover:bg-secondary/80"
+                    : "hover:underline",
                 )}
                 key={item.name}
               >
@@ -48,9 +50,7 @@ const ProfileLayout = ({ children }: { children: React.ReactNode }) => {
               </Button>
             ))}
           </div>
-          <div className="sm:w-full md:w-5/6 mt-4 sm:mt-0">
-            {children}
-          </div>
+          <div className="sm:w-full md:w-5/6 mt-4 sm:mt-0">{children}</div>
         </div>
       </div>
     </div>

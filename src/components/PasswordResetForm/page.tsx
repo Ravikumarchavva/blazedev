@@ -21,36 +21,34 @@ import { passwordChange } from "@/actions/password-reset";
 import { useSearchParams } from "next/navigation";
 
 export default function PasswordRestForm() {
-    const searchParams = useSearchParams();
-    const token = searchParams.get("token");
-    const [isPending, startTransition] = useTransition();
-    const [error, setError] = useState<string | undefined>(undefined);
-    const [success, setSuccess] = useState<string | undefined>(undefined);
-    const passwordResetForm = useForm<z.infer<typeof changePasswordSchema>>({
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
+  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState<string | undefined>(undefined);
+  const [success, setSuccess] = useState<string | undefined>(undefined);
+  const passwordResetForm = useForm<z.infer<typeof changePasswordSchema>>({
     resolver: zodResolver(changePasswordSchema),
     defaultValues: {
-      password:"",
+      password: "",
       confirmPassword: "",
     },
-    });
-    const onSubmit = async (values:z.infer<typeof changePasswordSchema>)=>{
-        if(success || error) return;
-        if(!token){
-          setError('Token is required');
-          return;
-        }
-        startTransition(() => {
-            passwordChange(token,values).then((data)=>{
-            if(data.success){
-                setSuccess(data.message);
-            }
-            else{
-                setError(data.message);
-            }
-            });
-        })
+  });
+  const onSubmit = async (values: z.infer<typeof changePasswordSchema>) => {
+    if (success || error) return;
+    if (!token) {
+      setError("Token is required");
+      return;
     }
-
+    startTransition(() => {
+      passwordChange(token, values).then((data) => {
+        if (data.success) {
+          setSuccess(data.message);
+        } else {
+          setError(data.message);
+        }
+      });
+    });
+  };
 
   return (
     <Form {...passwordResetForm}>
@@ -66,7 +64,8 @@ export default function PasswordRestForm() {
               <FormLabel htmlFor="password">Password</FormLabel>
               <FormControl>
                 <Input
-                  {...field} className="font-semibold"
+                  {...field}
+                  className="font-semibold"
                   placeholder="******"
                   type="password"
                   disabled={isPending}
@@ -84,7 +83,8 @@ export default function PasswordRestForm() {
               <FormLabel htmlFor="confirmPassword">Confirm password</FormLabel>
               <FormControl>
                 <Input
-                  {...field} className="font-semibold"
+                  {...field}
+                  className="font-semibold"
                   placeholder="******"
                   type="password"
                   disabled={isPending}
@@ -105,4 +105,4 @@ export default function PasswordRestForm() {
       </form>
     </Form>
   );
-};
+}
