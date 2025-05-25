@@ -1,8 +1,8 @@
 {
   "redirects": [
     {
-      "source": "/datanexus",
-      "destination": "/dataNexus",
+      "source": "/",
+      "destination": "/",
       "permanent": true
     }
   ]

@@ -97,7 +97,8 @@ export default async function RootLayout({
               url: "https://www.ravikumarchavva.com",
               sameAs: [
                 "https://twitter.com/Ravikumarchavva",
-                // Add other social profiles if available
+                "https://www.linkedin.com/in/ravikumar-chavva/",
+                "https://github.com/Ravikumarchavva/"
               ],
               jobTitle: "Data Analyst & Web Developer",
               image: "/icon.jpg",
