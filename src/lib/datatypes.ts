@@ -12,6 +12,7 @@ export interface Project {
   image: string;
   comingSoon: boolean;
   link: string;
+  deployed: boolean;
 }
 
 export interface Blog {

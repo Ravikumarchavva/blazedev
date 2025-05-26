@@ -1,10 +1,12 @@
+import { loginSchema } from "./models/schemas";
+import { getUserByEmail } from "./data/findUser";
+
 import GitHub from "next-auth/providers/github";
 import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import type { NextAuthConfig } from "next-auth";
-import { loginSchema } from "./models/schemas";
-import { getUserByEmail } from "./data/findUser";
 import { compare } from "bcryptjs";
+
 export default {
   providers: [
     GitHub({

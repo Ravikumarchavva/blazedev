@@ -1,16 +1,18 @@
 "use client";
 import { NavBarProvider, useNavBarContext } from "@/context/NavBarContext";
+import { AccountDropdownMenu } from "@/components/AccountDropdown/page";
+import Resume from "@/components/Resume/page";
+import { ModeToggle } from "@/components/theme-toggle";
+import Logo from "@/components/NavBar/Logo/page";
+import NavBarLinks from "@/components/NavBar/NavbarLinks/page";
+import SocialMedia from "@/components/NavBar/SocialMedia/page";
+
+
+import React from "react";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
-import React from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { MdCancel } from "react-icons/md";
-import { AccountDropdownMenu } from "../AccountDropdown/page";
-import Resume from "../Resume/page";
-import { ModeToggle } from "../theme-toggle";
-import Logo from "./Logo/page";
-import NavBarLinks from "./NavbarLinks/page";
-import SocialMedia from "./SocialMedia/page";
 
 const NavBarContent: React.FC = () => {
   const { fix, menu, clicked, toggleMenu } = useNavBarContext();

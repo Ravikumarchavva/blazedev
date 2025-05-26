@@ -3,15 +3,15 @@ import { Slides } from "./Slides";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-const Portfolio = () => {
+const Projects = () => {
   return (
     <div
-      id="Portfolio"
+      id="Projects"
       className="w-full min-h-[95vh] gap-10 flex flex-col items-start justify-center px-[5vw] rounded-t-2xl pt-[5vh]"
     >
       <div className="w-full flex items-center md:justify-between justify-center">
         <div className="text-5xl text-center font-semibold text-secondary inline-block w-full">
-          Portfolio
+          Projects
         </div>
         <div className="sm:hidden portrait:hidden md:inline-block">
           <Link href={"/projects"}>
@@ -30,4 +30,4 @@ const Portfolio = () => {
   );
 };
 
-export default Portfolio;
+export default Projects;

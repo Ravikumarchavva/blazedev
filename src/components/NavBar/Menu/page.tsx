@@ -6,7 +6,6 @@ import { MdCancel } from "react-icons/md";
 import { usePathname } from "next/navigation";
 
 const Menu = () => {
-  const currentPath = usePathname();
   const [menu, setMenu] = useState(false);
   const [clicked, setClicked] = useState(false);
 
