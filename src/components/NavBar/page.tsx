@@ -7,7 +7,6 @@ import Logo from "@/components/NavBar/Logo/page";
 import NavBarLinks from "@/components/NavBar/NavbarLinks/page";
 import SocialMedia from "@/components/NavBar/SocialMedia/page";
 
-
 import React from "react";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";

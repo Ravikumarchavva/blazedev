@@ -1,11 +1,8 @@
 import type { Config } from "tailwindcss";
 
 const config = {
-  darkMode: ["class"],
-  content: [
-    "./src/**/*.{ts,tsx}",
-    "./src/mdx-components.mdx",
-  ],
+  darkMode: "class",
+  content: ["./src/**/*.{ts,tsx}", "./src/mdx-components.mdx"],
   prefix: "",
   theme: {
     container: {
@@ -13,7 +10,7 @@ const config = {
       padding: "5px",
       screens: {
         "2xl": "1400px",
-        "3xl": "2160px"
+        "3xl": "2160px",
       },
     },
     extend: {
