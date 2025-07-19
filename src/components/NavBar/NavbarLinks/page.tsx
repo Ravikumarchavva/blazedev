@@ -31,18 +31,21 @@ const NavBarLinks: React.FC = () => {
         section.offsetTop <= scrollPosition &&
         section.offsetTop + section.offsetHeight > scrollPosition
       ) {
-        if (activeSection !== section.id) {
-          setActiveSection(section.id);
-        }
+        setActiveSection(prevActive => {
+          if (prevActive !== section.id) {
+            return section.id;
+          }
+          return prevActive;
+        });
         foundSection = true;
         break;
       }
     }
 
-    if (!foundSection && activeSection !== null) {
-      setActiveSection(null);
+    if (!foundSection) {
+      setActiveSection(prevActive => prevActive !== null ? null : prevActive);
     }
-  }, [activeSection]);
+  }, []); // Remove activeSection from dependencies
 
   useEffect(() => {
     if (currentPath === "/") {
@@ -52,7 +55,7 @@ const NavBarLinks: React.FC = () => {
         window.removeEventListener("scroll", handleScroll);
       };
     }
-  }, []);
+  }, [currentPath, handleScroll]);
 
   const handleClick = (id: string) => {
     if (menu) {
@@ -75,12 +78,12 @@ const NavBarLinks: React.FC = () => {
           key={link.url}
           whileHover={{ scale: 1.05 }}
           className={`rounded-md px-1 text-white bg-tranparent hover:text-foreground hover:bg-background ${currentPath === "/" && link.id === "Home" && activeSection === null
-              ? "bg-secondary"
-              : currentPath === "/" && activeSection === link.id
-                ? "bg-secondary  transition duration-500"
-                : currentPath !== "/" && currentPath === link.url
-                  ? "bg-secondary"
-                  : ""
+            ? "bg-secondary"
+            : currentPath === "/" && activeSection === link.id
+              ? "bg-secondary  transition duration-500"
+              : currentPath !== "/" && currentPath === link.url
+                ? "bg-secondary"
+                : ""
             }`}
           transition={{ duration: 0.3, ease: "easeInOut" }}
         >
