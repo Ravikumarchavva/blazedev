@@ -29,7 +29,6 @@ const ProjectCard = ({
         <div className="absolute text-center text-white bg-primary bg-opacity-50 bottom-0 w-full h-[30%] p-2 rounded-b-lg">
           <span className="text-2xl font-semibold">{title}</span>
           <div className="flex items-center justify-around px-4">
-            <p className="mt-2 px-2 portrait:hidden">{description}</p>
             <Link href={`${link}`}>
               <button
                 className={`mt-2 min-h-10 px-4 text-white rounded ${
