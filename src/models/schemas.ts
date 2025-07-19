@@ -34,7 +34,7 @@ export const changePasswordSchema = z
       : "",
   );
 
-// profile and contact schemas
+// profile and contact schemas 
 export const settingsSchema = z.object({
   name: z.string().min(1, { message: "Name is Required" }),
   email: z.string().email(),

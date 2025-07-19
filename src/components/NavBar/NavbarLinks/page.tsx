@@ -22,7 +22,9 @@ const NavBarLinks: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
   const handleScroll = () => {
-    const sections = links.map((link) => document.getElementById(link.id));
+    const sections = links.map((link) =>
+      document.getElementById(link.id)
+    );
     const scrollPosition = window.scrollY + window.innerHeight / 2;
     let foundSection = false;
 
@@ -75,15 +77,14 @@ const NavBarLinks: React.FC = () => {
         <motion.div
           key={link.url}
           whileHover={{ scale: 1.05 }}
-          className={`rounded-md px-1 text-white bg-tranparent hover:text-foreground hover:bg-background ${
-            currentPath === "/" && link.id === "Home" && activeSection === null
-              ? "bg-secondary"
-              : currentPath === "/" && activeSection === link.id
-                ? "bg-secondary  transition duration-500"
-                : currentPath !== "/" && currentPath === link.url
-                  ? "bg-secondary"
-                  : ""
-          }`}
+          className={`rounded-md px-1 text-white bg-tranparent hover:text-foreground hover:bg-background ${currentPath === "/" && link.id === "Home" && activeSection === null
+            ? "bg-secondary"
+            : currentPath === "/" && activeSection === link.id
+              ? "bg-secondary  transition duration-500"
+              : currentPath !== "/" && currentPath === link.url
+                ? "bg-secondary"
+                : ""
+            }`}
           transition={{ duration: 0.3, ease: "easeInOut" }}
         >
           {currentPath === "/" ? (

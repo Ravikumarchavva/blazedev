@@ -122,7 +122,7 @@ export default async function RootLayout({
       <body
         className={cn(
           "min-h-screen bg-background antialiased",
-          fontPoppins.className,
+          fontPoppins.className
         )}
       >
         <ThemeProvider
