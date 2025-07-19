@@ -5,7 +5,7 @@ import { Projects } from "@/data/Projects";
 
 import ProjectCard from "@/components/ProjectCard/page";
 
-const allProjects: React.FC = () => {
+const Products: React.FC = () => {
   const projects: Project[] = Projects;
 
   return (
@@ -36,4 +36,4 @@ const allProjects: React.FC = () => {
   );
 };
 
-export default allProjects;
+export default Products;
