@@ -1,17 +1,16 @@
 "use client";
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { Link as ScrollLink, scroller } from "react-scroll";
+import Link from "next/link";
 import { useNavBarContext } from "@/context/NavBarContext";
 import { PageLink } from "@/lib/datatypes";
 
-import React, { useState, useEffect } from "react";
-import { Link as ScrollLink, scroller } from "react-scroll";
-import { motion } from "framer-motion";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-
 const links: PageLink[] = [
   { id: "Home", url: "/", title: "Home" },
-  { id: "Projects", url: "/projects", title: "Projects" },
   { id: "About", url: "/about", title: "About" },
+  { id: "Portfolio", url: "/portfolio", title: "Portfolio" },
   { id: "Blogs", url: "/blogs", title: "Blogs" },
   { id: "Contact", url: "/contact", title: "Contact" },
 ];
@@ -22,9 +21,7 @@ const NavBarLinks: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
   const handleScroll = () => {
-    const sections = links.map((link) =>
-      document.getElementById(link.id)
-    );
+    const sections = links.map((link) => document.getElementById(link.id));
     const scrollPosition = window.scrollY + window.innerHeight / 2;
     let foundSection = false;
 
@@ -49,7 +46,7 @@ const NavBarLinks: React.FC = () => {
 
   useEffect(() => {
     if (currentPath === "/") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to top on mount
       window.addEventListener("scroll", handleScroll);
       return () => {
         window.removeEventListener("scroll", handleScroll);
@@ -66,7 +63,7 @@ const NavBarLinks: React.FC = () => {
       scroller.scrollTo(id, {
         duration: 500,
         smooth: true,
-        offset: -50,
+        offset: -50, // Adjust offset as needed
       });
     }
   };
@@ -77,14 +74,15 @@ const NavBarLinks: React.FC = () => {
         <motion.div
           key={link.url}
           whileHover={{ scale: 1.05 }}
-          className={`rounded-md px-1 text-white bg-tranparent hover:text-foreground hover:bg-background ${currentPath === "/" && link.id === "Home" && activeSection === null
-            ? "bg-secondary"
-            : currentPath === "/" && activeSection === link.id
-              ? "bg-secondary  transition duration-500"
-              : currentPath !== "/" && currentPath === link.url
-                ? "bg-secondary"
-                : ""
-            }`}
+          className={`rounded-md px-1 text-white bg-tranparent hover:text-foreground hover:bg-background ${
+            currentPath === "/" && link.id === "Home" && activeSection === null
+              ? "bg-secondary"
+              : currentPath === "/" && activeSection === link.id
+                ? "bg-secondary  transition duration-500"
+                : currentPath !== "/" && currentPath === link.url
+                  ? "bg-secondary"
+                  : ""
+          }`}
           transition={{ duration: 0.3, ease: "easeInOut" }}
         >
           {currentPath === "/" ? (

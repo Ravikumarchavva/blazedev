@@ -9,7 +9,6 @@ export const Projects: Project[] = [
     image: "/projects/carPrice/car.jpg",
     comingSoon: false,
     link: "/projects/CarPricePrediction",
-    deployed: true,
   },
   {
     id: 1,
@@ -20,7 +19,6 @@ export const Projects: Project[] = [
     image: "/projects/churn/churn.jpg",
     comingSoon: false,
     link: "/projects/CustomerChurn",
-    deployed: true,
   },
   {
     id: 2,
@@ -30,6 +28,5 @@ export const Projects: Project[] = [
     image: "/projects/cricketWinPrediction/t20.jpg",
     comingSoon: false,
     link: "/projects/CricketWinPrediction",
-    deployed: false,
   },
 ];

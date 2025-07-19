@@ -1,6 +1,5 @@
 import { z } from "zod";
 
-// Authentication Schemas
 export const signUpSchema = z
   .object({
     name: z.string().min(1, { message: "Name is Required" }),
@@ -34,7 +33,6 @@ export const changePasswordSchema = z
       : "",
   );
 
-// profile and contact schemas 
 export const settingsSchema = z.object({
   name: z.string().min(1, { message: "Name is Required" }),
   email: z.string().email(),
@@ -47,8 +45,8 @@ export const contactSchema = z.object({
   message: z.string().min(10, { message: "Enter atleast 10 characters" }),
 });
 
-// Data nexus schemas
 export const statusSchema = z.enum(["NOTSTARTED", "INPROGRESS", "COMPLETED"]);
+
 export const taskSchema = z.object({
   id: z.string(),
   title: z.string(),

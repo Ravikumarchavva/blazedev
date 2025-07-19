@@ -64,12 +64,6 @@ export default async function RootLayout({
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="robots" content="index, follow" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
         <link rel="icon" href="/icon.jpg" />
         <link rel="canonical" href="https://www.ravikumarchavva.com" />
         {/* Open Graph Meta Tags */}
@@ -92,29 +86,24 @@ export default async function RootLayout({
         />
         <meta name="twitter:creator" content="@Ravikumarchavva" />
         <meta name="twitter:image" content="/icon.jpg" />
-        {/* Structured Data (JSON-LD) with WebSite and Person */}
+        {/* Structured Data (JSON-LD) */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "WebSite",
+              "@type": "Person",
+              name: "Ravi Kumar Chavva",
               url: "https://www.ravikumarchavva.com",
-              name: "Ravi Kumar Chavva Portfolio",
-              mainEntity: {
-                "@type": "Person",
-                name: "Ravi Kumar Chavva",
-                url: "https://www.ravikumarchavva.com",
-                sameAs: [
-                  "https://twitter.com/Ravikumarchavva",
-                  "https://www.linkedin.com/in/ravikumar-chavva/",
-                  "https://github.com/Ravikumarchavva/",
-                ],
-                jobTitle: "Data Analyst & Web Developer",
-                image: "/icon.jpg",
-                description:
-                  "Explore Ravi Kumar Chavva's portfolio — data analytics projects, web development work, technical blog posts, and more.",
-              },
+              sameAs: [
+                "https://twitter.com/Ravikumarchavva",
+                "https://www.linkedin.com/in/ravikumar-chavva/",
+                "https://github.com/Ravikumarchavva/"
+              ],
+              jobTitle: "Data Analyst & Web Developer",
+              image: "/icon.jpg",
+              description:
+                "Explore Ravi Kumar Chavva's portfolio — data analytics projects, web development work, technical blog posts, and more.",
             }),
           }}
         />
@@ -122,7 +111,7 @@ export default async function RootLayout({
       <body
         className={cn(
           "min-h-screen bg-background antialiased",
-          fontPoppins.className
+          fontPoppins.className,
         )}
       >
         <ThemeProvider
