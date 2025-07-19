@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { Link as ScrollLink, scroller } from "react-scroll";
@@ -20,7 +20,7 @@ const NavBarLinks: React.FC = () => {
   const { menu, toggleMenu } = useNavBarContext();
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     const sections = links.map((link) => document.getElementById(link.id));
     const scrollPosition = window.scrollY + window.innerHeight / 2;
     let foundSection = false;
@@ -42,7 +42,7 @@ const NavBarLinks: React.FC = () => {
     if (!foundSection && activeSection !== null) {
       setActiveSection(null);
     }
-  };
+  }, [activeSection]);
 
   useEffect(() => {
     if (currentPath === "/") {
@@ -74,15 +74,14 @@ const NavBarLinks: React.FC = () => {
         <motion.div
           key={link.url}
           whileHover={{ scale: 1.05 }}
-          className={`rounded-md px-1 text-white bg-tranparent hover:text-foreground hover:bg-background ${
-            currentPath === "/" && link.id === "Home" && activeSection === null
+          className={`rounded-md px-1 text-white bg-tranparent hover:text-foreground hover:bg-background ${currentPath === "/" && link.id === "Home" && activeSection === null
               ? "bg-secondary"
               : currentPath === "/" && activeSection === link.id
                 ? "bg-secondary  transition duration-500"
                 : currentPath !== "/" && currentPath === link.url
                   ? "bg-secondary"
                   : ""
-          }`}
+            }`}
           transition={{ duration: 0.3, ease: "easeInOut" }}
         >
           {currentPath === "/" ? (

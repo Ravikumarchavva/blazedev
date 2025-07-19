@@ -1,5 +1,5 @@
 // middleware.ts
-import authConfig from "@/auth.config";
+import authConfig from "@/auth.middleware.config";
 import NextAuth from "next-auth";
 import {
   DEFAULT_REDIRECT_PATH,

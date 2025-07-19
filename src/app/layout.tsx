@@ -86,27 +86,6 @@ export default async function RootLayout({
         />
         <meta name="twitter:creator" content="@Ravikumarchavva" />
         <meta name="twitter:image" content="/icon.jpg" />
-        {/* Structured Data (JSON-LD) */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Ravi Kumar Chavva",
-              url: "https://www.ravikumarchavva.com",
-              sameAs: [
-                "https://twitter.com/Ravikumarchavva",
-                "https://www.linkedin.com/in/ravikumar-chavva/",
-                "https://github.com/Ravikumarchavva/"
-              ],
-              jobTitle: "Data Analyst & Web Developer",
-              image: "/icon.jpg",
-              description:
-                "Explore Ravi Kumar Chavva's portfolio — data analytics projects, web development work, technical blog posts, and more.",
-            }),
-          }}
-        />
       </head>
       <body
         className={cn(
