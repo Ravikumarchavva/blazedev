@@ -1,10 +1,9 @@
 {
-    "redirects": [
-      {
-        "source": "/datanexus",
-        "destination": "/dataNexus",
-        "permanent": true
-      }
-    ]
-  }
-  
+  "redirects": [
+    {
+      "source": "/datanexus",
+      "destination": "/dataNexus",
+      "permanent": true
+    }
+  ]
+}
