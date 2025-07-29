@@ -1,21 +1,23 @@
-import Link from 'next//link';
+import Link from "next//link";
 
---- 
+---
+
 # Customer Churn Prediction
 
-*Date: July 2024*
+_Date: July 2024_
 
 GitHub: <Link href='https://github.com/Ravikumarchavva/ML_Playground/tree/main/week2_BinaryClassification' target="_blank">BinaryClassification</Link>
 
 ## Objective
 
-Our goal was to predict potential customers who are more likely to churn using various machine learning techniques with a focus on optimizing recall and precision. 
+Our goal was to predict potential customers who are more likely to churn using various machine learning techniques with a focus on optimizing recall and precision.
 
 This post summarizes our journey through the stages of data exploration, feature engineering, model selection, and refinement.
 
 ---
 
 ## Overview
+
 ![Data Exploration Report](/projects/churn/churnOverview.JPG)
 
 ---
@@ -30,6 +32,7 @@ We began by understanding the dataset’s structure and performing necessary pre
 ![Power BI Report](/projects/churn/ChurnReport.jpg)
 
 **Key Insights:**
+
 - Customers with longer tenure are less likely to churn.
 - About 26% of customers churned.
 - Married customers are less likely to churn.
@@ -37,6 +40,7 @@ We began by understanding the dataset’s structure and performing necessary pre
 - Churn rate is higher for customers who are using fiber optic internet service.
 
 **Technologies Used:**
+
 - **Language:** Python
 - **Visualization:** Matplotlib, Seaborn
 - **Core Libraries:** Polars, NumPy, Scikit-learn, Imbalanced-learn, CatBoost
@@ -57,6 +61,7 @@ To simplify the model, we dropped features with low Matthews correlation coeffic
 Given the imbalanced nature of the churn data, we applied Synthetic Minority Over-sampling Technique for Nominal data (SMOTE-N) to balance the classes. This improved the model’s ability to predict churners effectively.
 
 **Key Insights:**
+
 - Addressing class imbalance is vital for improving model recall and precision.
 
 ---
@@ -66,6 +71,7 @@ Given the imbalanced nature of the churn data, we applied Synthetic Minority Ove
 To improve our model’s decision boundaries, we analyzed errors and introduced decision trees. This helped overcome the limitations of linear decision boundaries and led to better predictions.
 
 **Key Takeaways:**
+
 - Error analysis is essential for refining models and improving performance.
 
 ---
@@ -77,11 +83,13 @@ We implemented ensemble methods such as Random Forest and Gradient Boosting to e
 ![Day 6 Ensemble Report](/projects/churn/Day6-ensembling-Report.jpg)
 
 **Models Used:**
+
 - Random Forest
 - CatBoost
 - AutoML (PyCaret, EvalML)
 
 **Key Insights:**
+
 - Ensemble methods significantly boost model performance.
 
 ---

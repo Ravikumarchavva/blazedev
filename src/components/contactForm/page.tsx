@@ -6,13 +6,19 @@ import { contactSchema } from "@/models/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useTransition } from "react";
 import { useForm } from "react-hook-form";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { FormError } from "../Form-Error";
 import { FormSuccess } from "../Form-Success";
 import { z } from "zod";
-
 
 const ContactForm = () => {
   const user = useCurrentUser();
@@ -35,11 +41,11 @@ const ContactForm = () => {
       setSuccess(undefined);
 
       try {
-        if(!user || !user.email){
+        if (!user || !user.email) {
           setError("Sign in to send message");
           return; // Skip sending message if user is not signed in
         }
-        const response = await contactMessage(values,user.email);
+        const response = await contactMessage(values, user.email);
 
         if (response.success) {
           setSuccess("Message sent successfully!");

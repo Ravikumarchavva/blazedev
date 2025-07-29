@@ -22,14 +22,14 @@ export const credentialSignUp = async (values: any) => {
       name,
       email,
       password: hashPassword,
-    }
+    },
   });
 
   const verificationToken = await generateVerificationToken(email);
   // Send email with verificationToken...
-  await sendVerificationCode(verificationToken.email,verificationToken.token);
+  await sendVerificationCode(verificationToken.email, verificationToken.token);
   return {
     success: true,
     message: "Confirmation token sent",
-  }
+  };
 };

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const carPricePredictionSchema = z.object({
   carlength: z.number().max(205).min(140),
@@ -11,7 +11,7 @@ export const carPricePredictionSchema = z.object({
 export const churnPredictionSchema = z.object({
   MonthlyCharges: z.number().max(120).min(18),
   TotalCharges: z.number().min(18),
-  InternetService: z.enum(["Fiber optic","DSL","No"]),
+  InternetService: z.enum(["Fiber optic", "DSL", "No"]),
   tenure: z.number().positive().max(140),
-  Contract: z.enum(["Month-to-month","One year","Two year"]),
+  Contract: z.enum(["Month-to-month", "One year", "Two year"]),
 });

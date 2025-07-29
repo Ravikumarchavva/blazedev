@@ -12,8 +12,6 @@ interface FormData {
 }
 
 const Contact: React.FC = () => {
-
-
   return (
     <div
       id="Contact"

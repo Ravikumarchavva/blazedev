@@ -1,11 +1,9 @@
 "use client";
 import Example from "./example.mdx";
-import 'katex/dist/katex.min.css';
-import '@/styles/globals.css';
+import "katex/dist/katex.min.css";
+import "@/styles/globals.css";
 
 const LinearRegression = () => {
-
-
   return (
     <div className="project w-full px-[5vw] portrait:px-0 flex flex-col pt-[10vh] portrait:pt-[5vh] items-center justify-center min-h-screen">
       {/* Example MDX Component */}

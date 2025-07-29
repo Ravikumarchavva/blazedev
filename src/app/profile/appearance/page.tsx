@@ -28,7 +28,7 @@ const Appearance = () => {
     <form
       className={cn(
         "w-full max-w-3xl flex flex-col items-start justify-start pb-10",
-        font.className
+        font.className,
       )}
     >
       <div className="h-[10vh]">
@@ -43,7 +43,9 @@ const Appearance = () => {
       <div className="border-b border-gray-200 my-4 w-full"></div>
       <div className="w-full">
         <h2 className="text-xl text-primary-foreground">Theme</h2>
-        <p className="text-gray-100 pt-2">Select the theme for the dashboard.</p>
+        <p className="text-gray-100 pt-2">
+          Select the theme for the dashboard.
+        </p>
 
         <div className="flex space-x-6 mt-6">
           {/* Light Theme Selection Card */}
@@ -52,7 +54,7 @@ const Appearance = () => {
               "border-4 rounded-lg p-4 w-[150px] h-[160px] flex flex-col justify-between cursor-pointer transition-all duration-200",
               selectedTheme === "dark"
                 ? "border-primary bg-white"
-                : "border-gray-800 bg-gray-50"
+                : "border-gray-800 bg-gray-50",
             )}
             onClick={() => handleThemeChange("light")}
           >
@@ -74,7 +76,7 @@ const Appearance = () => {
               "border-4 rounded-lg p-4 w-[150px] h-[160px] flex flex-col justify-between cursor-pointer transition-all duration-200",
               selectedTheme === "light"
                 ? "border-primary bg-gray-800"
-                : "border-gray-300 bg-gray-700"
+                : "border-gray-300 bg-gray-700",
             )}
             onClick={() => handleThemeChange("dark")}
           >

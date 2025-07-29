@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/select";
 import WarningNote from "@/components/UxWarning/page";
 import { churnPredictionSchema } from "@/models/mlSchemas";
-import React from 'react';
+import React from "react";
 
 // Typescript type inference
 type ChurnPredictionFormValues = z.infer<typeof churnPredictionSchema>;
@@ -41,17 +41,22 @@ const ChurnForm = () => {
     },
   });
 
-  const fetchWithRetry = async (url: string, options: RequestInit, retries: number = 3, delay: number = 1000) => {
+  const fetchWithRetry = async (
+    url: string,
+    options: RequestInit,
+    retries: number = 3,
+    delay: number = 1000,
+  ) => {
     for (let i = 0; i < retries; i++) {
       try {
         const response = await fetch(url, options);
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         return await response.json();
       } catch (error) {
         if (i < retries - 1) {
-          await new Promise(res => setTimeout(res, delay));
+          await new Promise((res) => setTimeout(res, delay));
         } else {
           throw error;
         }
@@ -84,7 +89,6 @@ const ChurnForm = () => {
         onSubmit={churnForm.handleSubmit(onSubmit)}
         className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full mx-auto py-20"
       >
-
         <FormField
           control={churnForm.control}
           name="MonthlyCharges"
@@ -209,12 +213,14 @@ const ChurnForm = () => {
 
         {predictedChurn && (
           <div className="text-center col-span-full mt-2">
-            <h2 className="text-2xl text-white">Prediction: {predictedChurn}</h2>
+            <h2 className="text-2xl text-white">
+              Prediction: {predictedChurn}
+            </h2>
           </div>
         )}
       </form>
     </Form>
-  )
-}
+  );
+};
 
 export default ChurnForm;

@@ -25,7 +25,7 @@ async function validatePassword(values: z.infer<typeof changePasswordSchema>) {
 }
 
 async function updatePassword(email: string, password: string) {
-  const hashedPassword = await bcrypt.hash(password,10);
+  const hashedPassword = await bcrypt.hash(password, 10);
   await db.user.update({
     where: { email },
     data: { password: hashedPassword },
@@ -38,7 +38,10 @@ async function deleteToken(token: string) {
   });
 }
 
-export async function passwordChange(token: string, values: z.infer<typeof changePasswordSchema>) {
+export async function passwordChange(
+  token: string,
+  values: z.infer<typeof changePasswordSchema>,
+) {
   try {
     const existingToken = await validateToken(token);
     const { password } = await validatePassword(values);
@@ -48,6 +51,10 @@ export async function passwordChange(token: string, values: z.infer<typeof chang
     });
     return { success: true, message: "Password changed successfully" };
   } catch (error: unknown) {
-    return { success: false, message: error instanceof Error ? error.message : 'An unknown error occurred' };
+    return {
+      success: false,
+      message:
+        error instanceof Error ? error.message : "An unknown error occurred",
+    };
   }
 }
